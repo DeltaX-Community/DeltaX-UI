@@ -1,0 +1,45 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+.btn {
+    @apply px-4 py-2 bg-blue-600 text-white rounded;
+}
+
+.ripple {
+    outline: none;
+    position: relative;
+    -webkit-transition-duration: 0.2s;
+    /* Safari */
+    transition-duration: 0.2s;
+    overflow: hidden;
+}
+
+.ripple:after {
+    content: "";
+    display: block;
+    background: rgba(184, 184, 200, 0.671);
+    position: absolute;
+    padding: 100%;
+    margin-left: -50%;
+    margin-top: -50%;
+    border-radius: 300px;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+.ripple:active:after {
+    position: absolute;
+    padding: 20px;
+    margin-left: -60px;
+    margin-top: -60px;
+    border-radius: 200px;
+    opacity: 1;
+    transition: 0s;
+}
+
+.wdg-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.7), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
+}
+
+@import "tailwindcss/utilities";
