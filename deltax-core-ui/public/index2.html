@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+
+  <title>Svelte app</title>
+
+  <link rel='stylesheet' href='/build/global.css'>
+
+  <script defer src='/build/bundle.js'></script>
+  <script defer src='/build/alpine.js'></script>
+</head>
+
+<body>
+
+  <div>
+    <d-panel title="Load Demo Template 2.html">
+      <div>
+        <d-load-partial url="demo-panel-tab2.html"> </d-load-partial>
+      </div>
+    </d-panel>
+    
+    <div x-data="{ tab2: 'foo' }">
+      <button :class="{ 'active': tab2 === 'foo' }" @click="tab2 = 'foo'">Foo</button>
+      <button :class="{ 'active': tab2 === 'bar' }" @click="tab2 = 'bar'">Bar</button>
+
+      <div x-show="tab2 === 'foo'">Tab Foo</div>
+      <div x-show="tab2 === 'bar'">Tab Bar</div>
+    </div>
+
+  </div>
+</body>
+
+</html>

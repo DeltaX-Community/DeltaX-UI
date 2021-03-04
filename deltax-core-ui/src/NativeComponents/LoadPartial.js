@@ -1,24 +1,22 @@
-import "alpinejs";
+ export class LoadComponent extends HTMLElement {
+     connectedCallback() {
+         fetch(this.htmlUrl)
+             .then(response => response.text())
+             .then(t => {
+                 this.loadTemplate(t)
+             })
+     }
 
-const template = document.createElement("template");
-template.innerHTML = ` 
-    <div x-data x-init="fetch($el.parentElement.url)
-        .then(response => response.text())
-        .then(response => { $refs.dropdown.innerHTML = response })">
-        <div x-ref="dropdown">
-        Loading Data...
-        </div>
-    </div>   
-`;
+     get htmlUrl() {
+         return `/partial/${this.getAttribute('url')}`;
+     }
 
-export class LoadPartial extends HTMLElement {
-    connectedCallback() {
-        this.append(template.content.cloneNode(true));
-    }
+     loadTemplate(tmpl) {
+         // const template = document.createElement("template");
+         // template.innerHTML = tmpl
+         // this.append(template.content.cloneNode(true));
+         this.innerHTML = tmpl
+     }
+ }
 
-    get url() {
-        return `/partial/${this.getAttribute('url')}`;
-    }
-}
-
-customElements.define("d-load-partial", LoadPartial);
+ customElements.define("d-load-partial", LoadComponent);

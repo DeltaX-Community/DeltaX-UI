@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"> 
 
 <head>
   <meta charset='utf-8'>
@@ -8,16 +8,17 @@
   <title>Svelte app</title>
 
   <link rel='icon' type='image/png' href='/assets/favicon.png'>
-  <link rel='stylesheet' href='/build/global.css'>
-  <link rel='stylesheet' href='/build/bundle.css'>
+  <link rel='stylesheet' href='/build/global.css'> 
 
   <script defer src='/build/bundle.js'></script>
-  <!-- <script defer src='/build/alpine.js'></script> -->
+  <script defer src='/build/alpine.js'></script> 
   <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script> -->
 </head>
 
-<body>
+<body >
   <!-- <d-nav-bar></d-nav-bar>	 -->
+
+  <d-load-partial url="demo-panel-tab2.html"></d-load-partial> 
 
   <d-panel title="pepe Void">
   </d-panel>
@@ -56,7 +57,7 @@
     <div x-show="tab === 'bar'">Tab Bar</div>
   </div>
 
-  <div class="container mx-auto mt-5  ">
+  <div class="container mx-auto mt-5  bg-white dark:bg-black"> 
     <div class="mt-1">
       <d-meter name="Running Time" topicname='process_info/UI.RtViewer/RunningDateTime'></d-meter>
     </div>
@@ -77,7 +78,7 @@
             <div class="py-1 flex-grow px-2 auto-cols-max font-bold {color} text-center">
               {value}
             </div>
-            <div class="py-1 px-2 bg-blue-600 text-white font-bold text-center">
+            <div class="py-1 px-2 bg-panel-text  text-white font-bold text-center">
               {name ?? topicname}
             </div>
           </div>
