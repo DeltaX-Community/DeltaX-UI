@@ -40,9 +40,9 @@
         icon: "fas fa-tasks",
         partialPage: "demo-panel-tab.html"
       }, {
-        title: "Tareas2",
-        url: "#task2",
-        color: "green-500",
+        title: "Index",
+        url: "/index.html",
+        color: "red-600",
         icon: "fas fa-tasks",
         partialPage: "tasks2-page.html"
       }]
@@ -93,8 +93,8 @@
         <div class="w-1/2 pl-2 md:pl-2">
           <div class="text-gray-900 text-base lg:text-2xl no-underline font-bold flex flex-row items-center gap-2">
             <div x-html="menu.logo" :class="`text-${currItem.color}`"></div>
-            <a x-text="menu.title" @click.prevent="setUrl(defaultUrl)" href="#"></a>
-            <p x-show="currItem.url != defaultUrl" class="font-medium text-base" >/</p>
+            <a x-text="menu.title" @click="setUrl(defaultUrl)" :href="defaultUrl"></a>
+            <p x-show="currItem.url != defaultUrl" class="font-medium text-base">/</p>
             <p x-show="currItem.url != defaultUrl" class="font-medium text-base" x-text="currItem.title"></p>
           </div>
         </div>
@@ -154,16 +154,18 @@
           </div>
         </div>
 
-        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 bg-white z-20"
+        <div
+          class="w-full flex-grow lg:flex lg:items-center lg:container lg:mx-auto lg:w-auto mt-2 lg:mt-0 bg-white z-20"
           :class="{ 'hidden': menuHidden == false }" @click="menuHidden = false">
-          <ul class="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+          <ul class="list-reset lg:flex flex-1 items-center px-4">
 
             <template x-for="item in menu.items" :key="item.url">
-              <li class="mr-6 my-2 md:my-0">
+              <li class="mr-3 my-2   text-sm">
                 <a :href="item.url"
-                  class="block px-2 py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-transparent"
+                  class="block px-1 p-2 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-transparent"
                   :class="getClass(item)" @click="setUrl(item.url)">
-                  <i class="fas fa-home fa-fw mr-3 "></i><span class="pb-1 md:pb-0 text-sm" x-text="item.title"></span>
+                  <i :class="`${item.icon} fa-fw mr-3`"></i><span class="pb-1 md:pb-0 text-sm"
+                    x-text="item.title"></span>
                 </a>
               </li>
             </template>
@@ -178,7 +180,7 @@
       <div class="xl::container lg:mx-auto">
         <template x-if="tab === item.url">
           <!-- <d-panel x-bind:title="tab"> -->
-            <d-load-partial :url="item.partialPage"></d-load-partial>
+          <d-load-partial :url="item.partialPage"></d-load-partial>
           <!-- </d-panel> -->
         </template>
       </div>
