@@ -1,21 +1,24 @@
  export class LoadComponent extends HTMLElement {
      connectedCallback() {
-         fetch(this.htmlUrl)
+         this.innerHTML = "<p>Loading...</p>" 
+     }
+
+     static get observedAttributes() {
+         return ['url'];
+     }
+
+     attributeChangedCallback(name, oldValue, newValue) { 
+         this.loadTemplate()
+     }
+
+     loadTemplate() {
+         const url = `/partial/${this.getAttribute('url')}`;
+         console.log('loadTemplate', url);
+         fetch(url)
              .then(response => response.text())
-             .then(t => {
-                 this.loadTemplate(t)
+             .then(tmpl => {
+                 this.innerHTML = tmpl || `<p>Fail Loading ${url}!</p>`
              })
-     }
-
-     get htmlUrl() {
-         return `/partial/${this.getAttribute('url')}`;
-     }
-
-     loadTemplate(tmpl) {
-         // const template = document.createElement("template");
-         // template.innerHTML = tmpl
-         // this.append(template.content.cloneNode(true));
-         this.innerHTML = tmpl
      }
  }
 
