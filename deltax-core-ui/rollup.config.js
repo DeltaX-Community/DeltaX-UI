@@ -42,6 +42,7 @@ export default {
 	plugins: [
 		svelte({
 			customElement: true, 
+			shadowDom: false,
 			preprocess: sveltePreprocess({
 				sourceMap: !production,
 				postcss: true
@@ -49,7 +50,7 @@ export default {
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production,				
-				customElement: true, 
+				customElement: true,  
 			}
 		}),
 		// we'll extract any component CSS out into

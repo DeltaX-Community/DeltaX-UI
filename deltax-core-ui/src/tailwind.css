@@ -43,3 +43,5 @@
 }
 
 @import "tailwindcss/utilities";
+
+@import 'material-icons/iconfont/material-icons.scss';

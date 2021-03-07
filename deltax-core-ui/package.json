@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "alpinejs": "^2.8.1",
+    "material-icons": "^0.5.4",
     "rpc-websockets": "^7.4.8",
     "sirv-cli": "^1.0.0"
   }

@@ -1,0 +1,35 @@
+{
+    title: "Planta Demo",
+    subTitle: "La gran planta demo",
+    logo: '<i class="fas fa-sun text-xl lg:text-4xl"></i>',
+
+    items: [{
+            title: "Inicio",
+            url: "#home",
+            color: "pink-600",
+            icon: "fas fa-home",
+            partialPage: "home-page.html",
+        },
+        {
+            title: "Tareas",
+            url: "#task",
+            color: "red-500",
+            icon: "fas fa-tasks",
+            partialPage: "tasks-page.html",
+        },
+        {
+            title: "TareasOk",
+            url: "#task-ok",
+            color: "blue-500",
+            icon: "fas fa-tasks",
+            partialPage: "demo-panel-tab.html",
+        },
+        {
+            title: "Index",
+            url: "/index.html",
+            color: "red-600",
+            icon: "fas fa-tasks",
+            partialPage: "tasks2-page.html",
+        }
+    ]
+}
