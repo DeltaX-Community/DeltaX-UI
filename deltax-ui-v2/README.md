@@ -2,22 +2,23 @@
 
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+npm run build
 ```
 
-### Lints and fixes files
+### Verify production files
 ```
-yarn lint
+npx serv dist
+# go to http://localhost:8000/#/demo/index.html
 ```
 
 ### Customize configuration
