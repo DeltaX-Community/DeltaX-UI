@@ -1,0 +1,26 @@
+<template>
+   <div x-data="testFunction2()">  
+     <p class="pepe">Fin 1</p>
+        El mensaje es: <b x-text="message"></b>
+  </div>
+
+   <div>
+    <demo-basic prop1="asdf 1"></demo-basic>
+    <p class="pepe">Fin 1</p>
+    <hr>
+    <demo-basic prop1="asdf 2"></demo-basic>
+    <p>Fin 2</p>
+    <hr>
+    <demo-basic prop1="asdf 3"></demo-basic>
+    <p>Fin 3</p>
+    <hr>
+  </div>  
+</template>
+
+<script>
+    function testFunction2() {
+		return {  
+      message :  "Hola mundo desde alpine"
+    }
+	}
+</script>

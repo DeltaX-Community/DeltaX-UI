@@ -1,0 +1,27 @@
+<template>
+	
+  <div x-data="testFunction()">
+    <button :class="{ 'active': tab === 'foo' }" @click="tab = 'foo'">Foo</button>
+    <button :class="{ 'active': tab === 'bar' }" @click="tab = 'bar'">Bar</button>
+
+    <div x-show="tab === 'foo'">Tab Foo</div>
+    <div x-show="tab === 'bar'">Tab Bar</div>
+
+    <dx-meter name="prueba1" topic-name="process_info/UI.RtViewer/RunningDateTime" unit="sec" ></dx-meter>
+    <dx-meter name="prueba2" topic-name="tag1" unit="sec" ></dx-meter>
+    <dx-rt-value topic-name="tag1"></dx-rt-value>
+  </div>
+  
+</template>
+
+<script>
+// 	// import '/build/alpine.js';
+// 
+	function testFunction() {
+		return { tab: 'bar' }
+	}
+// 
+// 	var el = document.getElementById("id-demo-panel-tab")
+ 	console.log("LOAD DEMO PANEL TAB",testFunction)
+// 	// el.setAttribute("x-data", "testFunction()") 
+</script>

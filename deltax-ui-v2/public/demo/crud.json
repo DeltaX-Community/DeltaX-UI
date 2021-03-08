@@ -1,0 +1,137 @@
+{ 
+  "Enable": true,
+  "DatabaseType": "Sqlite",
+  "ConnectionString": "Filename=GenericReportDb.sqlite3",
+  "PrimaryKeysDelimiter": ";",
+  "PermissionsRoles": [
+    "UsersAdmin"
+  ],  
+  "Endpoints": {
+    "user": {
+      "PrimaryKeys": [
+        "Id"
+      ],
+      "GetItem": [
+        "select ",
+        "Id, Username, FullName, Email, Image, Active",
+        "from users where Id = @Id "
+      ],
+      "UpdateFields": [
+        "FullName",
+        "Email",
+        "Image"
+      ],
+      "UpdateItem": [
+        "update users set ",
+        "FullName=@FullName, ",
+        "Email=@Email ",
+        "where Id = @Id "
+      ],
+      "DeleteItem": [
+        "delete from users where Id = @Id "
+      ]
+    },
+    "users": {
+      "InsertFields": [
+        "Username",
+        "FullName",
+        "Email",
+        "Image"
+      ],
+      "InsertList": [
+        "insert into users ",
+        "(Username, FullName, Email, Image, Active)",
+        "values (@Username, @FullName, @Email, @Image, 1)"
+      ],
+      "CountList": [
+        "select count() from users "
+      ],
+      "GetList": [
+        "select ",
+        "Id, Username, FullName, Email ",
+        "from users ",
+        "LIMIT @PerPage OFFSET @Offset"
+      ],
+      "SearchFields": [
+        "Id",
+        "Username",
+        "FullName",
+        "Email"
+      ],
+      "SearchList": [
+        "select ",
+        "Id, Username, FullName, Email ",
+        "from users ",
+        "WHERE (Id = @Id or @Id is null) ",
+        "AND (Username like @Username or @Username is null) ",
+        "AND (FullName like @FullName or @FullName is null) ",
+        "AND (Email like @Email or @Email is null) "
+      ]
+    },
+    "usersroleTable": {
+      "InsertFields": [
+        "UserId",
+        "RolId",
+        "C",
+        "R",
+        "U",
+        "D"
+      ],
+      "InsertList": [
+        "insert into usersroles ",
+        "(UserId, RolId, C, R, U, D)",
+        "values (@UserId, @RolId, @C, @R, @U, @D)"
+      ],
+      "SearchFields": [
+        "UserId",
+        "RolId"
+      ],
+      "SearchList": [
+        "select ",
+        "UserId, RolId, u.Username, r.Name as RoleName, C, R, U, D, ur.CreatedAt ",
+        "from usersroles ur ",
+        "join users u on u.Id = ur.UserId ",
+        "join roles r on r.Id = ur.RolId ",
+        "WHERE (UserId = @UserId or @UserId is null) ",
+        "AND (RolId = @RolId or @RolId is null) "
+      ],
+      "PrimaryKeys": [
+        "UserId",
+        "RolId"
+      ],
+      "GetItem": [
+        "select ",
+        "UserId, RolId, u.Username, r.Name as RoleName, C, R, U, D, ur.CreatedAt ",
+        "from usersroles ur ",
+        "join users u on u.Id = ur.UserId ",
+        "join roles r on r.Id = ur.RolId ",
+        "where UserId = @UserId AND RolId = @RolId "
+      ],
+      "UpdateFields": [
+        "C",
+        "R",
+        "U",
+        "D"
+      ],
+      "UpdateItem": [
+        "update usersroles set ",
+        "C=@C, R=@R, U=@U, D=@D ",
+        "where UserId = @UserId AND RolId = @RolId "
+      ],
+      "DeleteItem": [
+        "delete from usersroles where UserId = @UserId AND RolId = @RolId "
+      ]
+    },
+    "rolesSelect": {
+      "SearchFields": [
+        "RolId"
+      ],
+      "SearchList": [
+        "select ",
+        "Id as RolId, Name as RoleName ",
+        "from roles ",
+        "WHERE (Id = @RolId or @RolId is null) "
+      ]
+    }
+  }
+}

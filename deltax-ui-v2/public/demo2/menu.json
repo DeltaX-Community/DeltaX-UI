@@ -1,0 +1,19 @@
+{
+    "title": "Planta Demo",
+    "subTitle": "La gran planta demo",
+    "logo": "<i class='fas fa-sun text-xl lg:text-4xl'></i>", 
+    "items": [ 
+        {
+            "title": "Panel Tab",
+            "url": "/demo2/demo-panel-tab.html",
+            "color": "red-500",
+            "icon": "fas fa-tasks"
+        },
+        {
+            "title": "Page X",
+            "url": "/demo2/pagex.html",
+            "color": "blue-500",
+            "icon": "fas fa-tasks"
+        }
+    ]
+}

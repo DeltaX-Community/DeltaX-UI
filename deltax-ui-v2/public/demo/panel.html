@@ -1,0 +1,231 @@
+<template>
+    <div class="lg:p-4 grid grid-cols-2 lg:grid-cols-10 gap-2 bg-blue-500 overflow-auto"
+        style="height: calc(100vh - 110px );">
+
+        <!-- primer lugar -->
+        <div class="col-span-2 sm:col-span-1 lg:col-span-2 p-2 | flex flex-col gap-2 bg-blue-300">
+            <!-- meter 2 -->
+            <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                <div class="text-center flex-row bg-green-200 self-center">
+                    <span class="text-xl font-bold font-sans">
+                        <dx-rt-value topic-name="process_info/UI.RtViewer/RunningDateTime"></dx-rt-value>
+                    </span>
+                </div>
+                <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Viabilidad</div>
+            </div>
+
+            <!-- meter 2 -->
+            <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                <div class="text-center flex-row bg-green-200 self-center flex-nowrap">
+                    <span class="text-5xl font-bold font-sans">
+                        <dx-rt-value topic-name="tag1"></dx-rt-value>
+                    </span>
+                    <span class="text-2xl font-sans font-extralight text-blue-700">U$S</span>
+                </div>
+                <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Deuda Economica</div>
+            </div>
+        </div>
+
+        <!-- segundo lugar lugar -->
+        <div class="col-span-2 sm:col-span-1 lg:col-span-2 p-2 | flex flex-col gap-2  bg-blue-300">
+            <!-- meter 2 -->
+            <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                <div class="text-center flex-row bg-green-200 self-center">
+                    <span class="text-5xl font-bold font-sans">123.2</span>
+                    <span class="text-2xl font-sans font-extralight text-blue-700">$</span>
+                </div>
+                <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold"></div>
+            </div>
+
+            <!-- meter 2 -->
+            <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                <div class="text-center flex-row bg-green-200 self-center flex-nowrap">
+                    <span class="text-5xl font-bold font-sans">Valor OK</span>
+                    <span class="text-2xl font-sans font-extralight text-blue-700"></span>
+                </div>
+                <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Lorem ipsum dolor</div>
+            </div>
+        </div>
+
+
+        <!-- GRAFICO 1 -->
+        <div class="col-span-2 lg:col-span-6 | bg-red-200 text-red font-bold py-2 px-4 overflow-auto"
+            style="min-height: 300px; height: 38vh;">
+            GRAFICO 1....
+            <br>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit amet dicta veritatis animi? Fugit atque
+            doloremque
+            recusandae amet nam nulla neque doloribus voluptatem, dolor iste, cumque ratione eos, sunt fugiat?
+        </div>
+
+        <!-- GRAFICO 2 -->
+        <div class="col-span-2 lg:col-span-5 | bg-green-200  text-red font-bold py-2 px-4 verflow-auto"
+            style="min-height: 300px;">
+            GRAFICO 2....
+            <br>
+
+            <div x-data="{focus:false, value:''}">
+
+
+                <div class="mt-2 p-0 mb-6 relative text-red-500 dark:text-gray-100 bg-white">
+                    <label x-show.transition="focus == true || value!='' " class="absolute top-0 ml-3 p-1 pt-0 mt-0 | label-transition block pointer-events-none cursor-text text-xs   bg-white rounded-md
+                    dark:bg-dark-500 undefined text-red-500">
+                        Test label
+                    </label>
+                    <label x-show.transition="focus == false && value==''" class="absolute top-0 pt-4 pb-2 px-4 label-transition block pointer-events-none cursor-text font-bold outline-none  rounded-md dark:bg-dark-500 
+                        text-black dark:text-gray-100 bg-transparent">
+                        Test label
+                    </label>
+                    <input aria-label="Test label"
+                        class="mt-2 pt-2 outline-none  px-4 rounded-t font-bold text-black dark:text-gray-100 bg-white w-full border rounded bg-transparent py-1 duration-200 ease-in  border-red-500 caret-error-500 "
+                        x-on:focus="focus=true"
+                        x-on:blur="focus=false"
+                        x-model="value"
+                        placeholder="">
+                    <div class="text-xs p-0 pb-1 ml-4 relative left-0 rounded-md  text-red-500"> ne</div>
+                </div>
+            </div>
+
+
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit amet dicta veritatis animi? Fugit atque
+            doloremque
+            recusandae amet nam nulla neque doloribus voluptatem, dolor iste, cumque ratione eos, sunt fugiat?
+        </div>
+
+        <!-- TABLA 1 -->
+        <div class="col-span-2 lg:col-span-5 | bg-white text-red   p-1 flex flex-col" style="min-height: 300px;">
+            TABLA 1....
+            <br>
+            <div class="overflow-y-scroll flex-grow" style="min-height: 150px; height: 150px;">
+                <dx-data-table crud-url="demo/endpoint/users?page=1&perPage=10" >
+                    <span field="field" class="bg-gray-200 cursor-pointer" >Lable 1123</span>
+                    <span field="field2" class="bg-blue-300" >Lable 1123</span>
+                    <span field="field3" class="w-1/2 bg-blue-300" oninput="formatLabel3" tdclass="text-red-500" >Label Pepe</span> 
+                </dx-data-table>  
+            </div> 
+            TABLA 2....
+            <br>
+            <div class="overflow-y-scroll flex-grow">
+                <table class="relative overflow-x-auto | shadow text-sm w-full cursor-pointer">
+                    <thead class="sticky top-0 | items-center bg-gray-200 shadow">
+                        <th class="p-1 pl-3 capitalize font-bold text-left text-gray-700 hover:text-black dark-hover:text-white"
+                            style="min-width: 300px;">
+                            Title</th>
+                        <th
+                            class="p-1 pl-3 capitalize font-bold text-left text-gray-700 hover:text-black dark-hover:text-white">
+                            Author</th>
+                        <th
+                            class="p-1 pl-3 capitalize font-bold text-left text-gray-700 hover:text-black dark-hover:text-white">
+                            Views
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to CSS</td>
+                            <td>Adam</td>
+                            <td>858</td>
+                        </tr>
+                        <tr class="bg-blue-200">
+                            <td>A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on
+                                Design
+                            </td>
+                            <td>Adam</td>
+                            <td>112</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr
+                            class="hover:bg-gray-50 dark-hover:bg-dark-400 border-gray-200 dark:border-gray-400 border-t border-b px-3">
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                        <tr>
+                            <td>Intro to JavaScript ultimo</td>
+                            <td>Chris</td>
+                            <td>1,280</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="sticky bottom-0 bg-white">hola</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script> 
+	function formatLabel3(v) {
+		return `<b>Pepe:${v}</b>`
+	} 
+</script>
