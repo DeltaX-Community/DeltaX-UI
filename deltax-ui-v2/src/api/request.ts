@@ -1,4 +1,3 @@
-const BASE_URL = "/api/v1"
 
 export function GetHeader() {
     return {
@@ -8,7 +7,7 @@ export function GetHeader() {
 }
 
 export function Get<T>(url: string) {
-    return fetch(`${BASE_URL}/${url}`,
+    return fetch(url,
         {
             method: "GET",
             headers: GetHeader()
@@ -18,7 +17,7 @@ export function Get<T>(url: string) {
 }
 
 export function Post<T>(url: string, data?: any) {
-    return fetch(`${BASE_URL}/${url}`,
+    return fetch(url,
         {
             method: "POST",
             body: JSON.stringify(data),
@@ -29,7 +28,7 @@ export function Post<T>(url: string, data?: any) {
 }
 
 export function Put<T>(url: string, data?: any) {
-    return fetch(`${BASE_URL}/${url}`,
+    return fetch(url,
         {
             method: "PUT",
             body: JSON.stringify(data),
@@ -40,7 +39,7 @@ export function Put<T>(url: string, data?: any) {
 }
 
 export function Delete<T>(url: string, data?: any) {
-    return fetch(`${BASE_URL}/${url}`,
+    return fetch(url,
         {
             method: "DELETE",
             body: JSON.stringify(data),

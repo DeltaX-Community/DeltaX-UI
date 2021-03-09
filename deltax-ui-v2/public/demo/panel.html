@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:p-4 grid grid-cols-2 lg:grid-cols-10 gap-2 bg-blue-500 overflow-auto"
+    <div class="lg:p-4 grid grid-cols-2 lg:grid-cols-10 gap-2 overflow-auto"
         style="height: calc(100vh - 110px );">
 
         <!-- primer lugar -->
@@ -93,16 +93,36 @@
         </div>
 
         <!-- TABLA 1 -->
-        <div class="col-span-2 lg:col-span-5 | bg-white text-red   p-1 flex flex-col" style="min-height: 300px;">
-            TABLA 1....
+        <div class="col-span-2 lg:col-span-5 | bg-white text-red border-blue-300 border-4 rounded-sm rounded-tr-3xl m-2 flex flex-col" style="min-height: 200px;">
+            <h2 class="p-2 text-lg font-bold font-sans text-gray-600 uppercase" >Usuarios Demos </h2>
             <br>
-            <div class="overflow-y-scroll flex-grow" style="min-height: 150px; height: 150px;">
-                <dx-data-table crud-url="demo/endpoint/users?page=1&perPage=10" >
-                    <span field="field" class="bg-gray-200 cursor-pointer" >Lable 1123</span>
-                    <span field="field2" class="bg-blue-300" >Lable 1123</span>
-                    <span field="field3" class="w-1/2 bg-blue-300" oninput="formatLabel3" tdclass="text-red-500" >Label Pepe</span> 
-                </dx-data-table>  
+            <div class="overflow-y-scroll flex-grow m-1 overflow-hidden" style="min-height: 150px;"> 
+                <dx-data-table crud-url="https://jsonplaceholder.typicode.com/users" 
+                    thead-class="bg-blue-100"
+                    tbody-class="bg-gray-50" 
+                    tr-class="border-blue-500"
+                    >
+                    <div field="name" td-class="font-bold text-blue-500 px-1 pl-2">
+                        <div class="border-blue-400 border-r p-1 m-0" >Usuario</div> 
+                    </div>
+                    <div field="username" td-class="px-1">
+                        <div class="border-blue-400 border-r p-1 m-0" >Alias</div> 
+                    </div>
+                    <div field="email" td-class="px-1 text-sm">
+                        <div class="border-blue-400 border-r p-1 m-0" >Correo</div> 
+                    </div>
+                    <div field="phone" td-class="px-1" class="border-r p-2 m-2" >
+                        <div>Telefono</div>                          
+                    </div>
+                    <div field="address" oninput="formatAddress" td-class="px-1 pr-2 text-xs" class="w-1/4 p-1">
+                        Dirección
+                    </div> 
+                </dx-data-table>
+                <div class="sticky bottom-0 bg-blue-100 text-sm p-1 font-semibold text-gray-600">
+                    Referencia tomada desde: <a class="text-red-400 uppercase" href="https://jsonplaceholder.typicode.com">jsonplaceholder</a>
+                </div>
             </div> 
+            <!-- 
             TABLA 2....
             <br>
             <div class="overflow-y-scroll flex-grow">
@@ -219,13 +239,13 @@
                     </tbody>
                 </table>
                 <div class="sticky bottom-0 bg-white">hola</div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
-<script> 
-	function formatLabel3(v) {
-		return `<b>Pepe:${v}</b>`
+<script>  
+	function formatAddress(v) {
+		return v ? `<b>${v.city}</b> - ${v.street} - ${v.suite}` : ''
 	} 
 </script>

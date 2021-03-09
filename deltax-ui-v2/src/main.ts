@@ -21,6 +21,8 @@ Vue.customElement('dx-rt-value', RtValue);
 import DataTable from "./components/DataTable.vue";
 Vue.customElement('dx-data-table', DataTable);
 
+import RtWs from "./services/RtWs";
+window.RtWs = RtWs
 
 new Vue({
   router,

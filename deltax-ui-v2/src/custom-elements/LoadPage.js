@@ -2,10 +2,7 @@
 import { GetHeader } from "../api/request";
 export class LoadPage extends HTMLElement {
      connectedCallback() {
-         this.innerHTML = "<p>Loading...</p>"
-         if (this.hasAttribute("url") && this.getAttribute('url')) {
-             this.loadTemplate()
-         }
+         this.innerHTML = "<p>Loading...</p>" 
      }
 
      static get observedAttributes() {

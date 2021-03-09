@@ -1,11 +1,9 @@
 <template>
   <div>
-    <header-bar :section="section"  :url="url"/> 
+    <header-bar :section="section" :url="url" />
     <transition name="fade" mode="out-in">
       <div :key="url">
-        <keep-alive :key="url">
-          <dx-load-page :url="url"> </dx-load-page>
-        </keep-alive>
+        <dx-load-page :url="url"> </dx-load-page>
       </div>
     </transition>
   </div>
@@ -30,9 +28,6 @@ export default {
     $route: {
       immediate: true,
       handler: function (to) {
-        console.log("to:", to);
-        console.log("page:", to.params.page);
-        console.log("section:", to.params.section);
         this.section = to.params.section;
         this.url = `/${to.params.section}/${to.params.page || "index.html"}`;
       },
@@ -42,11 +37,13 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .2s
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
 }
-.fade-enter, .fade-leave-to {
-  opacity: 0
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
 

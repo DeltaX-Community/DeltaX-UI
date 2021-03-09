@@ -139,4 +139,5 @@ export class RealTimeWebSocket extends Client {
 const connectionUrl = "ws://localhost:5011/rt";
 const RtWs = new RealTimeWebSocket(connectionUrl);
 
+export type IRtWs = typeof RtWs
 export default RtWs;
