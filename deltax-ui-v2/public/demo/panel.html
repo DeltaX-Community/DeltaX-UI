@@ -64,9 +64,7 @@
             GRAFICO 2....
             <br>
 
-            <div x-data="{focus:false, value:''}">
-
-
+            <div x-data="{focus:false, value:''}"> 
                 <div class="mt-2 p-0 mb-6 relative text-red-500 dark:text-gray-100 bg-white">
                     <label x-show.transition="focus == true || value!='' " class="absolute top-0 ml-3 p-1 pt-0 mt-0 | label-transition block pointer-events-none cursor-text text-xs   bg-white rounded-md
                     dark:bg-dark-500 undefined text-red-500">
@@ -93,15 +91,22 @@
         </div>
 
         <!-- TABLA 1 -->
-        <div class="col-span-2 lg:col-span-5 | bg-white text-red border-blue-300 border-4 rounded-sm rounded-tr-3xl m-2 flex flex-col" style="min-height: 200px;">
-            <h2 class="p-2 text-lg font-bold font-sans text-gray-600 uppercase" >Usuarios Demos </h2>
-            <br>
-            <div class="overflow-y-scroll flex-grow m-1 overflow-hidden" style="min-height: 150px;"> 
-                <dx-data-table crud-url="https://jsonplaceholder.typicode.com/users" 
+        <div x-data="{url : ''}"  
+            x-init="setTimeout(() => url = 'https://jsonplaceholder.typicode.com/users')" 
+            class="col-span-2 lg:col-span-5 | bg-white text-red border-blue-300 border-4 rounded-sm rounded-tr-3xl m-2 grid grid-cols-1" 
+            style="min-height: 300px;"
+            > 
+          
+            <h2 class="p-2 text-lg font-bold font-sans text-gray-600 uppercase" >Usuarios Demos </h2>  
+
+            <div class="overflow-y-scroll m-1"> 
+                <dx-data-table
+                    x-ref="table" 
+                    x-bind:crud-url="url" 
                     thead-class="bg-blue-100"
                     tbody-class="bg-gray-50" 
                     tr-class="border-blue-500"
-                    >
+                >
                     <div field="name" td-class="font-bold text-blue-500 px-1 pl-2">
                         <div class="border-blue-400 border-r p-1 m-0" >Usuario</div> 
                     </div>
@@ -117,11 +122,11 @@
                     <div field="address" oninput="formatAddress" td-class="px-1 pr-2 text-xs" class="w-1/4 p-1">
                         Dirección
                     </div> 
-                </dx-data-table>
-                <div class="sticky bottom-0 bg-blue-100 text-sm p-1 font-semibold text-gray-600">
-                    Referencia tomada desde: <a class="text-red-400 uppercase" href="https://jsonplaceholder.typicode.com">jsonplaceholder</a>
-                </div>
+                </dx-data-table>  
             </div> 
+            <div class="bg-blue-100 text-sm p-1 font-semibold text-gray-600">
+                Referencia tomada desde: <a class="text-red-400 uppercase" href="https://jsonplaceholder.typicode.com">jsonplaceholder</a>
+            </div>
             <!-- 
             TABLA 2....
             <br>
@@ -247,5 +252,5 @@
 <script>  
 	function formatAddress(v) {
 		return v ? `<b>${v.city}</b> - ${v.street} - ${v.suite}` : ''
-	} 
+	}
 </script>

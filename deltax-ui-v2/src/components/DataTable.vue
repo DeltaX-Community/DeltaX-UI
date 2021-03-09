@@ -20,7 +20,7 @@
     </thead>
     <tbody :class="tbodyClass">
       <template v-for="(row, idx) in rows">
-        <slot name="row" v-bind:row="row">
+        <slot name="row">
           <tr
             :key="idx"
             class="border-gray-200 dark:border-gray-400 border-t border-b px-3"
@@ -28,7 +28,7 @@
           >
             <template v-for="col in columnsObj">
               <td :key="col.field" :class="col['td-class']">
-                <slot :name="`row.${col.field}`" v-bind:row="row">
+                <slot :name="`row.${col.field}`">
                   <div
                     v-html="
                       col.oninput != null
@@ -50,10 +50,6 @@
 import { Get } from "../api/request";
 export default {
   props: {
-    columns: {
-      type: String,
-      require: true,
-    },
     crudUrl: {
       type: String,
     },
@@ -85,20 +81,15 @@ export default {
 
   computed: {
     columnsObj() {
-      if (this.columns) {
-        return typeof this.columns == "string"
-          ? JSON.parse(this.columns)
-          : this.columns;
-      }
-
       const cols = [];
+
       this.$slots.default?.forEach((s) => {
-        console.log("+ slot", s.tag, s.data.domProps.innerHTML, s.data.attrs);
-        cols.push({
+        const obj = {
           ...s.data.attrs,
           oninput: s.data.attrs.oninput ? eval(s.data.attrs.oninput) : null,
-          label: s.data.domProps.innerHTML,
-        });
+          label: `${s.data.domProps.innerHTML}`,
+        };
+        cols.push(obj);
       });
       return cols;
     },
@@ -108,6 +99,10 @@ export default {
     crudUrl: {
       immediate: true,
       handler: function (url) {
+        if (!url) {
+          return;
+        }
+
         Get(url).then((json) => {
           console.log("DataTable response json:", json);
           this.rows = json;
