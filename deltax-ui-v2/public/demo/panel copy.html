@@ -1,0 +1,185 @@
+<template>
+    <div x-data="panelData()" x-init="setup" class="relative">
+
+        <div class="absolute top-1 right-4 flex z-10">
+            <div class="text-green-900 text-5xl">
+                <div
+                    class="bg-white border-2 border-green-100 rounded-full cursor-pointer shadow-xl hover:text-green-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        style="height: 24px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:p-4 grid grid-cols-2 lg:grid-cols-10 gap-2 overflow-auto" style="height: calc(100vh - 110px );">
+
+            <!-- primer lugar -->
+            <div class="col-span-2 sm:col-span-1 lg:col-span-2 p-2 | flex flex-col gap-2 bg-blue-300">
+                <!-- meter 2 -->
+                <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                    <div class="text-center flex-row bg-green-200 self-center">
+                        <span class="text-xl font-bold font-sans">
+                            <dx-rt-value topic-name="process_info/UI.RtViewer/RunningDateTime"></dx-rt-value>
+                        </span>
+                    </div>
+                    <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Viabilidad</div>
+                </div>
+
+                <!-- meter 2 -->
+                <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                    <div class="text-center flex-row bg-green-200 self-center flex-nowrap">
+                        <span class="text-5xl font-bold font-sans">
+                            <dx-rt-value topic-name="tag1"></dx-rt-value>
+                        </span>
+                        <span class="text-2xl font-sans font-extralight text-blue-700">U$S</span>
+                    </div>
+                    <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Deuda Economica</div>
+                </div>
+            </div>
+
+            <!-- segundo lugar lugar -->
+            <div class="col-span-2 sm:col-span-1 lg:col-span-2 p-2 | flex flex-col gap-2  bg-blue-300">
+                <!-- meter 2 -->
+                <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                    <div class="text-center flex-row bg-green-200 self-center">
+                        <span class="text-5xl font-bold font-sans">123.2</span>
+                        <span class="text-2xl font-sans font-extralight text-blue-700">$</span>
+                    </div>
+                    <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold"></div>
+                </div>
+
+                <!-- meter 2 -->
+                <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
+                    <div class="text-center flex-row bg-green-200 self-center flex-nowrap">
+                        <span class="text-5xl font-bold font-sans">Valor OK</span>
+                        <span class="text-2xl font-sans font-extralight text-blue-700"></span>
+                    </div>
+                    <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Lorem ipsum dolor</div>
+                </div>
+            </div>
+
+
+            <!-- GRAFICO 1 -->
+            <div class="col-span-2 lg:col-span-6 | bg-red-200 text-red font-bold py-2 px-4 overflow-auto"
+                style="min-height: 300px; height: 38vh;">
+                GRAFICO 1....
+                <br>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit amet dicta veritatis animi? Fugit atque
+                doloremque
+                recusandae amet nam nulla neque doloribus voluptatem, dolor iste, cumque ratione eos, sunt fugiat?
+            </div>
+
+            <!-- GRAFICO 2 -->
+            <div class="col-span-2 lg:col-span-5 relative | bg-green-200  text-red font-bold py-2 px-4 flex flex-col">
+                GRAFICO 2....
+                <br>
+
+                <div x-data="{focus:false, value:''}">
+                    <div class="mt-2 p-0 mb-2 relative text-red-500 dark:text-gray-100 bg-white">
+                        <label x-show.transition="focus == true || value!='' " class="absolute top-0 ml-3 p-1 pt-0 mt-0 | label-transition block pointer-events-none cursor-text text-xs   bg-white rounded-md
+                        dark:bg-dark-500 undefined text-red-500">
+                            Test label
+                        </label>
+                        <label x-show.transition="focus == false && value==''" class="absolute top-0 pt-4 pb-2 px-4 label-transition block pointer-events-none cursor-text font-bold outline-none  rounded-md dark:bg-dark-500 
+                            text-black dark:text-gray-100 bg-transparent">
+                            Test label
+                        </label>
+                        <input aria-label="Test label"
+                            class="mt-2 pt-2 outline-none  px-4 rounded-t font-bold text-black dark:text-gray-100 bg-white w-full border rounded bg-transparent py-1 duration-200 ease-in  border-red-500 caret-error-500 "
+                            x-on:focus="focus=true" x-on:blur="focus=false" x-model="value" placeholder="">
+                        <div class="text-xs p-0 pb-1 ml-4 relative left-0 rounded-md  text-red-500"> ne</div>
+                    </div>
+                </div>
+
+                <div class="grid flex-grow bg-gray-50">
+                    <dx-raw-plot></dx-raw-plot>
+                </div>
+                <div class="bg-red-500 block">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit amet dicta veritatis animi? Fugit atque
+                    doloremque
+                    recusandae amet nam nulla neque doloribus voluptatem, dolor iste, cumque ratione eos, sunt fugiat?
+                </div>
+            </div>
+
+            <!-- TABLA 1 -->
+            <div class="col-span-2 lg:col-span-5 | bg-white text-red border-blue-300 border-4 rounded-sm rounded-tr-3xl m-2 flex flex-col"
+                style="height: 45vh; min-height: 300px;">
+
+                <h2 class="p-2 text-lg font-bold font-sans text-gray-600 uppercase">Usuarios Demos </h2>
+
+                <div class="overflow-y-scroll m-1 flex-grow">
+                    <dx-data-table x-bind:crud-url="url" thead-class="bg-blue-100" tbody-class="bg-gray-50"
+                        tr-class="border-blue-500">
+                        <div field="name" td-class="font-bold text-blue-500 px-1 pl-2">
+                            <div class="border-blue-400 border-r p-1 m-0">Usuario</div>
+                        </div>
+                        <div field="username" td-class="px-1">
+                            <div class="border-blue-400 border-r p-1 m-0">Alias</div>
+                        </div>
+                        <div field="email" td-class="px-1 text-sm">
+                            <div class="border-blue-400 border-r p-1 m-0">Correo</div>
+                        </div>
+                        <div field="phone" td-class="px-1" class="border-r p-2 m-2">
+                            <div>Telefono</div>
+                        </div>
+                        <div field="address" oninput="formatAddress" td-class="px-1 pr-2 text-xs" class="w-1/4 p-1">
+                            Dirección
+                        </div>
+                    </dx-data-table>
+                </div>
+                <div class="bg-blue-100 text-sm p-1 font-semibold text-gray-600 flex flex-row">
+                    <div class="flex-grow">
+                        Referencia tomada desde:
+                        <a class="text-red-400 uppercase" href="https://jsonplaceholder.typicode.com">
+                            jsonplaceholder
+                        </a>
+                    </div>
+                    <div class="text-red-900 text-5xl">
+                        <div
+                            class="bg-white border-2 border-green-100 rounded-full cursor-pointer shadow-xl hover:text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" style="height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-green-900 text-5xl">
+                        <div
+                            class="bg-white border-2 border-green-100 rounded-full cursor-pointer shadow-xl hover:text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" style="height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    function formatAddress(v) {
+        return v ? `<b>${v.city}</b> - ${v.street} - ${v.suite}` : ''
+    }
+
+    function panelData() {
+        return {
+            baseUrl: 'https://jsonplaceholder.typicode.com/users',
+            url: '',
+            refresh: 20,
+            setup: function () {
+                this.url = `${this.baseUrl}?time=${Date.now()}`
+
+                setInterval(() => {
+                    this.url = `${this.baseUrl}?time=${Date.now()}`
+                }, this.refresh * 1000);
+            },
+        }
+    }
+</script>

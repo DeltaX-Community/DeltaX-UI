@@ -26,6 +26,12 @@
             "url": "/demo/panel.html",
             "color": "green-500",
             "icon": "fas fa-tasks"
+        },
+        {
+            "title": "uPlot",
+            "url": "/demo/testuplot.html",
+            "color": "red-600",
+            "icon": "fas fa-tasks"
         }
     ]
 }

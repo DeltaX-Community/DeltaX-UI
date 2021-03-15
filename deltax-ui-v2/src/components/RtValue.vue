@@ -33,12 +33,8 @@ export default {
 
   mounted() {
     // console.log("--- MOUNTED --- topicName",this.topicName)
-    if (RtWs.IsConnected) {
-        RtWs.RtAddSubscribe([this.topicName]);
-    }
-    RtWs.on("rt.connected", function () {
-        RtWs.RtAddSubscribe([this.topicName]);
-    }); 
+     
+    RtWs.RtAddSubscribe([this.topicName]); 
   },
 
   computed:{

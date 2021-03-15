@@ -30,11 +30,7 @@
               <td :key="col.field" :class="col['td-class']">
                 <slot :name="`row.${col.field}`">
                   <div
-                    v-html="
-                      col.oninput != null
-                        ? col.oninput(row[col.field])
-                        : row[col.field]
-                    "
+                    v-html="parseFieldValue(row,col)"
                   />
                 </slot>
               </td>
@@ -79,10 +75,20 @@ export default {
     };
   },
 
+  methods:{
+    parseFieldValue(row, col) {
+      return col.oninput != null
+        ? col.oninput(row[col.field])
+        : row[col.field]
+    }
+  },
+
   computed: {
     columnsObj() {
+      if (!this.crudUrl) {
+        return [];
+      }
       const cols = [];
-
       this.$slots.default?.forEach((s) => {
         const obj = {
           ...s.data.attrs,

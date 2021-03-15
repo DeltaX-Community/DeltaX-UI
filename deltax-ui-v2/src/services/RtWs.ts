@@ -66,6 +66,7 @@ export class RealTimeWebSocket extends Client {
         console.log("rt on open:", result);
         reactive.IsConnected = true;
         await this.RtGetTopics()
+        await this.RtSubscribeTopics();
         this.emit("rt.connected");
     }
 
@@ -81,18 +82,16 @@ export class RealTimeWebSocket extends Client {
         result.tags.forEach(tag => {
             tag.updated = new Date(tag.updated);
             Vue.set(reactive.Topics, tag.tagName, tag);
-            this.SubscribedTopics.add(tag.tagName);
         });
     }
 
-    public async RtSubscribe(topics: Array<string>) {
-        console.log("rpc.rt.subscribe topics", topics);
-        const resultTags = await this.call('rpc.rt.subscribe', topics, this.timeout) as { tags: Array<TopicDto> };
-        console.log("rpc.rt.subscribe resultTags", resultTags);
-
-        this.SubscribedTopics = new Set();
+    public async RtSubscribeOnly(topics: Array<string>) {
         reactive.Topics = {};
-        this.RtOnNotifyTags(resultTags);
+        this.SubscribedTopics = new Set(topics);
+
+        if (this.IsConnected) {
+            await this.RtSubscribeTopics()
+        }
     }
 
     public async RtAddSubscribe(topics: Array<string>) {
@@ -102,14 +101,31 @@ export class RealTimeWebSocket extends Client {
         }
 
         this.SubscribedTopics = new Set(topics.concat(Array.from(this.SubscribedTopics)))
-        const topicsSet = Array.from(this.SubscribedTopics);
-
-        console.log("******** RtAddSubscribe topics", topicsSet);
-        const resultTags = await this.call('rpc.rt.subscribe', topicsSet, this.timeout) as { tags: Array<TopicDto> };
-        console.log("RtAddSubscribe resultTags", resultTags);
-
-        this.RtOnNotifyTags(resultTags);
+        if (this.IsConnected) {
+            await this.RtSubscribeTopics()
+        }
     }
+
+    private async RtSubscribeTopics() {
+        const topics = Array.from(this.SubscribedTopics);
+        if (topics.length) {
+            console.log("******** RtSubscribeTopics topics", topics);
+            const resultTags = await this.call('rpc.rt.subscribe', topics, this.timeout) as { tags: Array<TopicDto> };
+            console.log("RtSubscribeTopics resultTags", resultTags);
+
+            this.RtOnNotifyTags(resultTags);
+        }
+    }
+
+    // public async RtSubscribe(topics: Array<string>)
+    // { 
+    //     if (this.IsConnected) {
+    //         this.RtAddSubscribe(topics);
+    //     }
+    //     this.on("rt.connected", () => {
+    //         this.RtAddSubscribe(topics); 
+    //     });
+    // }
 
     public async RtSetValues(topicValue: Array<{ topic: string; value: string | number | unknown }>) {
         console.log("send RtSetValues", topicValue);

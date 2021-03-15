@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+
+  <title>Svelte app</title>
+
+  <link defer rel='icon' type='image/png' href='/assets/favicon.png'>
+
+  <script defer src='/build/bundle.js'></script>  
+  <script defer src='/build/alpine.js'></script>
+
+  <link rel='stylesheet' href='/build/tailwind.min.css'>
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"> -->
+  
+  <script>
+    const doc = (document._currentScript || document.currentScript).ownerDocument;
+    const template = doc.querySelector('#my-box');
+
+    customElements.define('my-box', class extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        const temp = document.importNode(template.content, true);
+        this.appendChild(temp);
+      }
+    });
+    
+  </script>
+</head>
+
+<body>
+  <div >
+  
+    <d-header-bar elementid="div-page"></d-header-bar> 
+    <div id="div-page"></div>
+
+    <d-meter name="Running" topicname='{process_info/UI.RtViewer/AliveMs}/60/60'></d-meter>
+
+    <div x-data="{ tab2: 'foo' }">
+      <button :class="{ 'active': tab2 === 'foo' }" @click="tab2 = 'foo'">Foo</button>
+      <button :class="{ 'active': tab2 === 'bar' }" @click="tab2 = 'bar'">Bar</button>
+
+      <div x-show="tab2 === 'foo'">Tab Foo</div>
+      <div x-show="tab2 === 'bar'">Tab Bar</div>
+    </div>
+    
+  </div>
+</body>
+
+</html>

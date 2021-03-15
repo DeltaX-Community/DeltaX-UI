@@ -1,10 +1,10 @@
-<svelte:options tag={null} />
+<svelte:options tag={"dx-header-bar"} />
 
 <script>
-    export let elementid;
+    import { Get } from "../api/request";
+    import { createEventDispatcher } from "svelte";
 
-    var template;
-    var script;
+    const dispatch = createEventDispatcher();
 
     var menu = {
         title: "Planta Demo",
@@ -14,77 +14,40 @@
         items: [
             {
                 title: "Inicio",
-                url: "#home",
+                url: "home-page.html",
                 color: "pink-600",
                 icon: "fas fa-home",
-                partialPage: "home-page.html",
-            },
-            {
-                title: "Tareas",
-                url: "#task",
-                color: "red-500",
-                icon: "fas fa-tasks",
-                partialPage: "tasks-page.html",
-            },
-            {
-                title: "TareasOk",
-                url: "#task-ok",
-                color: "blue-500",
-                icon: "fas fa-tasks",
-                partialPage: "demo-panel-tab.html",
-            },
-            {
-                title: "Index",
-                url: "/index.html",
-                color: "red-600",
-                icon: "fas fa-tasks",
-                partialPage: "tasks2-page.html",
             },
         ],
     };
 
-    const defaultUrl = menu.items[0].url;
-    var currTab = location.hash.split("?")[0] || defaultUrl;
-    var currItem = menu.items.find((i) => i.url == currTab);
-    var menuHidden = false;
-    var userMenu = false;
-    console.log(location.hash, currTab, defaultUrl, currItem);
+    function getMenu() {
+        const url = `menu.json`;
+        console.log("Iniciar Header bar menu", url);
+        Get(url).then((json) => {
+            console.log("Menu", json);
+            menu = json;
+            setUrl(location.hash);
+        });
+    }
 
-    var loadComponent = function (url) {
-        return fetch(url)
-            .then((result) => {
-                return result.text();
-            })
-            .then((txt) => {
-                const parser = new DOMParser();
-                const fragment = parser.parseFromString(txt, "text/html");
-                const s = fragment.getElementsByTagName("SCRIPT")[0];
-                return { template: txt, script: s };
-            });
-    };
+    location.hash || (location.href = "#home.html");
+    getMenu();
 
-    var loadUrl = async function (url) {
-        url = `/partial/${url}`;
-        const a = await loadComponent(url);
+    let defaultUrl = menu.items[0].url;
+    let currTab = defaultUrl;
+    let currItem = menu.items.find((i) => i.url == currTab) || menu.items[0];
+    let menuHidden = true;
+    let userMenu = false;
 
-        // let script = document.createElement("script");
-        // script.setAttribute("src", "/build/alpine.js");
-        // document.head.appendChild(script);
-
-        template = a.template;
-        console.log(elementid, a.script);
-        if (a.script) {
-            script = document.createElement("script");
-            script.innerHTML = a.script.innerHTML;
-            document.body.appendChild(script);
-        }
-
-        if (elementid) {
-            var el = document.getElementById(elementid);
-            console.log(elementid, el);
-            if (el) {
-                el.innerHTML = a.template;
-            }
+    var setUrl = function (url) {
+        console.log("setUrl", setUrl);
+        defaultUrl = menu.items[0].url;
+        const newTab = url?.match("(.+)[?]?")[1] || defaultUrl;
+        if (newTab != currTab && menu.items.find((i) => i.url == newTab)) {
+            currTab = newTab;
+            currItem = menu.items.find((i) => i.url == currTab);
+            dispatch("item", currItem);
         }
     };
 
@@ -96,29 +59,14 @@
         }
     };
 
-    function toggleUserMenu() {
-        console.log("userMenu", userMenu);
-        userMenu = !userMenu;
-    }
-
-    var setUrl = function (url) {
-        console.log("setUrl", setUrl);
-        currItem = menu.items.find((i) => i.url == url);
-        currTab = url;
-        loadUrl(currItem.partialPage);
-    };
-
     window.onpopstate = function (event) {
-        const newTab = location.hash.split("?")[0] || currTab;
-        if (newTab != currTab && menu.items.find((i) => i.url == newTab)) {
-            location.reload();
-        }
+        setUrl(location.hash);
     };
 </script>
 
 <nav id="header" class="bg-white sticky w-full z-10 top-0 shadow-md mb-4">
     <div
-        class="w-full mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-3 lg:pb-0"
+        class="w-full mx-auto flex flex-wrap items-center xl:container mt-0 pt-3 pb-3 md:pb-3 lg:pb-0"
     >
         <div class="w-1/2 pl-2 md:pl-2">
             <div
@@ -129,10 +77,10 @@
                     bind:innerHTML={menu.logo}
                     class="text-{currItem.color}"
                 />
-                <a on:click={() => setUrl(defaultUrl)} href={defaultUrl}
-                    >{menu.title}</a
-                >
-                {#if currItem.url != defaultUrl}
+                <a on:click={() => setUrl(defaultUrl)} href={defaultUrl}>
+                    {menu.title}
+                </a>
+                {#if currItem && currItem.url != defaultUrl}
                     <p class="font-medium text-base">/</p>
                     <p class="font-medium text-base">{currItem.title}</p>
                 {/if}
@@ -143,7 +91,7 @@
                 <!-- User Menu -->
                 <div class="relative text-sm">
                     <button
-                        on:click={toggleUserMenu}
+                        on:click={() => (userMenu = !userMenu)}
                         class="flex items-center focus:outline-none mr-3"
                     >
                         <img
@@ -231,12 +179,12 @@
         </div>
 
         <div
-            class="w-full flex-grow lg:flex lg:items-center lg:container lg:mx-auto lg:w-auto mt-2 lg:mt-0 bg-white z-20 {menuHidden ===
-            false
+            class="w-full flex-grow lg:flex lg:items-center xl:container lg:mx-auto lg:w-auto mt-2 lg:mt-0 bg-white z-20 
+            {menuHidden
                 ? 'hidden'
                 : ''}"
             on:click={() => {
-                menuHidden = false;
+                menuHidden = true;
             }}
         >
             <ul class="list-reset lg:flex flex-1 items-center px-4">
@@ -247,7 +195,7 @@
                             class="block px-1 p-2 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-transparent {getClass(
                                 item
                             )}"
-                            on:click={setUrl(item.url)}
+                            on:click={() => setUrl(item.url)}
                         >
                             <i class="{item.icon} fa-fw mr-3" />
                             <span class="pb-1 md:pb-0 text-sm">
@@ -261,17 +209,6 @@
     </div>
 </nav>
 
-{currTab}
-{#each menu.items as item}
-    <div class="lg:container lg:mx-auto">
-        {#if currTab == item.url}
-            {JSON.stringify(item)}
-            <!-- --- {@html template?.innerHTML} --- -->
-            <!-- <d-load-partial url={item.partialPage} /> -->
-        {/if}
-    </div>
-{/each}
-
 <style>
-    @import "/build/tailwind.min.css";
+    @import "/global.css";
 </style>

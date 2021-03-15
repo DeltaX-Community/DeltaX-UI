@@ -1,24 +1,8 @@
 module.exports = {
-  purge: [
-    // './src/**/*.html',
-    // './src/**/*.js',
-  ],
-  darkMode: 'class', // or 'media' or 'class'
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {
-      colors: {
-        panel: {
-          header: '#ddbf5f',
-          text: '#d4af37',
-          dark: '#aa8c2c'
-        },
-        gold: {
-          light: '#ddbf5f',
-          base: '#d4af37',
-          dark: '#aa8c2c'
-        },
-      },
-    },
+    extend: {},
   },
   variants: {
     extend: {},

@@ -1,8 +1,8 @@
 import { Client } from "rpc-websockets";
 import { writable, Writable } from "svelte/store";
 
-const Topics = writable({} as { [name: string]: TopicDto });
-const IsConnected = writable(false);
+
+
 
 export interface TopicDto {
     tagName: string;
@@ -26,7 +26,10 @@ export class RealTimeWebSocket extends Client {
 
         this.timeout = 10000;
         this.KnownTopics = [];
-        this.NameTopics = new Set();
+        this.SubscribedTopics = new Set();
+        this.Topics = writable({} as { [name: string]: TopicDto });
+        this.IsConnected = writable(false);
+        this.IsConnected.subscribe(val => this.isConnected = val)
 
         this.on('open', this.RtOnOpen);
         this.on('close', this.RtOnClose);
@@ -34,18 +37,22 @@ export class RealTimeWebSocket extends Client {
     }
 
     public KnownTopics: Array<string>;
-    public NameTopics: Set<string>;
+    public SubscribedTopics: Set<string>;
+    public Topics = writable({} as { [name: string]: TopicDto });
+    public IsConnected = writable(false);
+    private isConnected = false
 
     private async RtOnClose() {
         console.log("rt on close:");
-        IsConnected.set(false);
+        this.IsConnected.set(false);
         this.emit("rt.disconnected");
     }
 
     private async RtOnOpen(result: unknown) {
         console.log("rt on open:", result);
-        IsConnected.set(true);
+        this.IsConnected.set(true);
         await this.RtGetTopics()
+        await this.RtSubscribeTopics();
         this.emit("rt.connected");
     }
 
@@ -58,42 +65,45 @@ export class RealTimeWebSocket extends Client {
     }
 
     private RtOnNotifyTags(result: { tags: Array<TopicDto> }) {
-        Topics.update(val => {
+        this.Topics.update(val => {
             result.tags.forEach(tag => {
                 tag.updated = new Date(tag.updated);
                 val[tag.tagName] = tag;
-                this.NameTopics.add(tag.tagName);
             });
             return val;
         });
     }
 
-    public async RtSubscribe(topics: Array<string>) {
-        console.log("rpc.rt.subscribe topics", topics);
-        const resultTags = await this.call('rpc.rt.subscribe', topics, this.timeout) as { tags: Array<TopicDto> };
-        console.log("rpc.rt.subscribe resultTags", resultTags);
+    public async RtSubscribeOnly(topics: Array<string>) {
+        this.Topics.update(val => val = {});
+        this.SubscribedTopics = new Set(topics);
 
-        console.log("Object.keys(Topics)", Object.keys(Topics))
-
-        this.NameTopics = new Set();
-        Topics.set({});
-        this.RtOnNotifyTags(resultTags);
+        if (this.isConnected) {
+            await this.RtSubscribeTopics()
+        }
     }
 
     public async RtAddSubscribe(topics: Array<string>) {
         // si todos los tags a agregar estan subscritos no invoco el comando 
-        if (topics.findIndex(t => !this.NameTopics.has(t)) < 0) {
+        if (topics.findIndex(t => !this.SubscribedTopics.has(t)) < 0) {
             return;
         }
 
-        this.NameTopics = new Set(topics.concat(Array.from(this.NameTopics)))
-        const topicsSet = Array.from(this.NameTopics);
+        this.SubscribedTopics = new Set(topics.concat(Array.from(this.SubscribedTopics)))
+        if (this.isConnected) {
+            await this.RtSubscribeTopics()
+        }
+    }
 
-        console.log("******** RtAddSubscribe topics", topicsSet);
-        const resultTags = await this.call('rpc.rt.subscribe', topicsSet, this.timeout) as { tags: Array<TopicDto> };
-        console.log("RtAddSubscribe resultTags", resultTags);
+    private async RtSubscribeTopics() {
+        const topics = Array.from(this.SubscribedTopics);
+        if (topics.length) {
+            console.log("******** RtSubscribeTopics topics", topics);
+            const resultTags = await this.call('rpc.rt.subscribe', topics, this.timeout) as { tags: Array<TopicDto> };
+            console.log("RtSubscribeTopics resultTags", resultTags);
 
-        this.RtOnNotifyTags(resultTags);
+            this.RtOnNotifyTags(resultTags);
+        }
     }
 
     public async RtSetValues(topicValue: Array<{ topic: string; value: string | number | unknown }>) {
@@ -124,8 +134,5 @@ export class RealTimeWebSocket extends Client {
 const connectionUrl = "ws://localhost:5011/rt";
 const RtWs = new RealTimeWebSocket(connectionUrl);
 
-export {
-    IsConnected,
-    Topics
-}
+export type IRtWs = typeof RtWs
 export default RtWs;

@@ -1,11 +1,14 @@
+import RtWs from "./services/RtWs";
+window.RtWs = RtWs
 
-// export { default as HeaderBar } from "./Components/HeaderBar.svelte";
-// export { default as NavBar } from "./Components/NavBar.svelte";
-export { default as Meter } from "./Components/Meter.svelte";
-export { default as Panel } from "./Components/Panel.svelte";
-export { default as RtWs } from "./services/RtWs";
-import "./NativeComponents/LoadPartial";
+import * as Api from "./api/request";
+window.Api = Api
 
-import HeaderBar from "./Components/HeaderBar.svelte";
 
-customElements.define('d-header-bar', HeaderBar as {} as CustomElementConstructor); 
+import { LoadPage } from "./Components/LoadPage";
+customElements.define("dx-load-page", LoadPage);
+
+export { default as App } from "./Components/App.svelte";
+export { default as HeaderBar } from "./Components/HeaderBar.svelte";
+export { default as RtValue } from "./Components/RtValue.svelte";
+export { default as DataTable } from "./Components/DataTable.svelte";

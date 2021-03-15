@@ -5,7 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import css from 'rollup-plugin-css-only'; 
+import css from 'rollup-plugin-css-only';
 import copy from 'rollup-plugin-copy'
 
 const production = !process.env.ROLLUP_WATCH;
@@ -37,29 +37,24 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		file: 'public/build/main.js'
 	},
 	plugins: [
 		svelte({
-			customElement: true, 
-			shadowDom: false,
-			preprocess: sveltePreprocess({
-				sourceMap: !production,
-				postcss: true
-			}),
+			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
 				// enable run-time checks when not in production
-				dev: !production,				
-				customElement: true,  
+				dev: !production,
+				customElement: true
 			}
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
-		css({ output: 'bundle.css' }),
+		css({ output: 'main.css' }),
 
 		copy({
 			targets: [
-				{ src: './node_modules/alpinejs/dist/alpine.js', dest: 'public/build/' }, 
+				{ src: './node_modules/alpinejs/dist/alpine-ie11.js', dest: 'public/build/' }, 
 			]
 		}),
 

@@ -1,166 +1,19 @@
 <!DOCTYPE html>
-<html lang="es"> 
-
+<html lang="en">
 <head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-  <title>Svelte app</title>
+	<title>Svelte app</title>
 
-  <link rel='icon' type='image/png' href='/assets/favicon.png'>
-  <link rel='stylesheet' href='/build/global.css'> 
-
-  <script defer src='/build/bundle.js'></script>
-  <script defer src='/build/alpine.js'></script> 
-  <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script> -->
+	<link rel='icon' type='image/png' href='/favicon.png'>
+	<link rel="stylesheet" href="/global.css">
+	<script defer src='/build/main.js'></script>   
+	<!-- <script defer src='/build/alpine.js'></script>    -->
 </head>
 
-<body >
-  <!-- <d-nav-bar></d-nav-bar>	 -->
-
-  <d-load-partial url="demo-panel-tab2.html"></d-load-partial> 
-
-  <d-panel title="pepe Void">
-  </d-panel>
-
-  <d-panel title="demo-panel-tab.html">
-    <div slot="body">
-      <d-load-partial url="demo-panel-tab.html"></d-load-partial>
-    </div>
-  </d-panel>
-
-
-  <!-- <div x-data>
-    <button @mouseenter.once="
-              fetch('/dropdown-partial.html') 
-                  .then(response => response.text())
-                  .then(html => { $refs.dropdown.innerHTML = html })
-          " @click="open = true">Show Dropdown</button>
-
-    <div x-ref="dropdown" x-show="open" @click.away="open = false">
-      Loading Spinner...
-    </div>
-  </div> -->
-
-  <div x-data="{ open: false }">
-    <button @click="open = true">Abrir Desplegable</button>
-    <ul x-show="open" @click.away="open = false">
-      Cuerpo del Desplegable ss
-    </ul>
-  </div>
-
-  <div x-data="{ tab: 'foo' }">
-    <button :class="{ 'active': tab === 'foo' }" @click="tab = 'foo'">Foo</button>
-    <button :class="{ 'active': tab === 'bar' }" @click="tab = 'bar'">Bar</button>
-
-    <div x-show="tab === 'foo'">Tab Foo</div>
-    <div x-show="tab === 'bar'">Tab Bar</div>
-  </div>
-
-  <div class="container mx-auto mt-5  bg-white dark:bg-black"> 
-    <div class="mt-1">
-      <d-meter name="Running Time" topicname='process_info/UI.RtViewer/RunningDateTime'></d-meter>
-    </div>
-    <div class="mt-1">
-      <d-meter name="Alive" topicname="process_info/UI.RtViewer/AliveMs" unit="[ms]"></d-meter>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 m-0 p-0  mt-1 gap-1">
-      <div class="py-2 px-1 | rounded-md | border-gray-400 border-2 " style="min-height: 300px;">
-        <div class="col-span-1 grid grid-cols-1">
-          <div class="mb-1">
-            <d-meter name="Running" topicname='{process_info/UI.RtViewer/AliveMs}/60/60'></d-meter>
-          </div>
-          <div class="my-1">
-            <d-meter name="Alive" topicname="process_info/UI.RtViewer/AliveMs" unit="[sec]"></d-meter>
-          </div>
-          <div class="grid grid-cols-1 | rounded-md border-2 border-blue-600">
-            <div class="py-1 flex-grow px-2 auto-cols-max font-bold {color} text-center">
-              {value}
-            </div>
-            <div class="py-1 px-2 bg-panel-text  text-white font-bold text-center">
-              {name ?? topicname}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="sm:col-start-2 sm:row-start-1 col-span-1 sm:col-span-2 row-span-2 m-0">
-        <div class="py-2 px-1 | rounded-md | border-blue-600 border-2 " style="min-height: 300px;">
-          C
-        </div>
-      </div>
-    </div>
-
-
-    <div>
-      <div class="rounded-md border-2 border-blue-600 grid grid-cols-1 items-stretch" style=" width: 200px;">
-        <div class="py-1  px-2 auto-cols-max font-bold {color} text-center text-4xl justify-center">
-          123.23
-        </div>
-        <div class="py-1 px-2 bg-blue-600 text-white font-bold text-center">
-        </div>
-      </div>
-    </div>
-
-    <div class="m-1 rounded-br-2xl rounded-tl-2xl | border-red-900 border-2 bg-blue-50 | wdg-shadow overflow-hidden">
-      <div class="p-1 bg-red-900 text-white text-center font-semibold font-sans uppercase">
-        el Titulo 2
-      </div>
-      <div class="py-2 px-1" style="min-height: 300px;">
-        <div class="col-span-1 grid grid-cols-1">
-          <div class="mb-1">
-            <d-meter name="Running X" topicname='{process_info/UI.RtViewer/AliveMs}/60/60'></d-meter>
-          </div>
-          <div class="my-1">
-            <d-meter name="Alive" topicname="process_info/UI.RtViewer/AliveMs" unit="[sec]"></d-meter>
-          </div>
-          <div class="grid grid-cols-1 | rounded-md border-2 border-blue-600">
-            <div class="py-1 flex-grow px-2 auto-cols-max font-bold {color} text-center">
-              {value}
-            </div>
-            <div class="py-1 px-2 bg-blue-600 text-white font-bold text-center">
-              {name ?? topicname}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p>nada</p>
-    <div>
-      <div
-        class="grid grid-cols-3 rounded-xl border-4  border-blue-600 overflow-hidden gap-2 bg-blue-200 text-xl font-extrabold">
-        <div class='bg-blue-600  py-2 px-4'>1</div>
-        <div class='  py-2 px-4'>2</div>
-        <div class='  py-2 px-4'>3</div>
-      </div>
-    </div>
-
-
-    <section>
-      <button class="button bg-blue-500 text-white py-2 px-4 hover:bg-blue-700 button3">
-        Botón con Tail
-      </button>
-
-      <button
-        class="py-2 px-4  ripple  rounded-lg shadow-md text-white bg-green-700 hover:bg-green-500 focus:bg-green-600">
-        Click me 1
-      </button>
-      <button
-        class="py-2 px-4  button3  rounded-lg shadow-md text-white bg-green-700 hover:bg-green-500 focus:bg-green-600">
-        Click me
-      </button>
-      <button
-        class="py-2 px-4  button rounded-lg shadow-md text-white bg-green-700 hover:bg-green-500 focus:bg-green-600">
-        Click me
-      </button>
-
-      <button class="ripple  btn   text-white bg-green-700 hover:bg-green-500 focus:bg-green-600">
-        Button Con texoto largo que pela
-      </button>
-    </section>
-    <section></section>
-  </div>
+<body>
+	<dx-app elementid="load-page"></dx-app>   
+	<dx-load-page id="load-page"></dx-load-page>
 </body>
-
 </html>

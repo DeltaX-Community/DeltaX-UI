@@ -21,6 +21,15 @@ Vue.customElement('dx-rt-value', RtValue);
 import DataTable from "./components/DataTable.vue";
 Vue.customElement('dx-data-table', DataTable);
 
+import RawPlot from "./components/plot/RawPlot.vue";
+Vue.customElement('dx-raw-plot', RawPlot);
+
+import RtPlot from "./components/plot/RtPlot.vue";
+Vue.customElement('dx-rt-plot', RtPlot, { shadow: true });
+
+// import RtPlot2 from "./components/plot2/RtPlot2.vue";
+// Vue.customElement('dx-rt-plot2', RtPlot2);
+
 import RtWs from "./services/RtWs";
 window.RtWs = RtWs
 

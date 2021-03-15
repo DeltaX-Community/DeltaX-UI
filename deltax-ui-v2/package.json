@@ -12,9 +12,11 @@
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9",
     "core-js": "^3.6.5",
+    "echarts": "5.0.2",
     "postcss": "^7",
     "rpc-websockets": "^7.4.8",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "uplot": "^1.6.7",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-custom-element": "^3.2.14",
@@ -33,7 +35,6 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "typescript": "~3.9.3",
-    "vue-cli-plugin-tailwind": "~2.0.6",
-    "vue-template-compiler": "^2.6.12"
+    "vue-cli-plugin-tailwind": "~2.0.6"
   }
 }
