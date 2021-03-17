@@ -6,7 +6,7 @@
     import RtWs from "../services/RtWs";
     let initialized = false;
 
-    $: if (topicname && !initialized) {
+    $: if (topicname) {
         RtWs.RtAddSubscribe([topicname]);
         initialized = true;
     }
