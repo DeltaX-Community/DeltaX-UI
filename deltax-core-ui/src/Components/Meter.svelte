@@ -13,18 +13,18 @@
 
 </script>
 
-<div class="grid overflow-hidden shadow-mb-xl bg-gray-800 hover:bg-black"> 
+<div class="grid overflow-hidden shadow-mb-xl bg-white hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-black"> 
     <div class="text-center flex-row self-center"> 
-      <span class="text-5xl font-bold font-sans break-all text-{color}-300 ">
+      <span class="text-5xl font-bold font-sans break-all text-{color}-700 dark:text-{color}-300 ">
         <dx-rt-value topicname={topicname}></dx-rt-value>
         </span>
         {#if unit }
-            <span class="font-sans font-bold text-{color}-300" >
+            <span class="font-sans font-bold text-{color}-700 dark:text-{color}-300" >
             {unit}
             </span>
         {/if}
     </div>
-    <div class="p-1 self-center text-center font-bold text-gray-300">
+    <div class="p-1 self-center text-center font-bold text-gray-800 dark:text-gray-300">
         {name}
     </div>
 </div>
