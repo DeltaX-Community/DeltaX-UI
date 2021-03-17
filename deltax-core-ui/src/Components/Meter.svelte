@@ -2,14 +2,14 @@
 
 <script >
     export let topicname;
-    export let nombre;
-    export let unidad;
+    export let name;
+    export let unit;
     export let color;
 
     if (!color)
         color = "gray";
-    if(!nombre)
-        nombre= "---";
+    if(!name)
+        name= "---";
 
 </script>
 
@@ -18,14 +18,14 @@
       <span class="text-5xl font-bold font-sans break-all text-{color}-300 ">
         <dx-rt-value topicname={topicname}></dx-rt-value>
         </span>
-        {#if unidad }
+        {#if unit }
             <span class="font-sans font-bold text-{color}-300" >
-            {unidad}
+            {unit}
             </span>
         {/if}
     </div>
     <div class="p-1 self-center text-center font-bold text-gray-300">
-        {nombre}
+        {name}
     </div>
 </div>
   
