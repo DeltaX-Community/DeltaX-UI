@@ -12,3 +12,4 @@ export { default as App } from "./Components/App.svelte";
 export { default as HeaderBar } from "./Components/HeaderBar.svelte";
 export { default as RtValue } from "./Components/RtValue.svelte";
 export { default as DataTable } from "./Components/DataTable.svelte";
+export { default as Meter } from "./Components/Meter.svelte";

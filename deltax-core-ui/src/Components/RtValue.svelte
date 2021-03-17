@@ -16,17 +16,16 @@
     $: color = status ? "" : "line-through text-red-600";
 </script>
 
-<div>
-    {#if value == "---"}
-        <div class="py-1 px-2 text-red-600">****</div>
-    {:else}
-        {#key value}
-            <div class="animate-color py-1 px-2 {color}">
-                {value}
-            </div>
-        {/key}
-    {/if}
-</div>
+
+{#if value == "---"}
+    <span class="text-red-600">***</span>
+{:else}
+    {#key value}
+        <span class="animate-color {color}">
+            {value}
+        </span>
+    {/key}
+{/if}
 
 <style>
     @import "/global.css";
