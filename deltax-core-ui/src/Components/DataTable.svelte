@@ -7,7 +7,7 @@
     export let tbodyclass: string;
     export let trclass: string;
 
-    $: rowsObj = rows ? JSON.parse(rows) : ([] as { [key: string]: unknown }[]);
+    $: rowsObj = (rows ? JSON.parse(rows) : []) as { [key: string]: unknown }[];
     $: columnsObj = (columns ? JSON.parse(columns) : []) as {
         class?: string;
         label: string;

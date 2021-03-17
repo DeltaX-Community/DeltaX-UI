@@ -1,173 +1,47 @@
 <template>
   <div x-data="panelData()" x-init="setup" class="relative">
-
-    <div class="absolute top-1 right-4 flex z-10">
-      <div class="text-green-900 text-5xl">
-        <div class="bg-white border-2 border-green-100 rounded-full cursor-pointer shadow-xl hover:text-green-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            style="height: 24px;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <div class="lg:p-4 grid grid-cols-2 lg:grid-cols-10 gap-2 | bg-white" style="min-height: calc(100vh - 110px);">
-
-      <!-- primer lugar -->
-      <div class="col-span-2 sm:col-span-1 lg:col-span-2 p-2 | flex flex-col gap-2 | bg-white">
-        <!-- meter 2 -->
-        <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
-          <div class="text-center flex-row bg-green-200 self-center">
-            <span class="text-xl font-bold font-sans">
-              <dx-rt-value topic-name="process_info/UI.RtViewer/RunningDateTime"></dx-rt-value>
-            </span>
+    <div class="lg:p-4   | flex flex-row flex-wrap  | bg-white"
+      style="height: calc(100vh - 130px);"> 
+ 
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px;">
+        <div class="m-2 grid bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4 overflow-hidden" >
+          <div class="relative"> 
+             <dx-rt-plot realtime="1" interval="200" x-bind:tags="tagsPlot2"></dx-rt-plot> 
           </div>
-          <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Viabilidad</div>
         </div>
+      </div> 
 
-        <!-- meter 2 -->
-        <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
-          <div class="text-center flex-row bg-green-200 self-center flex-nowrap">
-            <span class="text-5xl font-bold font-sans">
-              <dx-rt-value topic-name="tag1"></dx-rt-value>
-            </span>
-            <span class="text-2xl font-sans font-extralight text-blue-700">U$S</span>
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px;">
+        <div class="m-2 grid bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4 overflow-hidden" >
+          <div class="relative"> 
+            <dx-raw-plot ></dx-raw-plot>  
           </div>
-          <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Deuda Economica</div>
+        </div>
+      </div> 
+<!--       
+      <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+          pepe 2
         </div>
       </div>
 
-      <!-- segundo lugar lugar -->
-      <div class="col-span-2 sm:col-span-1 lg:col-span-2 p-2 | flex flex-col gap-2 | bg-white">
-        <!-- meter 2 -->
-        <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
-          <div class="text-center flex-row bg-green-200 self-center">
-            <span class="text-5xl font-bold font-sans">123.2</span>
-            <span class="text-2xl font-sans font-extralight text-blue-700">$</span>
-          </div>
-          <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold"></div>
-        </div>
-
-        <!-- meter 2 -->
-        <div class="grid | bg-red-500 rounded-md border-red-900 border-2 overflow-hidden">
-          <div class="text-center flex-row bg-green-200 self-center flex-nowrap">
-            <span class="text-5xl font-bold font-sans">Valor OK</span>
-            <span class="text-2xl font-sans font-extralight text-blue-700"></span>
-          </div>
-          <div class="pb-3 px-1 self-center text-center bg-red-200 text-red font-bold">Lorem ipsum dolor</div>
+      <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+          pepe 3
         </div>
       </div>
 
-
-      <!-- GRAFICO 1 -->
-      <div
-        class="col-span-2 lg:col-span-6 m-2 flex flex-col | bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md">
-
-        <h2
-          class="m-2 py-1 px-2 text-lg font-bold font-sans text-gray-800 uppercase bg-blue-400 rounded-sm rounded-tr-2xl shadow">
-          Usuarios Demos
-        </h2>
-
-        <div class="grid flex-grow mt-1 |  bg-gray-100">
-          <!-- <dx-raw-plot></dx-raw-plot> -->
-          <!-- <dx-rt-plot real-time="true" x-bind:tags="tagsPlot2"></dx-raw-plot> -->
+       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+          pepe 4
         </div>
-        <div class="bg-red-200">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit amet dicta veritatis animi? Fugit
-          atque
-          doloremque
-          recusandae amet nam nulla neque doloribus voluptatem, dolor iste, cumque ratione eos, sunt fugiat?
-        </div>
-      </div>
-
-
-      <!-- GRAFICO 2 -->
-      <div
-        class="col-span-2 lg:col-span-5 m-2 flex flex-col | bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md"
-        style="height: 43vh;">
-
-        <h2
-          class="m-2 py-1 px-2 text-lg font-bold font-sans text-gray-800 uppercase bg-blue-400 rounded-sm rounded-tr-2xl shadow">
-          Usuarios Demos
-        </h2>
-
-        <div class="grid flex-grow mt-1 |  bg-white">
-          <dx-rt-plot real-time="true" x-bind:tags="tagsPlot2">
-            </dx-raw-plot>
-        </div>
-      </div>
-
-      <!-- TABLA 1 -->
-      <div
-        class="col-span-2 lg:col-span-5 m-2 | flex flex-col | bg-white text-red border-blue-300 border-4 rounded-sm rounded-tr-3xl shadow-md"
-        style="height: 43vh;">
-
-        <h2
-          class="m-0 py-3 px-4 text-lg font-bold font-sans text-gray-800 uppercase | rounded-sm rounded-tr-2xl | shadow-inner">
-          Usuarios Demos
-        </h2>
-
-        <div class="overflow-y-scroll m-1 flex-grow">
-
-          <dx-data-table theadclass="bg-blue-100" tbodyclass="bg-gray-50" trclass="border-blue-500" x-bind:rows="rows"
-            x-bind:columns="columns">
-
-          </dx-data-table>
-
-          <!-- <dx-data-table x-bind:crud-url="url" thead-class="bg-blue-100" tbody-class="bg-gray-50"
-                        tr-class="border-blue-500">
-                        <div field="name" td-class="font-bold text-blue-500 px-1 pl-2">
-                            <div class="border-blue-400 border-r p-1 m-0">Usuario</div>
-                        </div>
-                        <div field="username" td-class="px-1">
-                            <div class="border-blue-400 border-r p-1 m-0">Alias</div>
-                        </div>
-                        <div field="email" td-class="px-1 text-sm">
-                            <div class="border-blue-400 border-r p-1 m-0">Correo</div>
-                        </div>
-                        <div field="phone" td-class="px-1" class="border-r p-2 m-2">
-                            <div>Telefono</div>
-                        </div>
-                        <div field="address" oninput="formatAddress" td-class="px-1 pr-2 text-xs" class="w-1/4 p-1">
-                            Dirección
-                        </div>
-                    </dx-data-table> -->
-        </div>
-        <div class="bg-blue-100 text-sm p-1 font-semibold text-gray-600 flex flex-row">
-          <div class="flex-grow">
-            Referencia tomada desde:
-            <a class="text-red-400 uppercase" href="https://jsonplaceholder.typicode.com">
-              jsonplaceholder
-            </a>
-          </div>
-          <div class="text-red-900 text-5xl">
-            <div class="bg-white border-2 border-green-100 rounded-full cursor-pointer shadow-xl hover:text-green-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                style="height: 24px;">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </div>
-          </div>
-          <div class="text-green-900 text-5xl">
-            <div class="bg-white border-2 border-green-100 rounded-full cursor-pointer shadow-xl hover:text-green-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                style="height: 24px;">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div> -->
+   
     </div>
   </div>
 </template>
 
-<script> 
-
+<script>
   function panelData() {
     return {
       columns: "",
@@ -178,69 +52,73 @@
       tagsPlot2: null,
 
       setup: async function () {
-        
+
         const series = [{
           name: "RtViewer Alive",
           tagName: "process_info/UI.RtViewer/AliveMs",
-          axisName: "#1"
+          axisName: "#1", 
         }, {
           name: "HistoricDB Alive",
           tagName: "process_info/RealTimeHistoricDB/AliveMs",
-          axisName: "#2"
+          axisName: "#1", 
         }, {
           name: "TagsCount",
           tagName: "process_info/UI.RtViewer/TagsCount",
-          axisName: "#3"
+          axisName: "#3", 
         }, {
           name: "RunningDateTime",
-          tagName: "process_info/UI.RtViewer/RunningDateTime",
-          options: {
-            itemStyle: {
-              color: '#ff4433'
-            },
-          }
+          tagName: "process_info/UI.RtViewer/RunningDateTime", 
+          color:"#FF3300",
+          isString : true
+        }, {
+          name: "tag1",
+          tagName: "tag1", 
+          color:"#0033FF",
+          isString : true
         }]
 
         await RtWs.RtAddSubscribe(series.map(s => s.tagName))
         this.tagsPlot2 = JSON.stringify(series)
-        
+
 
         this.columns = JSON.stringify(
           [{
-            label: "Usuario",
-            field: "name",
-            class: "bg-red-100 px-2",
-            tdclass: "bg-red-50 px-2"
-          },
-          {
-            label: "Correo",
-            field: "email",
-            class: "bg-green-100 px-2",
-            tdclass: "bg-green-50 px-2"
-          },
-          {
-            label: "Direccion",
-            field: "address",
-            class: "bg-blue-200 w-2/5 px-2",
-            tdclass: "bg-blue-100 px-2 text-sm"
-          }
-        ])
+              label: "Usuario",
+              field: "name",
+              class: "bg-red-100 px-2",
+              tdclass: "bg-red-50 px-2"
+            },
+            {
+              label: "Correo",
+              field: "email",
+              class: "bg-green-100 px-2",
+              tdclass: "bg-green-50 px-2"
+            },
+            {
+              label: "Direccion",
+              field: "address",
+              class: "bg-blue-200 w-2/5 px-2",
+              tdclass: "bg-blue-100 px-2 text-sm"
+            }
+          ])
 
         this.url = `${this.baseUrl}?time=${Date.now()}`
 
         var formatAddress = function (v) {
           return v ? `<b>${v.city}</b> - ${v.street} - ${v.suite}` : ''
         }
-        
-        var mappFields = function(rows)
-        {
-          result = rows.map( r => {
-            return {...r, address: `${formatAddress(r.address)}` }
+
+        var mappFields = function (rows) {
+          result = rows.map(r => {
+            return {
+              ...r,
+              address: `${formatAddress(r.address)}`
+            }
           })
-          return  JSON.stringify(result)
+          return JSON.stringify(result)
         }
 
-        Api.Get(this.url)  
+        Api.Get(this.url)
           .then(rows => this.rows = mappFields(rows))
 
         // this.rows = JSON.stringify(
@@ -258,13 +136,13 @@
         //     }
         //   ])
 
-       
 
-        setInterval(() => {
-          this.url = `${this.baseUrl}?time=${Date.now()}`
-          Api.Get(this.url) 
-             .then(rows => this.rows= mappFields(rows))
-        }, this.refresh * 1000);
+
+        // setInterval(() => {
+        //   this.url = `${this.baseUrl}?time=${Date.now()}`
+        //   Api.Get(this.url)
+        //     .then(rows => this.rows = mappFields(rows))
+        // }, this.refresh * 1000);
       },
     }
   }

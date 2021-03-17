@@ -12,7 +12,6 @@
             .getElementById(elementid ?? "element-page")
             ?.setAttribute("url", url);
     }
-    let dom_node;
 </script>
 
 <HeaderBar on:item={handleUrl} />

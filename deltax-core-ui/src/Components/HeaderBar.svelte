@@ -96,7 +96,7 @@
                     >
                         <img
                             class="w-8 h-8 rounded-full mr-4"
-                            src="http://i.pravatar.cc/300"
+                            src="/assets/img/avatar.jpg"
                             alt="Avatar of User"
                         />
                         <span class="hidden md:inline-block"> Hi, User </span>
