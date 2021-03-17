@@ -11,7 +11,7 @@
         },
         {
             "title": "Demo home",
-            "url": "/demo/",
+            "url": "/demo/#home.html",
             "color": "pink-600",
             "icon": "fas fa-home"
         },

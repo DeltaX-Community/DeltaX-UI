@@ -21,14 +21,13 @@ if (sessionDark) {
     darkMode = JSON.parse(sessionDark) == true
 }
 
-document.body.classList.toggle("dark", darkMode)
-
+document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
 
 class CommonClass {
     public IsDarkMode = writable(darkMode);
 
     public setDarkMode(darkMode = true) {
-        document.body.classList.toggle("dark", darkMode)
+        document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
         sessionStorage.setItem('DarkMode', JSON.stringify(darkMode))
         this.IsDarkMode.set(darkMode)
     }
