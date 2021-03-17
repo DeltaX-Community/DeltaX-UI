@@ -37,6 +37,7 @@
     "alpinejs": "^2.8.1",
     "cross-env": "^7.0.3",
     "rpc-websockets": "^7.4.9",
-    "sirv-cli": "^1.0.0"
+    "sirv-cli": "^1.0.0",
+    "uplot": "^1.6.7"
   }
 }

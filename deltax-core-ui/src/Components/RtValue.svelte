@@ -4,18 +4,19 @@
     export let topicname: string;
 
     import RtWs from "../services/RtWs";
+    let initialized = false;
 
-    if (topicname) {
+    $: if (topicname && !initialized) {
         RtWs.RtAddSubscribe([topicname]);
+        initialized = true;
     }
 
     let IsConnected = RtWs.IsConnected;
     let Topics = RtWs.Topics;
-    $: status = $IsConnected && $Topics[topicname]?.status;
-    $: value = $Topics[topicname]?.value ?? "---";
+    $: status = $IsConnected && initialized && $Topics[topicname]?.status;
+    $: value = $Topics[topicname]?.status ? $Topics[topicname]?.value : "---";
     $: color = status ? "" : "line-through text-red-600";
 </script>
-
 
 {#if value == "---"}
     <span class="text-red-600">***</span>

@@ -13,3 +13,5 @@ export { default as HeaderBar } from "./Components/HeaderBar.svelte";
 export { default as RtValue } from "./Components/RtValue.svelte";
 export { default as DataTable } from "./Components/DataTable.svelte";
 export { default as Meter } from "./Components/Meter.svelte";
+export { default as RawPlot } from "./Components/Plot/RawPlot.svelte";
+export { default as RtPlot } from "./Components/Plot/RtPlot.svelte";

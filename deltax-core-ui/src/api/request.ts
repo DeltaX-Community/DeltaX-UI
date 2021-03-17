@@ -102,7 +102,10 @@ export function GetTopicHistory(
     }
 
     // http://127.0.0.1:5010/api/v1/History/topic/tag1?maxPoints=1000&lastSeconds=300
-    return Get<TagValue[]>(`${baseUrl}/History/topic/${tagName}?${q.join("&")}`);
+    return Get<any[]>(`${baseUrl}/History/topic/${tagName}?${q.join("&")}`)
+        .then(e => e.map(v => {
+            return { ...v, updated: new Date(v.updated) } as TagValue
+        }));
 }
 
 

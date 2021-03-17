@@ -54,7 +54,7 @@ export default {
 
 		copy({
 			targets: [
-				{ src: './node_modules/alpinejs/dist/alpine-ie11.js', dest: 'public/build/' }, 
+				{ src: './node_modules/alpinejs/dist/alpine.js', dest: 'public/build/' }, 
 			]
 		}),
 

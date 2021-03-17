@@ -1,31 +1,36 @@
 {
     "title": "Planta1 Linea Demo",
     "subTitle": "La gran planta demo",
-    "logo": "<i class='fas fa-sun text-xl lg:text-4xl'></i>", 
-    "items": [
-        {
+    "logo": "<i class='fas fa-sun text-xl lg:text-4xl'></i>",
+    "items": [{
             "title": "Home",
-            "url": "/", 
+            "url": "/",
             "color": "blue-500",
             "icon": "fas fa-tasks"
         },
         {
             "title": "Demo",
-            "url": "#home.html", 
+            "url": "#home.html",
             "color": "pink-600",
             "icon": "fas fa-home"
         },
         {
             "title": "Demo Panel Tab",
-            "url": "#demo-panel-tab.html", 
+            "url": "#demo-panel-tab.html",
             "color": "red-500",
             "icon": "fas fa-tasks"
         },
         {
             "title": "Demo Panel",
-            "url": "#panel.html", 
+            "url": "#panel.html",
             "color": "blue-500",
             "icon": "fas fa-tasks"
-        }        
+        },
+        {
+            "title": "Uplot",
+            "url": "#testuplot.html",
+            "color": "green-500",
+            "icon": "fas fa-tasks"
+        }
     ]
 }
