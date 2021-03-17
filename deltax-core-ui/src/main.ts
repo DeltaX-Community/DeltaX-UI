@@ -4,6 +4,9 @@ window.RtWs = RtWs
 import * as Api from "./api/request";
 window.Api = Api
 
+import Common from "./Settings/Common";
+window.Common = Common
+
 
 import { LoadPage } from "./Components/LoadPage";
 customElements.define("dx-load-page", LoadPage);

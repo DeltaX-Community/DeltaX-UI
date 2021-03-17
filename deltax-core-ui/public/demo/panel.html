@@ -4,18 +4,14 @@
       style="height: calc(100vh - 130px);"> 
  
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px;">
-        <div class="m-2 grid bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4 overflow-hidden" >
-          <div class="relative"> 
-             <dx-rt-plot realtime="1" interval="200" x-bind:tags="tagsPlot2"></dx-rt-plot> 
-          </div>
+        <div class="m-2 grid relative bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4 overflow-hidden" >
+            <dx-rt-plot realtime="1" interval="200" x-bind:tags="tagsPlot2"></dx-rt-plot>  
         </div>
       </div> 
 
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px;">
-        <div class="m-2 grid bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4 overflow-hidden" >
-          <div class="relative"> 
-            <dx-raw-plot ></dx-raw-plot>  
-          </div>
+        <div class="m-2 grid relative bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4 overflow-hidden" >
+          <dx-raw-plot ></dx-raw-plot>   
         </div>
       </div> 
     

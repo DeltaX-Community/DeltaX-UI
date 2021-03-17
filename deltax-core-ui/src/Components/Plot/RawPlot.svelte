@@ -9,7 +9,6 @@
     let clientWidth;
 
     $: if (clientWidth && clientHeight && plot && plot.plot) {
-        console.log(clientHeight, elPlot.clientHeight, plot.plot.height);
         plot.plot.setSize({
             width: clientWidth,
             height: clientHeight - 24,
@@ -52,12 +51,15 @@
     });
 </script>
 
-<div
-    class="absolute inset-0 overflow-hidden"
-    bind:clientHeight
-    bind:clientWidth
-    bind:this={elPlot}
-/>
+<div class="block">
+    <div
+        class="top-1 inset-0 overflow-hidden"
+        style="position: absolute; z-index: -1;"
+        bind:clientHeight
+        bind:clientWidth
+    />
+    <div class="absolute inset-0 overflow-hidden" bind:this={elPlot} />
+</div>
 
 <style>
     @import "/global.css";

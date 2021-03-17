@@ -3,8 +3,12 @@
 <script>
     import { Get } from "../api/request";
     import { createEventDispatcher } from "svelte";
+    import Common from "../Settings/Common";
 
     const dispatch = createEventDispatcher();
+
+    $: IsDarkMode = Common.IsDarkMode;
+    $: dark = $IsDarkMode ? "dark" : "";
 
     var menu = {
         title: "Planta Demo",
@@ -133,6 +137,15 @@
                                 >
                                     My account
                                 </a>
+                            </li>
+                            <li>
+                                <span
+                                    on:click={() =>
+                                        Common.setDarkMode(!$IsDarkMode)}
+                                    class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline cursor-pointer"
+                                >
+                                    {$IsDarkMode ? "Light" : "Dark"}
+                                </span>
                             </li>
                             <li>
                                 <a

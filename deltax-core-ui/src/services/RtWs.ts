@@ -1,7 +1,6 @@
 import { Client } from "rpc-websockets";
 import { writable, Writable } from "svelte/store";
-
-
+import { RealTimeUrl } from "../Settings/Config"
 
 
 export interface TopicDto {
@@ -124,15 +123,8 @@ export class RealTimeWebSocket extends Client {
     }
 }
 
-// const production = !process.env.ROLLUP_WATCH;
-// const scheme = document.location.protocol === "https:" ? "wss" : "ws";
-// const port = document.location.port ? ":" + document.location.port : "";
-// const connectionUrl = !production
-//     ? "ws://localhost:5011/rt"
-//     : scheme + "://" + document.location.hostname + port + "/rt";
 
-const connectionUrl = "ws://localhost:5011/rt";
-const RtWs = new RealTimeWebSocket(connectionUrl);
+const RtWs = new RealTimeWebSocket(RealTimeUrl);
 
 export type IRtWs = typeof RtWs
 export default RtWs;

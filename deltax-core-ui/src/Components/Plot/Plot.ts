@@ -200,10 +200,8 @@ export class Plot {
 
     public setSeriesData(seriesDataValues: TagValue[][]) {
         this.xValues = seriesDataValues[0].map(d => d.updated.getTime() / 1000)
-        console.log("*** setSeriesData", seriesDataValues);
 
         var yy = seriesDataValues.map((s, si) => {
-            console.log("* setSeriesData", si, s);
             const serie = this.options.series[si + 1];
             if (serie["isString"]) {
                 var xTime = s.map(r => r.updated.getTime() / 1000);
@@ -229,8 +227,6 @@ export class Plot {
         })
 
         this.seriesData = [this.xValues, ...yy]
-        console.log("*** setSeriesData this.seriesData", this.seriesData);
-
         this.plot.setData(this.seriesData, true)
     }
 
@@ -265,7 +261,6 @@ export class Plot {
 
 
     public addPoints(updated: Date, seriesPoint: (string | null)[]) {
-        // console.log("addPoints", updated, seriesPoint)
         this.xValues.push(updated.getTime() / 1000)
 
         seriesPoint.forEach((val, si) => {

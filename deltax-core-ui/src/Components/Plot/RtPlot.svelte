@@ -8,7 +8,7 @@
     import RtWs from "../../services/RtWs";
 
     export let baseUrl = "http://127.0.0.1:5010/api/v1";
-    export let tags: string;
+    export let tags: string = null;
     $: tagsObj = (tags ? JSON.parse(tags) : []) as {
         name: string;
         tagName: string;
@@ -17,12 +17,12 @@
         color?: string;
     }[];
 
-    $: Topics = RtWs.Topics;
+    export let begin: string = null;
+    export let end: string = null;
+    export let realtime: boolean = null;
+    export let interval: number = null;
 
-    export let begin: string;
-    export let end: string;
-    export let realtime: boolean;
-    export let interval: number;
+    $: Topics = RtWs.Topics;
 
     let timer;
     let elPlot;
@@ -56,9 +56,7 @@
             color?: string;
         }[]
     ) {
-        console.log("*** configureSeries", series);
         for (const serie of series) {
-            console.log("* addSerie", serie);
             plot.addSerie(serie.name, serie.axisName, {
                 isString: serie.isString == true,
                 color: serie.color,
@@ -69,17 +67,14 @@
     var loadSeries = async function (
         series: { tagName: string; isString: boolean }[]
     ) {
-        console.log("*** loadSeries", series);
         let seriesDataValues: TagValue[][] = [];
         for (const serie of series) {
             const res = await GetTopicHistory(baseUrl, serie.tagName, {
                 ...getParams(),
                 strictMode: serie.isString != true,
             });
-            console.log("* loadSeries", serie, res);
             seriesDataValues.push(res);
         }
-        console.log("*** loadSeries", seriesDataValues);
         plot.setSeriesData(seriesDataValues);
 
         if (realtime) {
@@ -99,7 +94,6 @@
     var makeRealTimeSerie = async function () {
         interval = interval > 100 ? interval : 1000;
         const topics = tagsObj.map((t) => t.tagName);
-        console.log("makeRealTimeSerie", topics);
         await RtWs.RtAddSubscribe(topics);
         timer = setInterval(updateValuesAllSeries, interval);
     };
@@ -109,15 +103,21 @@
     });
 
     onDestroy(() => {
-        console.log("*** Destroy Plot *** ", this.tags);
         plot.plot.destroy();
         clearInterval(this.timer);
         this.timer = null;
     });
 
     // Update Width and Height on resize
-    $: if (clientWidth && clientHeight && plot && plot.plot && initialized) {
-        console.log(clientHeight, elPlot.clientHeight, plot.plot.height);
+    $: if (
+        clientWidth &&
+        clientHeight &&
+        elPlot &&
+        plot &&
+        plot.plot &&
+        initialized
+    ) {
+        // console.log( "resize",  clientHeight, elPlot.clientHeight, plot.plot.height );
         plot.plot.setSize({
             width: clientWidth,
             height: clientHeight - 24,
@@ -127,18 +127,22 @@
     $: if (tagsObj && tagsObj.length && plot && !initialized) {
         configureSeries(tagsObj);
         plot.init(elPlot);
-        loadSeries(tagsObj);
-
         initialized = true;
+
+        loadSeries(tagsObj);
     }
 </script>
 
-<div
-    class="absolute inset-0 overflow-hidden"
-    bind:clientHeight
-    bind:clientWidth
-    bind:this={elPlot}
-/>
+<div class="block">
+    <div
+        class="top-1 inset-0 overflow-hidden"
+        style="position: absolute; z-index: -1;"
+        bind:clientHeight
+        bind:clientWidth
+    />
+
+    <div class="absolute inset-0 overflow-hidden" bind:this={elPlot} />
+</div>
 
 <style>
     @import "/global.css";
