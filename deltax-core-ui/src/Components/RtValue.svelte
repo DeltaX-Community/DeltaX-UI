@@ -4,29 +4,29 @@
     export let topicname: string;
 
     import RtWs from "../services/RtWs";
+    let initialized = false;
 
-    if (topicname) {
+    $: if (topicname && !initialized) {
         RtWs.RtAddSubscribe([topicname]);
+        initialized = true;
     }
 
     let IsConnected = RtWs.IsConnected;
     let Topics = RtWs.Topics;
-    $: status = $IsConnected && $Topics[topicname]?.status;
-    $: value = $Topics[topicname]?.value ?? "---";
+    $: status = $IsConnected && initialized && $Topics[topicname]?.status;
+    $: value = $Topics[topicname]?.status ? $Topics[topicname]?.value : "---";
     $: color = status ? "" : "line-through text-red-600";
 </script>
 
-<div>
-    {#if value == "---"}
-        <div class="py-1 px-2 text-red-600">****</div>
-    {:else}
-        {#key value}
-            <div class="animate-color py-1 px-2 {color}">
-                {value}
-            </div>
-        {/key}
-    {/if}
-</div>
+{#if value == "---"}
+    <span class="text-red-600">***</span>
+{:else}
+    {#key value}
+        <span class="animate-color {color}">
+            {value}
+        </span>
+    {/key}
+{/if}
 
 <style>
     @import "/global.css";
