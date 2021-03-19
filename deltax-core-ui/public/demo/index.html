@@ -9,12 +9,68 @@
 	<link rel='icon' type='image/png' href='/favicon.png'>
 	<link rel="stylesheet" href="/global.css">
 	<link rel="stylesheet" href="/uplot.css">
-	<script defer src='/build/main.js'></script> 
+	<script defer src='/build/main.js'></script>
+
+	<style>
+		#page {
+			display: none;
+		} 
+
+		.body-loading {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0; 
+			width: 100vw;
+			height: 100vh; 
+			z-index: 200;    
+			background-color: rgba(133, 130, 130, 0.8);
+			background-image: url("/assets/img/loading.gif");
+			background-repeat: no-repeat;
+			background-position: center; 
+			opacity: 1; 
+			transition: opacity 1s linear;
+		} 
+
+		.loading-visible {
+			visibility: visible;
+			opacity: 1; 
+		}
+		.loading-hidden {
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0s 1s, opacity 1s linear;
+		} 
+
+		.load-page-loading {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;  
+			z-index: 1;  
+			width: 100vw;
+			height: 100vh; 
+			background-color: rgba(133, 130, 130 );
+			background-image: url("/assets/img/loading.gif");
+			background-repeat: no-repeat;
+			background-position: center;    
+		}  
+
+	</style>
+	<script>
+		function bodyLoad() {
+			document.getElementById("page").style.display = "block";  
+			document.getElementById("body-loading").classList.remove("loading-visible")
+			document.getElementById("body-loading").classList.add("loading-hidden") 
+		}  
+	</script>
 </head>
 
-<body>
-	<dx-app elementid="load-page"></dx-app>   
-	<dx-load-page id="load-page"></dx-load-page>  
- 
-</body> 
+<body onload="bodyLoad()" class="bg-white dark:bg-gray-700">
+	<div id="body-loading" class="body-loading loading-visible"></div>
+	<div id="page">
+		<dx-app elementid="load-page"></dx-app>
+		<dx-load-page id="load-page"></dx-load-page> 
+	</div>	
+</body>
 </html>

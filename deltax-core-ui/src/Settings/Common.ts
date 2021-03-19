@@ -1,5 +1,5 @@
 
-import { writable, Writable } from "svelte/store";
+import { writable } from "svelte/store";
 import { DefaultDarkMode } from "./Config";
 
 // default value
@@ -21,14 +21,13 @@ if (sessionDark) {
     darkMode = JSON.parse(sessionDark) == true
 }
 
-document.body.classList.toggle("dark", darkMode)
-
+document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
 
 class CommonClass {
     public IsDarkMode = writable(darkMode);
 
     public setDarkMode(darkMode = true) {
-        document.body.classList.toggle("dark", darkMode)
+        document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
         sessionStorage.setItem('DarkMode', JSON.stringify(darkMode))
         this.IsDarkMode.set(darkMode)
     }
@@ -37,6 +36,4 @@ class CommonClass {
 const Common = new CommonClass()
 export type ICommon = typeof Common
 export default Common;
-
-
 

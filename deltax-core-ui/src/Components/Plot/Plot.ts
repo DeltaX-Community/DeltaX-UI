@@ -59,17 +59,30 @@ export class Plot {
     private seriesDataString: { [key: string]: string[] };
     private localTz = new Intl.DateTimeFormat().resolvedOptions().timeZone;
     private fmtDate = uPlot.fmtDate('{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}.{fff}')
+    private defaultAxes = {}
 
-    constructor(width: number, height: number, title: string) {
+    constructor(width: number, height: number, title: string, dark: boolean = false) {
+
+        this.defaultAxes = {
+            stroke: dark ? "#c7d0d9" : "#3c3245",
+            grid: {
+                stroke: "#5c526550",
+                width: 1
+            },
+            ticks: {
+                stroke: "#5c526550",
+                width: 1
+            }
+        }
+
         this.options = {
             width,
             height,
             title,
-
             plugins: [],
             cursor: {
                 points: {
-                    size: 10,
+                    size: 12,
                     width: 2,
                     // @ts-ignore: Unreachable code error 
                     stroke: (u, seriesIdx) => u.series[seriesIdx].pointFill,
@@ -103,17 +116,19 @@ export class Plot {
                 },
             },
             axes: [
-                {
-                    scale: "x",
-                    side: 2
-                },
-                {
-                    scale: "yString",
-                    side: 1,
-                    show: true,
-                    grid: { show: false },
-                    size: 1
-                }],
+                Object.assign({}, this.defaultAxes,
+                    {
+                        scale: "x",
+                        side: 2
+                    }),
+                Object.assign({}, this.defaultAxes,
+                    {
+                        scale: "yString",
+                        side: 1,
+                        show: true,
+                        grid: { show: false },
+                        size: 1
+                    })],
             series: [{}]
         }
 
@@ -134,13 +149,12 @@ export class Plot {
                 time: false,
                 distr: 1
             }
-            this.options.axes.push({
-                scale: scaleName,
-                side: 3,
-                // stroke: "#222222",
-                // ticks: { size: 5, width: 1, stroke: "#222222" },
-                show: true
-            })
+            this.options.axes.push(Object.assign({}, this.defaultAxes,
+                {
+                    scale: scaleName,
+                    side: 3,
+                    show: true
+                }))
         }
     }
 
@@ -173,7 +187,7 @@ export class Plot {
                 paths: u => null,
                 points: {
                     space: 2,
-                    size: 10,
+                    size: 12,
                     show: true,
                     width: 2
                 },
@@ -185,7 +199,8 @@ export class Plot {
                 scale: scale,
                 label: name,
                 stroke: color,
-                fill: `${color}0f`,
+                fill: `${color}1A`,
+                width: 2,
                 paths: uPlot.paths.stepped({
                     align: 1
                 }),

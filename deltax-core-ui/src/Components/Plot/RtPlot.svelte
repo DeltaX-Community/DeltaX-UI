@@ -6,6 +6,10 @@
     import { GetTopicHistory } from "../../api/request";
     import type { TagValue } from "../../api/request";
     import RtWs from "../../services/RtWs";
+    import Common from "../../Settings/Common";
+
+    $: IsDarkMode = Common.IsDarkMode;
+    $: dark = $IsDarkMode ? "dark" : "";
 
     export let baseUrl = "http://127.0.0.1:5010/api/v1";
     export let tags: string = null;
@@ -99,7 +103,7 @@
     };
 
     onMount(() => {
-        plot = new Plot(clientWidth ?? 400, 100, "El Titulo");
+        plot = new Plot(clientWidth ?? 400, 100, "El Titulo", $IsDarkMode);
     });
 
     onDestroy(() => {
@@ -119,7 +123,7 @@
     ) {
         // console.log( "resize",  clientHeight, elPlot.clientHeight, plot.plot.height );
         plot.plot.setSize({
-            width: clientWidth,
+            width: clientWidth - 4,
             height: clientHeight - 24,
         });
     }
@@ -133,15 +137,15 @@
     }
 </script>
 
-<div class="block">
+<div class="block {dark}">
     <div
-        class="top-1 inset-0 overflow-hidden"
+        class="top-0 inset-0 overflow-hidden"
         style="position: absolute; z-index: -1;"
         bind:clientHeight
         bind:clientWidth
     />
 
-    <div class="absolute inset-0 overflow-hidden" bind:this={elPlot} />
+    <div class="absolute inset-0" bind:this={elPlot} />
 </div>
 
 <style>

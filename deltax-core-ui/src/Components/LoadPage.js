@@ -1,25 +1,26 @@
-import { GetHeader } from "../api/request"; 
+import { GetHeader } from "../api/request";
 
 export class LoadPage extends HTMLElement {
     script = null
-    // shadow = null
     wrapper = null
-    style = null
+    loading = null
 
     connectedCallback() {
-        // this.shadow = this.attachShadow({ mode: 'open' });
         this.wrapper = document.createElement('div');
-        this.wrapper.innerHTML = "<p>Loading...</p>"
+        this.loading = document.createElement('div');
+        this.appendChild(this.loading)
         this.appendChild(this.wrapper);
+        this.loadTemplate()
     }
 
     disconnectedCallback() {
-        console.log('disconnected from the DOM', this.getAttribute('url'));
-         if (this.script) {
-             this.removeChild(this.script);
-             this.script = null;
+        // console.log('disconnected from the DOM', this.getAttribute('url'));
+        if (this.script) {
+            this.removeChild(this.script);
+            this.script = null;
         }
         this.removeChild(this.wrapper)
+        this.removeChild(this.loading) 
     }
 
     static get observedAttributes() {
@@ -33,8 +34,17 @@ export class LoadPage extends HTMLElement {
 
     loadTemplate() {
         const url = this.getAttribute('url');
+        if (!url || url == '') {
+            return
+        }
+
+        this.loading.classList.add("load-page-loading")
+        this.loading.classList.add("loading-visible")
+        this.loading.classList.remove("loading-hidden")  
+        this.wrapper.innerHTML = `<div class="load-page-wait">Loading ${url}!</div>`
+
         console.log('loadTemplate', url);
-        fetch(url, {
+        fetch(url, { 
                 headers: GetHeader()
             })
             .then(response => response.text())
@@ -44,17 +54,22 @@ export class LoadPage extends HTMLElement {
 
                 // load TEMPLATE
                 const originalTemplate = fragment.getElementsByTagName('TEMPLATE')[0];
-                // this.wrapper.innerHTML = originalTemplate?.innerHTML || `<p>Fail Loading ${url}!</p>`
-                 this.wrapper.innerHTML = originalTemplate?.innerHTML || `<p>Fail Loading ${url}!</p>`
- 
+                this.wrapper.innerHTML = originalTemplate?.innerHTML || `<div class="load-page-fail">Fail Loading ${url}!</div>`
+
                 // Load SCRIPT
                 const originalScript = fragment.getElementsByTagName('SCRIPT')[0];
-                if (originalScript) { 
+                if (originalScript) {
                     this.script = document.createElement('script');
                     this.script.innerHTML = originalScript.innerHTML;
-                    this.wrapper.appendChild(this.script); 
-                    console.log('loadTemplate  wrapper SCRIPT', this.script);
-                }               
+                    this.wrapper.appendChild(this.script);
+                    // console.log('loadTemplate  wrapper SCRIPT', this.script);  
+                }
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    this.loading.classList.remove("loading-visible")
+                    this.loading.classList.add("loading-hidden")  
+                }, 50);
             })
     }
 }
