@@ -4,7 +4,7 @@
     "logo": "<i class='fas fa-sun text-xl lg:text-4xl'></i>",
     "items": [{
             "title": "Home",
-            "url": "/",
+            "url": "/#home.html",
             "color": "blue-500",
             "icon": "fas fa-tasks"
         },
