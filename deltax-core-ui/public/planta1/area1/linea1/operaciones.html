@@ -1,0 +1,152 @@
+<template>
+  <div x-data="panelData()" x-init="setup" class="relative">
+    <div class="lg:p-4   | flex flex-row flex-wrap"
+      style="height: calc(100vh - 130px);"> 
+ 
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid"  style="min-height: 300px; max-height: 500px;">
+        <div class="m-2 grid relative bg-white border-blue-300  dark:bg-gray-800  dark:border-gray-900  border-4 rounded-sm rounded-tr-3xl | shadow-md  " >  
+           <div class="block relative m-0 mr-2 mt-1"> 
+            <!-- <dx-rt-plot realtime="1" interval="200" x-bind:tags="tagsPlot2"></dx-rt-plot>    -->
+            <dx-raw-plot ></dx-raw-plot>   
+           </div>
+        </div> 
+      </div> 
+
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 500px;" >
+        <div class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md" >
+          <div class="block relative m-0 mr-4 mt-2"> 
+            <dx-raw-plot ></dx-raw-plot>   
+          </div>
+        </div> 
+      </div> 
+    
+      <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2  bg-gray-200 border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+          <dx-meter topicname="tag1" name="Running" unit="min" color="green" ></dx-meter>
+          <dx-meter topicname="tag4" name="Running" unit="min" color="green" ></dx-meter>  
+        </div>
+      </div> 
+
+      <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+          pepe 3
+        </div>
+      </div>
+
+       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+          pepe 4
+        </div>
+      </div>    
+    </div>
+  </div>
+</template>
+
+<script>
+  function panelData() {
+    return {
+      columns: "",
+      rows: "",
+      baseUrl: 'https://jsonplaceholder.typicode.com/users',
+      url: '',
+      refresh: 20,
+      tagsPlot2: null,
+
+      setup: async function () {
+
+        const series = [{
+          name: "RtViewer Alive",
+          tagName: "process_info/UI.RtViewer/AliveMs",
+          axisName: "#1", 
+        }, {
+          name: "HistoricDB Alive",
+          tagName: "process_info/RealTimeHistoricDB/AliveMs",
+          axisName: "#1", 
+        }, {
+          name: "TagsCount",
+          tagName: "process_info/UI.RtViewer/TagsCount",
+          axisName: "#3", 
+        }, {
+          name: "RunningDateTime",
+          tagName: "process_info/UI.RtViewer/RunningDateTime", 
+          color:"#FF3300",
+          isString : true
+        }, {
+          name: "tag1",
+          tagName: "tag1", 
+          color:"#0033FF",
+          isString : true
+        }]
+
+        await RtWs.RtAddSubscribe(series.map(s => s.tagName))
+        this.tagsPlot2 = JSON.stringify(series)
+
+
+        this.columns = JSON.stringify(
+          [{
+              label: "Usuario",
+              field: "name",
+              class: "bg-red-100 px-2",
+              tdclass: "bg-red-50 px-2"
+            },
+            {
+              label: "Correo",
+              field: "email",
+              class: "bg-green-100 px-2",
+              tdclass: "bg-green-50 px-2"
+            },
+            {
+              label: "Direccion",
+              field: "address",
+              class: "bg-blue-200 w-2/5 px-2",
+              tdclass: "bg-blue-100 px-2 text-sm"
+            }
+          ])
+
+        this.url = `${this.baseUrl}?time=${Date.now()}`
+
+        var formatAddress = function (v) {
+          return v ? `<b>${v.city}</b> - ${v.street} - ${v.suite}` : ''
+        }
+
+        var mappFields = function (rows) {
+          result = rows.map(r => {
+            return {
+              ...r,
+              address: `${formatAddress(r.address)}`
+            }
+          })
+          return JSON.stringify(result)
+        }
+
+        Api.Get(this.url)
+          .then(rows => this.rows = mappFields(rows))
+
+        // this.rows = JSON.stringify(
+        //   [{ 
+        //         f1: 1,
+        //         f2: 2 
+        //     },
+        //     { 
+        //         f1: 2,
+        //         f2: 3 
+        //     },
+        //     { 
+        //         f1: 5,
+        //         f2: 7 
+        //     }
+        //   ])
+
+
+
+        // setInterval(() => {
+        //   this.url = `${this.baseUrl}?time=${Date.now()}`
+        //   Api.Get(this.url)
+        //     .then(rows => this.rows = mappFields(rows))
+        // }, this.refresh * 1000);
+      },
+    }
+  }
+
+  import("/build/alpine.js")
+</script>

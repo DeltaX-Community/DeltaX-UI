@@ -2,99 +2,109 @@
 
 <script>
     import { Get } from "../api/request";
-    import { createEventDispatcher } from "svelte";
     import Common from "../Settings/Common";
-
-    const dispatch = createEventDispatcher();
 
     $: IsDarkMode = Common.IsDarkMode;
     $: dark = $IsDarkMode ? "dark" : "";
 
     var menu = {
-        title: "Planta Demo",
-        subTitle: "La gran planta demo",
-        logo: '<i class="fas fa-sun text-xl lg:text-4xl"></i>',
-
+        title: "Planta1",
+        url: "/#home.html",
+        logo: "<i class='fas fa-sun text-xl lg:text-4xl'></i>",
         items: [
             {
-                title: "Inicio",
-                url: "home-page.html",
-                color: "pink-600",
+                title: "Planta 1",
+                url: "/planta1/#home.html",
+                color: "green-600",
+                icon: "fas fa-home",
+            },
+        ],
+        tabs: [
+            {
+                title: "Operaciones",
+                url: "#operaciones.html",
+                color: "red-600",
                 icon: "fas fa-home",
             },
         ],
     };
 
-    function getMenu() {
-        const url = `menu.json`;
-        console.log("Iniciar Header bar menu", url);
-        Get(url).then((json) => {
-            console.log("Menu", json);
-            menu = json;
-            setUrl(location.hash);
-        });
-    }
-
-    location.hash || (location.href = "#home.html");
-    getMenu();
-
-    let defaultUrl = menu.items[0].url;
-    let currTab = defaultUrl;
-    let currItem = menu.items.find((i) => i.url == currTab) || menu.items[0];
+    let defaultUrl = "";
+    let currTab = location.hash;
+    let currItem = menu.tabs?.find((i) => i.url == currTab);
     let menuHidden = true;
     let userMenu = false;
 
-    var setUrl = function (url) {
-        console.log("setUrl", setUrl);
-        defaultUrl = menu.items[0].url;
-        const newTab = url?.match("(.+)[?]?")[1] || defaultUrl;
-        if (newTab != currTab && menu.items.find((i) => i.url == newTab)) {
-            currTab = newTab;
-            currItem = menu.items.find((i) => i.url == currTab);
-            dispatch("item", currItem);
-        }
-    };
+    function onPopstate() {
+        currTab = location.hash;
+        currItem = menu.tabs?.find((i) => i.url == currTab);
+    }
+
+    window.addEventListener("popstate", function () {
+        onPopstate();
+    });
+
+    function getMenu() {
+        Get(`menu.json`).then((json) => {
+            console.log("menu:", json);
+            menu = json;
+            onPopstate();
+            defaultUrl = menu.tabs ? menu.tabs[0].url : "#";
+            if (!location.hash && defaultUrl.length > 1) {
+                location.href = defaultUrl;
+            }
+        });
+    }
+
+    getMenu();
 
     $: getClass = function (item) {
         if (currTab == item.url) {
-            return `text-${item.color} border-${item.color} hover:border-${item.color}`;
+            return `text-black font-bold dark:text-white border-${item.color} hover:border-${item.color}`;
         } else {
-            return `hover:border-${item.color}`;
+            return `hover:border-${item.color} text-gray-500 dark:text-gray-300`;
         }
-    };
-
-    window.onpopstate = function (event) {
-        setUrl(location.hash);
     };
 </script>
 
 <div class={dark}>
     <nav
         id="header"
-        class="bg-white dark:bg-gray-600 sticky w-full z-10 top-0 shadow-md mb-4"
+        class="bg-white dark:bg-gray-600 text-gray-800 dark:text-gray-100 sticky w-full z-10 top-0 shadow-md mb-0"
     >
-        <div
-            class="w-full mx-auto flex flex-wrap items-center xl:container mt-0 pt-3 pb-3 md:pb-3 lg:pb-0"
-        >
-            <div class="w-1/2 pl-2 md:pl-2">
+        <div class="w-full mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3">
+            <div class="pl-2 md:pl-2">
                 <div
-                    class="text-gray-900 text-base lg:text-2xl no-underline font-bold flex flex-row items-center gap-2"
+                    class=" text-base lg:text-xl no-underline font-bold flex flex-row items-center gap-2"
                 >
                     <div
                         contenteditable="false"
                         bind:innerHTML={menu.logo}
-                        class="text-{currItem.color}"
+                        class="text-{currItem?.color}"
                     />
-                    <a on:click={() => setUrl(defaultUrl)} href={defaultUrl}>
+                    <a
+                        href={menu.url}
+                        class="block pr-1 align-middle text-base no-underline hover:text-blue-400 border-b-2 border-transparent"
+                    >
                         {menu.title}
                     </a>
-                    {#if currItem && currItem.url != defaultUrl}
-                        <p class="font-medium text-base">/</p>
-                        <p class="font-medium text-base">{currItem.title}</p>
+                    {#if menu.items}
+                        {#each menu.items as item}
+                            <span class="font-medium text-base m-0 p-0">/</span>
+                            <a
+                                href={item.url}
+                                class="block align-middle text-base no-underline hover:text-blue-400 border-b-2 border-transparent"
+                            >
+                                {item.title}
+                            </a>
+                        {/each}
                     {/if}
                 </div>
             </div>
-            <div class="w-1/2 pr-0">
+            <div class="pr-0 flex-grow">
+                <slot />
+            </div>
+            <div class="pr-0">
                 <div class="flex relative float-right">
                     <!-- User Menu -->
                     <div class="relative text-sm">
@@ -127,7 +137,7 @@
                         </button>
 
                         <div
-                            class="rounded shadow-md bg-gray-100 absolute mt-8 top-2 right-2 min-w-full overflow-auto z-30 {userMenu ===
+                            class="rounded shadow-md bg-gray-800 text-white opacity-90 absolute mt-8 top-2 right-2 min-w-full overflow-auto z-30 {userMenu ===
                             false
                                 ? 'hidden'
                                 : ''}"
@@ -139,7 +149,7 @@
                                 <li>
                                     <a
                                         href="#profile"
-                                        class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline"
+                                        class="px-4 py-2 block  hover:bg-gray-700 no-underline hover:no-underline"
                                     >
                                         My account
                                     </a>
@@ -148,7 +158,7 @@
                                     <span
                                         on:click={() =>
                                             Common.setDarkMode(!$IsDarkMode)}
-                                        class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline cursor-pointer"
+                                        class="px-4 py-2 block  hover:bg-gray-700 no-underline hover:no-underline cursor-pointer"
                                     >
                                         {$IsDarkMode ? "Light" : "Dark"}
                                     </span>
@@ -156,18 +166,18 @@
                                 <li>
                                     <a
                                         href="#noty"
-                                        class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline"
+                                        class="px-4 py-2 block  hover:bg-gray-700 no-underline hover:no-underline"
                                     >
                                         Notifications
                                     </a>
                                 </li>
                                 <li>
-                                    <hr class="border-t mx-2 border-gray-400" />
+                                    <hr class="border-t mx-2 border-gray-700" />
                                 </li>
                                 <li>
                                     <a
                                         href="#logout"
-                                        class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline"
+                                        class="px-4 py-2 block  hover:bg-gray-700 no-underline hover:no-underline"
                                     >
                                         Logout
                                     </a>
@@ -177,55 +187,62 @@
                     </div>
 
                     <!-- Menu Icon  -->
-                    <div class="block lg:hidden pr-4">
-                        <button
-                            on:click={() => (menuHidden = !menuHidden)}
-                            class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none"
-                        >
-                            <svg
-                                class="fill-current h-3 w-3"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
+                    {#if menu.tabs && menu.tabs.length > 1}
+                        <div class="block lg:hidden pr-4">
+                            <button
+                                on:click={() => (menuHidden = !menuHidden)}
+                                class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 dark:text-white dark:border-white appearance-none focus:outline-none"
                             >
-                                <title>Menu</title>
-                                <path
-                                    d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
-                                />
-                            </svg>
-                        </button>
+                                <svg
+                                    class="fill-current h-3 w-3"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <title>Menu</title>
+                                    <path
+                                        d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    {/if}
+                    <div class="block pr-4 font-extrabold font-mono text-xl">
+                        15:24:24
                     </div>
                 </div>
             </div>
-
-            <div
-                class="w-full flex-grow lg:flex lg:items-center xl:container lg:mx-auto lg:w-auto mt-2 lg:mt-0 bg-white z-20 
-            {menuHidden
-                    ? 'hidden'
-                    : ''}"
-                on:click={() => {
-                    menuHidden = true;
-                }}
-            >
-                <ul class="list-reset lg:flex flex-1 items-center px-4">
-                    {#each menu.items as item}
-                        <li class="mr-3 my-0 text-sm">
-                            <a
-                                href={item.url}
-                                class="block px-1 p-2 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-transparent {getClass(
-                                    item
-                                )}"
-                                on:click={() => setUrl(item.url)}
-                            >
-                                <i class="{item.icon} fa-fw mr-3" />
-                                <span class="pb-1 md:pb-0 text-sm">
-                                    {item.title}
-                                </span>
-                            </a>
-                        </li>
-                    {/each}
-                </ul>
-            </div>
         </div>
+        {#if menu.tabs && menu.tabs.length > 1}
+            <div>
+                <div
+                    class="w-full flex-grow lg:flex lg:items-center lg:mx-auto lg:w-auto mt-2 lg:mt-0 bg-white dark:bg-gray-600 z-20 
+            {menuHidden
+                        ? 'hidden'
+                        : ''}"
+                    on:click={() => {
+                        menuHidden = true;
+                    }}
+                >
+                    <ul class="list-reset lg:flex flex-1 items-center px-4">
+                        {#each menu.tabs as item}
+                            <li class="mr-3 my-0 text-sm">
+                                <a
+                                    href={item.url}
+                                    class="block px-1 p-2 align-middle hover:text-black dark:hover:text-gray-100  no-underline border-b-2 border-transparent {getClass(
+                                        item
+                                    )}"
+                                >
+                                    <i class={item.icon} />
+                                    <span class="pb-1 md:pb-0 text-sm">
+                                        {item.title}
+                                    </span>
+                                </a>
+                            </li>
+                        {/each}
+                    </ul>
+                </div>
+            </div>
+        {/if}
     </nav>
 </div>
 
