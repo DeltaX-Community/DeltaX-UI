@@ -1,0 +1,50 @@
+<template>
+
+  <style>
+    .active {
+      background-color: royalblue;
+    }
+  </style>
+
+  <div x-data="testFunction()">
+    <button :class="{ 'active': tab === 'foo' }" @click="tab = 'foo'">Foo</button>
+    <button :class="{ 'active': tab === 'bar' }" @click="tab = 'bar'">Bar</button>
+    <button :class="{ 'active': tab === 'bar2' }" @click="tab = 'bar2'">Bar 2</button>
+
+    <div x-show="tab === 'foo'">Tab Foo</div>
+    <div x-show="tab === 'bar'">
+      Tab
+      <dx-rt-value topicname="process_info/UI.RtViewer/AliveMs"></dx-rt-value>
+      Bar
+      <div class="flex flex-row items-stretch overflow-hidden my-auto | rounded-md border-2 border-blue-600">
+        <div class="py-1 flex-grow px-2 auto-cols-max font-bold bg-blue-600 text-white"> 
+          <div class=" py-1 px-2">  
+            Prueba
+            </div>   
+        </div>
+        <div class="py-1 flex-grow px-2 auto-cols-max font-bold my-auto">
+          <dx-rt-value topicname="process_info/UI.RtViewer/AliveMs"></dx-rt-value>
+        </div>
+        <div class="py-1 px-2 my-auto">Unidad</div>
+      </div>
+
+    </div>
+
+    <!-- <dx-meter name="prueba1" topic-name="process_info/UI.RtViewer/RunningDateTime" unit="sec" ></dx-meter>
+    <dx-meter name="prueba2" topic-name="tag1" unit="sec" ></dx-meter> -->
+    <dx-rt-value topic-name="tag1"></dx-rt-value>
+  </div>
+
+</template>
+
+<script>
+  import("/build/alpine.js")
+
+  function testFunction() {
+    return {
+      tab: 'bar'
+    }
+  }
+
+  console.log("LOAD DEMO PANEL TAB", testFunction)
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+
+	<title>Demo App</title>
+
+	<link rel='icon' type='image/png' href='/favicon.png'>
+	<link rel="stylesheet" href="/global.css">
+	<link rel="stylesheet" href="/uplot.css">
+	<script defer src='/build/main.js'></script>
+
+	<style>
+		#page {
+			display: none;
+		}
+
+		.body-loading {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			z-index: 200;
+			background-color: rgba(133, 130, 130, 0.8);
+			background-image: url("/assets/img/loading.gif");
+			background-repeat: no-repeat;
+			background-position: center;
+			opacity: 1;
+			transition: opacity 1s linear;
+		}
+
+		.loading-visible {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		.loading-hidden {
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0s 1s, opacity 1s linear;
+		}
+
+		.load-page-loading {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1;
+			width: 100vw;
+			height: 100vh;
+			background-color: rgba(133, 130, 130);
+			background-image: url("/assets/img/loading.gif");
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+	</style>
+	<script>
+		function bodyLoad() {
+			document.getElementById("page").style.display = "block";
+			document.getElementById("body-loading").classList.remove("loading-visible")
+			document.getElementById("body-loading").classList.add("loading-hidden")
+		}
+	</script>
+</head>
+
+<body onload="bodyLoad()" class="bg-white dark:bg-gray-700">
+	<div id="body-loading" class="body-loading loading-visible"></div>
+	<div id="page">
+		<dx-app>
+			<div class="flex align-middle">
+				<div class="pr-0 flex-grow"></div>
+				<div
+					class="flex justify-center items-center font-medium mx-1 mr-3 py-1 px-2 bg-green-600 border border-white">
+					<div class="text-base text-white font-bold max-w-full flex-initial uppercase">
+						En Marcha
+					</div>
+				</div>
+			</div>
+		</dx-app>
+		<dx-load-page hash></dx-load-page>
+	</div>
+</body>
+</html>

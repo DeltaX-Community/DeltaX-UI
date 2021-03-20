@@ -108,8 +108,10 @@
 
     onDestroy(() => {
         plot.plot.destroy();
-        clearInterval(this.timer);
-        this.timer = null;
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
     });
 
     // Update Width and Height on resize
@@ -133,7 +135,9 @@
         plot.init(elPlot);
         initialized = true;
 
-        loadSeries(tagsObj);
+        setTimeout(() => {
+            loadSeries(tagsObj);
+        }, 10);
     }
 </script>
 

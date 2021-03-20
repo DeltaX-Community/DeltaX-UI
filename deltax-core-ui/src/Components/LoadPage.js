@@ -6,17 +6,24 @@ export class LoadPage extends HTMLElement {
     loading = null
 
     connectedCallback() {
+        const self = this
         this.wrapper = document.createElement('div');
         this.loading = document.createElement('div');
         this.appendChild(this.loading)
         this.appendChild(this.wrapper);
-        this.loadTemplate()
+        this.loadTemplate(); 
+
+        if (this.hasAttribute('hash')) {
+            window.addEventListener("popstate", function () {
+                self.loadTemplate();
+            });  
+        }
     }
 
     disconnectedCallback() {
         // console.log('disconnected from the DOM', this.getAttribute('url'));
         if (this.script) {
-            this.removeChild(this.script);
+            this.removeChild(this.script); 
             this.script = null;
         }
         this.removeChild(this.wrapper)
@@ -24,7 +31,7 @@ export class LoadPage extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ['url'];
+        return ['url']; 
     }
 
     // eslint-disable-next-line 
@@ -32,9 +39,19 @@ export class LoadPage extends HTMLElement {
         this.loadTemplate()
     }
 
-    loadTemplate() {
+    getUrl() {
+        if (this.hasAttribute('hash')) {
+            const hash = location.hash;
+            return hash.length > 0 ? hash.substr(1) : null;
+        }
+
         const url = this.getAttribute('url');
-        if (!url || url == '') {
+        return (!url || url == '') ? null : url
+    }
+
+    loadTemplate() {
+        let url = this.getUrl();
+        if (!url) {
             return
         }
 

@@ -1,0 +1,24 @@
+<template>
+  <div x-data="panelData()" x-init="setup" class="relative">
+    <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 500px;">
+      <div class="m-2 grid relative ">
+        <div class="relative flex flex-col m-4 text-xl w-80">
+          <a href="linea1/#operaciones.html" class="px-3 py-1 hover:text-blue-400">Linea 1 Operaciones</a>
+          <a href="linea1/#gestion.html" class="px-3 py-1 hover:text-blue-400">Linea 1 Gestion</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  function panelData() {
+    return {
+      setup: async function () {
+
+      },
+    }
+  }
+
+  import("/build/alpine.js")
+</script>
