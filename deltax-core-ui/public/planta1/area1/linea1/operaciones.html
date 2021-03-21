@@ -46,11 +46,11 @@
 
 
           <!-- Sprklines y tiempos de Marcha/Parada -->
-          <div class="m-4"> 
+          <div class="m-4 grid gap-2"> 
 
             <!-- Marcha -->
-            <div class="flex align-middle gap-1 h-12 ">
-              <div class="text-base w-52 py-2 flex items-center font-bold">
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
                 En Marcha
               </div>
               <div class="relative flex-grow">
@@ -58,15 +58,15 @@
                   tags='[{"tagName": "process_info/UI.RtViewer/AliveMs", "color": "#22FF44"}]' spark="true">
                 </dx-rt-plot>
               </div>
-              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
-                <dx-rt-value  class="text-3xl text-gray-200"  topicname="=round({process_info/UI.RtViewer/AliveMs}/124, 0)"></dx-rt-value>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value  class="text-2xl text-black dark:text-gray-200"  topicname="=round({process_info/UI.RtViewer/AliveMs}/124, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
             </div>
 
             <!-- Tiempo desde Ultima Parada -->
-            <div class="flex align-middle gap-1 h-12">
-              <div class="text-base w-52 py-2 flex items-center font-bold">
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
                 Tiempo desde Ultima Parada
               </div>
               <div class="pr-0 relative flex-grow">
@@ -74,15 +74,15 @@
                   spark="true">
                 </dx-rt-plot>
               </div>
-              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-3xl text-gray-200"  topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"  topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
             </div>
 
             <!-- Parada -->
-            <div class="flex  align-middle gap-1 h-12">
-              <div class="text-base w-52 py-2 flex items-center font-bold">
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
                 Parada
               </div>
               <div class="pr-0 relative flex-grow">
@@ -90,15 +90,15 @@
                   tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color": "#FF3300"}]' spark="true">
                 </dx-rt-plot>
               </div>
-              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-3xl text-gray-200" topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 10, 0)"></dx-rt-value>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200" topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 10, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
             </div>
 
             <!-- Bajo Ritmo -->
-            <div class="flex align-middle gap-1 h-12">
-              <div class="text-base w-52 py-2 flex items-center font-bold">
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
                 Bajo Ritmo
               </div>
               <div class="pr-0 relative flex-grow">
@@ -106,8 +106,8 @@
                   tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color": "#FFAA33"}]' spark="true">
                 </dx-rt-plot>
               </div>
-              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-3xl text-gray-200" topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 80, 0)"></dx-rt-value>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200" topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 80, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
             </div>
