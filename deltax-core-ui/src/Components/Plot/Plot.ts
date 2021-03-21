@@ -60,8 +60,21 @@ export class Plot {
     private localTz = new Intl.DateTimeFormat().resolvedOptions().timeZone;
     private fmtDate = uPlot.fmtDate('{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}.{fff}')
     private defaultAxes = {}
+    private spark = false;
+    private slice = false;
+    private syncPlot = uPlot.sync("syncPlot");
+    private overEl: Element;
+    private cursorToEnd = false;
 
-    constructor(width: number, height: number, title: string, dark: boolean = false) {
+    constructor(
+        width: number,
+        height: number,
+        title: string,
+        dark: boolean = false,
+        slice: boolean = false,
+        spark: boolean = true,
+        cursorToEnd: boolean = false,
+        syncCursor: boolean = false) {
 
         this.defaultAxes = {
             stroke: dark ? "#c7d0d9" : "#3c3245",
@@ -82,7 +95,7 @@ export class Plot {
             plugins: [],
             cursor: {
                 points: {
-                    size: 12,
+                    size: 10,
                     width: 2,
                     // @ts-ignore: Unreachable code error 
                     stroke: (u, seriesIdx) => u.series[seriesIdx].pointFill,
@@ -132,6 +145,24 @@ export class Plot {
             series: [{}]
         }
 
+        if (spark) {
+            this.options.axes.forEach(a => {
+                a.show = false
+            })
+            this.options.legend = { show: false }
+            this.options.cursor.show = false
+        }
+
+        if (syncCursor) {
+            this.options.cursor.sync = {
+                key: this.syncPlot.key,
+                setSeries: true
+            }
+        }
+
+        this.spark = spark;
+        this.slice = slice;
+        this.cursorToEnd = cursorToEnd;
         this.seriesDataString = {}
         this.xValues = [];
         this.seriesData = [this.xValues]
@@ -139,6 +170,17 @@ export class Plot {
 
     public init(el: HTMLElement) {
         this.plot = new uPlot(this.options, this.seriesData, el);
+        this.overEl = this.plot.root.querySelector(".u-over");
+
+        if (this.cursorToEnd) {
+            this.overEl.addEventListener("mouseenter", () => {
+                this.cursorToEnd = false
+            });
+            this.overEl.addEventListener("mouseleave", () => {
+                this.cursorToEnd = true;
+                this.plot.setCursor({ left: this.overEl.clientWidth, top: -1 })
+            });
+        }
     }
 
     private addScale(scaleName: string) {
@@ -153,7 +195,7 @@ export class Plot {
                 {
                     scale: scaleName,
                     side: 3,
-                    show: true
+                    show: this.spark == false
                 }))
         }
     }
@@ -187,7 +229,7 @@ export class Plot {
                 paths: u => null,
                 points: {
                     space: 2,
-                    size: 12,
+                    size: 10,
                     show: true,
                     width: 2
                 },
@@ -297,12 +339,13 @@ export class Plot {
             }
         })
 
-        this.sliceData()
+        if (this.slice) {
+            this.sliceData()
+        }
         this.plot.setData(this.seriesData)
 
-
-
-        let mooSync = uPlot.sync("moo");
-        mooSync.sub
+        if (this.cursorToEnd) {
+            this.plot.setCursor({ left: this.overEl.clientWidth, top: -1 })
+        }
     }
 }

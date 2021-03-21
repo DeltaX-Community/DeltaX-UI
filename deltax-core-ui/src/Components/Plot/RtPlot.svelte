@@ -21,10 +21,13 @@
         color?: string;
     }[];
 
+    export let title: string = "";
     export let begin: string = null;
     export let end: string = null;
     export let realtime: boolean = null;
     export let interval: number = null;
+    export let slice: boolean = false;
+    export let spark: boolean = false;
 
     $: Topics = RtWs.Topics;
 
@@ -61,7 +64,7 @@
         }[]
     ) {
         for (const serie of series) {
-            plot.addSerie(serie.name, serie.axisName, {
+            plot.addSerie(serie.name || "", serie.axisName, {
                 isString: serie.isString == true,
                 color: serie.color,
             });
@@ -103,7 +106,16 @@
     };
 
     onMount(() => {
-        plot = new Plot(clientWidth ?? 400, 100, "El Titulo", $IsDarkMode);
+        plot = new Plot(
+            clientWidth ?? 400,
+            100,
+            title,
+            $IsDarkMode,
+            slice,
+            spark,
+            true,
+            false
+        );
     });
 
     onDestroy(() => {
@@ -125,8 +137,8 @@
     ) {
         // console.log( "resize",  clientHeight, elPlot.clientHeight, plot.plot.height );
         plot.plot.setSize({
-            width: clientWidth - 4,
-            height: clientHeight - 24,
+            width: clientWidth - 0,
+            height: clientHeight - (title != "" ? 24 : 0),
         });
     }
 
@@ -149,7 +161,7 @@
         bind:clientWidth
     />
 
-    <div class="absolute inset-0" bind:this={elPlot} />
+    <div class="absolute inset-0" bind:this={elPlot} part="uplot" />
 </div>
 
 <style>

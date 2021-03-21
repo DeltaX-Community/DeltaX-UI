@@ -1,43 +1,148 @@
 <template>
-  <div x-data="panelData()" x-init="setup" class="relative">
-    <div class="lg:p-4   | flex flex-row flex-wrap"
-      style="height: calc(100vh - 130px);"> 
- 
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid"  style="min-height: 300px; max-height: 500px;">
-        <div class="m-2 grid relative bg-white border-blue-300  dark:bg-gray-800  dark:border-gray-900  border-4 rounded-sm rounded-tr-3xl | shadow-md  " >  
-           <div class="block relative m-0 mr-2 mt-1"> 
-            <!-- <dx-rt-plot realtime="1" interval="200" x-bind:tags="tagsPlot2"></dx-rt-plot>    -->
-            <dx-raw-plot ></dx-raw-plot>   
-           </div>
-        </div> 
-      </div> 
 
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 500px;" >
-        <div class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md" >
-          <div class="block relative m-0 mr-4 mt-2"> 
-            <dx-raw-plot ></dx-raw-plot>   
+  <div x-data="panelData()" x-init="setup" class="  text-black dark:text-white">
+    <div class="lg:p-4   | flex flex-row flex-wrap" style="height: calc(100vh - 130px);">
+
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 450px;">
+        <div
+          class="m-2 flex flex-col bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm rounded-tl-3xl | shadow-md  ">
+
+          <!-- Estado de linea y contadores -->
+          <div class="m-4">
+            <div class="flex align-middle gap-2">
+              <div class="uppercase text-2xl font-bold">
+                Estado
+              </div>
+              <div class="pr-0 flex-grow"></div>
+              <div
+                class="flex justify-center items-center font-medium py-1 px-2 bg-green-600 border border-white">
+                <div class="text-base text-white font-bold max-w-full flex-initial uppercase">
+                  En Marcha
+                </div>
+              </div>
+              <div
+                class="flex justify-center items-center font-medium py-1 px-2 bg-red-700 border border-white shadow-inner opacity-20">
+                <div class="text-base text-gray-400 font-bold max-w-full flex-initial uppercase stroke-2">
+                  Parada
+                </div>
+              </div>
+            </div>
           </div>
-        </div> 
-      </div> 
-    
+
+          <!-- Estado de linea y contadores -->
+          <div class="m-4">
+            <div class="flex align-middle justify-around gap-2">
+              <div class="w-1/3">
+                <dx-meter topicname="=41" name="Totales"   color="blue"></dx-meter>
+              </div>
+              <div class="w-1/3">
+                <dx-meter topicname="=39" name="Buenas"  color="green"></dx-meter>
+              </div>
+              <div class="w-1/3">
+                <dx-meter topicname="=2" name="Malas"  color="red"></dx-meter>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Sprklines y tiempos de Marcha/Parada -->
+          <div class="m-4"> 
+
+            <!-- Marcha -->
+            <div class="flex align-middle gap-1 h-12 ">
+              <div class="text-base w-52 py-2 flex items-center font-bold">
+                En Marcha
+              </div>
+              <div class="relative flex-grow">
+                <dx-rt-plot realtime="1" interval="2000"
+                  tags='[{"tagName": "process_info/UI.RtViewer/AliveMs", "color": "#22FF44"}]' spark="true">
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
+                <dx-rt-value  class="text-3xl text-gray-200"  topicname="=round({process_info/UI.RtViewer/AliveMs}/124, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+
+            <!-- Tiempo desde Ultima Parada -->
+            <div class="flex align-middle gap-1 h-12">
+              <div class="text-base w-52 py-2 flex items-center font-bold">
+                Tiempo desde Ultima Parada
+              </div>
+              <div class="pr-0 relative flex-grow">
+                <dx-rt-plot realtime="1" interval="2000" tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs"}]'
+                  spark="true">
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-3xl text-gray-200"  topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+
+            <!-- Parada -->
+            <div class="flex  align-middle gap-1 h-12">
+              <div class="text-base w-52 py-2 flex items-center font-bold">
+                Parada
+              </div>
+              <div class="pr-0 relative flex-grow">
+                <dx-rt-plot realtime="1" interval="2000"
+                  tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color": "#FF3300"}]' spark="true">
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-3xl text-gray-200" topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 10, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+
+            <!-- Bajo Ritmo -->
+            <div class="flex align-middle gap-1 h-12">
+              <div class="text-base w-52 py-2 flex items-center font-bold">
+                Bajo Ritmo
+              </div>
+              <div class="pr-0 relative flex-grow">
+                <dx-rt-plot realtime="1" interval="2000"
+                  tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color": "#FFAA33"}]' spark="true">
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 py-2 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-3xl text-gray-200" topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 80, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 450px;">
+        <div
+          class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md">
+          <div class="block relative m-0 mt-2 mr-2">
+            <dx-rt-plot title="" realtime="1" interval="2000" x-bind:tags="tagsPlot2"></dx-rt-plot>
+          </div>
+        </div>
+      </div>
+
       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
-        <div class="m-2  bg-gray-200 border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
-          <dx-meter topicname="tag1" name="Running" unit="min" color="green" ></dx-meter>
-          <dx-meter topicname="tag4" name="Running" unit="min" color="green" ></dx-meter>  
+        <div class="m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md">
+          <dx-meter topicname="tag1" name="Running" unit="min" color="green"></dx-meter>
+          <dx-meter topicname="tag4" name="Running" unit="min" color="green"></dx-meter>
         </div>
       </div> 
 
       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
-        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+        <div class="m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md">
           pepe 3
         </div>
       </div>
 
-       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
-        <div class="m-2  bg-white border-blue-300 border-4 rounded-sm rounded-tr-3xl | shadow-md p-1 pt-2 pr-4">
+      <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+        <div class="m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md">
           pepe 4
         </div>
-      </div>    
+      </div>
+
     </div>
   </div>
 </template>
@@ -57,25 +162,25 @@
         const series = [{
           name: "RtViewer Alive",
           tagName: "process_info/UI.RtViewer/AliveMs",
-          axisName: "#1", 
+          axisName: "#1",
         }, {
           name: "HistoricDB Alive",
           tagName: "process_info/RealTimeHistoricDB/AliveMs",
-          axisName: "#1", 
+          axisName: "#1",
         }, {
           name: "TagsCount",
           tagName: "process_info/UI.RtViewer/TagsCount",
-          axisName: "#3", 
+          axisName: "#3",
         }, {
           name: "RunningDateTime",
-          tagName: "process_info/UI.RtViewer/RunningDateTime", 
-          color:"#FF3300",
-          isString : true
+          tagName: "process_info/UI.RtViewer/RunningDateTime",
+          color: "#FF3300",
+          isString: true
         }, {
           name: "tag1",
-          tagName: "tag1", 
-          color:"#0033FF",
-          isString : true
+          tagName: "tag1",
+          color: "#0033FF",
+          isString: true
         }]
 
         await RtWs.RtAddSubscribe(series.map(s => s.tagName))

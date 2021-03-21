@@ -15,13 +15,20 @@
 
     $: if (clientWidth && clientHeight && plot && plot.plot) {
         plot.plot.setSize({
-            width: clientWidth - 4,
+            width: clientWidth - 0,
             height: clientHeight - 24,
         });
     }
 
     onMount(() => {
-        plot = new Plot(clientWidth ?? 400, 100, "El Titulo", $IsDarkMode);
+        plot = new Plot(
+            clientWidth ?? 400,
+            100,
+            "El Titulo",
+            $IsDarkMode,
+            false,
+            false
+        );
         plot.addSerie("Serie 1", "y");
         plot.addSerie("Serie 2", "y3", { color: "#FFA000" });
         plot.addSerie("Serie 3", "y4", { isString: true, color: "#00A0FF" });
