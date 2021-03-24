@@ -46,19 +46,36 @@
     height: 100%;
 }
 
+
 .u-legend {
     font-size: 14px;
     margin: auto;
     text-align: center;
+    /*Agregado*/
+
+    /* 
     position: absolute;
     border-radius: 4px;
+    width: 100%;
+    top: -16px;
+    left: 2px;
+    background: rgba(255, 249, 245, 0.76);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4); 
+    */
+}
+
+.float-legend {
+    position: absolute;
     top: 2px;
-    right: 2px;
+    right: 0px;
+    border-radius: 4px;
     background: rgba(255, 249, 245, 0.76);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
 }
 
-.dark .u-legend {
+
+
+.dark .float-legend {
     background: rgba(57, 56, 61, 0.76);
     box-shadow: 0px 0px 4px rgba(163, 163, 163, 0.4);
     color: rgb(207, 207, 207);

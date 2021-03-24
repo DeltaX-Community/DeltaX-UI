@@ -48,6 +48,46 @@ const colorPalette = [
 ];
 
 
+// converts the legend into a simple tooltip
+function moveLegendAsTooltipPlugin(className: string = "") {
+    let legendEl;
+    let overEl;
+
+    function init(u: uPlot) {
+        console.log("init u", u)
+        legendEl = u.root.querySelector(".u-legend");
+        overEl = u.root.querySelector(".u-over");
+
+        legendEl.classList.remove("u-inline");
+        className && legendEl.classList.add(className);
+
+        legendEl?.classList?.add("float-legend")
+    }
+
+    function update(u: uPlot) {
+        const {
+            left,
+            top
+        } = u.cursor;
+
+        // console.log(u.root.clientWidth, legendEl.clientWidth, left, overEl.clientWidth)
+        // Move Legend
+        if (left > 0 && left > (overEl.clientWidth - legendEl.clientWidth)) {
+            legendEl.style.transform = `translate(-${overEl.clientWidth - legendEl.clientWidth}px, 0px)`;
+        } else if (legendEl.style.transform) {
+            legendEl.style.transform = null;
+        }
+    }
+
+    return {
+        hooks: {
+            init: init,
+            setCursor: update,
+        }
+    };
+}
+
+
 
 export class Plot {
 
@@ -93,6 +133,7 @@ export class Plot {
             height,
             title,
             plugins: [],
+            hooks: {},
             cursor: {
                 points: {
                     size: 10,
@@ -152,6 +193,9 @@ export class Plot {
             this.options.legend = { show: false }
             this.options.cursor.show = false
         }
+        else {
+            // this.options.plugins.push(moveLegendAsTooltipPlugin())
+        }
 
         if (syncCursor) {
             this.options.cursor.sync = {
@@ -160,6 +204,7 @@ export class Plot {
             }
         }
 
+        this.options.series[0].value = (u: uPlot, rv: number, sidx: number, idx: number) => this.getTime(u, sidx, idx);
         this.spark = spark;
         this.slice = slice;
         this.cursorToEnd = cursorToEnd;
@@ -183,6 +228,7 @@ export class Plot {
         }
     }
 
+
     private addScale(scaleName: string) {
         let scale = this.options.scales[scaleName];
         if (!scale) {
@@ -200,14 +246,21 @@ export class Plot {
         }
     }
 
+    private getTime(u: uPlot, sidx: number, idx: number) {
+        return `${this.xValues[idx] ? this.fmtDate(uPlot.tzDate(new Date(this.xValues[idx] * 1e3), this.localTz)) : '---'}`
+    }
 
     private valueTable(u: uPlot, sidx: number, idx: number) {
         const time = `${this.xValues[idx] ? this.fmtDate(uPlot.tzDate(new Date(this.xValues[idx] * 1e3), this.localTz)) : '---'}`
+        return { Time: time, Value: this.getValue(u, sidx, idx) }
+    }
+
+    private getValue(u: uPlot, sidx: number, idx: number) {
         const serie = this.options.series[sidx];
         const value = serie["isString"]
             ? `${this.seriesDataString[sidx] ? this.seriesDataString[sidx][idx] : 'NULL'}`
             : `${this.seriesData[sidx] ? this.seriesData[sidx][idx] : 'NaN'}`
-        return { Time: time, Value: value }
+        return value
     }
 
     public addSerie(name: string, scale = 'y', options = {} as { isString?: boolean, color?: string }) {
@@ -233,7 +286,8 @@ export class Plot {
                     show: true,
                     width: 2
                 },
-                values: (u: uPlot, sidx: number, idx: number) => this.valueTable(u, sidx, idx),
+                value: (u: uPlot, rv: number, sidx: number, idx: number) => this.getValue(u, sidx, idx),
+                // values: (u: uPlot, sidx: number, idx: number) => this.valueTable(u, sidx, idx),
                 ...extraOptions
             })
         } else {
@@ -249,7 +303,7 @@ export class Plot {
                 points: {
                     show: false
                 },
-                values: (u: uPlot, sidx: number, idx: number) => this.valueTable(u, sidx, idx),
+                // values: (u: uPlot, sidx: number, idx: number) => this.valueTable(u, sidx, idx),
                 ...extraOptions
             })
         }
@@ -285,6 +339,7 @@ export class Plot {
 
         this.seriesData = [this.xValues, ...yy]
         this.plot.setData(this.seriesData, true)
+
     }
 
     private interval = 0
