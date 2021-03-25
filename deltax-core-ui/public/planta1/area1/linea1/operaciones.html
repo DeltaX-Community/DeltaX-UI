@@ -3,6 +3,8 @@
   <div x-data="panelData()" x-init="setup" class="  text-black dark:text-white">
     <div class="lg:p-4   | flex flex-row flex-wrap" style="height: calc(100vh - 130px);">
 
+
+      <!-- Panel Estado -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 450px;">
         <div
           class="m-2 flex flex-col bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm rounded-tl-3xl | shadow-md  ">
@@ -117,7 +119,10 @@
           </div>
         </div>
       </div>
+      <!-- Fin Panel Estado -->
 
+
+      <!-- Panel Grafico -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; max-height: 450px;">
         <div
           class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm | shadow-md">
@@ -126,22 +131,59 @@
           </div>
         </div>
       </div>
+      <!-- Fin Panel Grafico -->
 
-      <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
+
+      <!-- Panel Imagen -->
+      <div class="w-full md:w-1/2 lg:w-1/3 h-full grid" >
         <div
-          class="m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md">
-          <dx-meter topicname="tag1" name="Running" unit="min" color="green"></dx-meter>
-          <dx-meter topicname="tag4" name="Running" unit="min" color="green"></dx-meter>
+          class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md overflow-hidden" >
+          <img class="object-cover h-full w-full" src="img_scada_1.jpg">
+         
+
+          <!-- superior izquiera -->
+          <div class="absolute text-base  left-0 top-0 md:left-10 md:top-10 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>     
+
+          <!-- superior derecha -->
+          <div class="absolute text-base  right-0 top-0 md:right-10 md:top-40 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>     
+
+          <!-- inferior izquiera -->
+          <div class="absolute text-base  left-0 bottom-0 md:left-10 md:bottom-20 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>     
+
+          <!-- inferior derecha -->
+          <div class="absolute text-base right-0 bottom-0 md:right-10 md:bottom-10 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3" >
+            <dx-rt-value class="text-3xl text-gray-200"
+            topicname="=20.4"></dx-rt-value>
+          <span class="pl-1 text-xs">unidades</span>
+          </div>
         </div>
       </div>
+      <!-- Fin Panel Imagen -->
 
+
+      <!-- Panel Pepe? -->
       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
         <div
           class="m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md">
           pepe 3
         </div>
       </div>
+      <!-- Fin Panel Pepe? -->
 
+      
+      <!-- Panel Lista Eventos -->
       <div class="w-full md:w-1/2 lg:w-1/3 h-1/2 md:h-1/2 lg:h-1/2 grid">
         <div
           class="m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md | overflow-y-scroll"  
@@ -186,6 +228,8 @@
           </table>
         </div>
       </div>
+      <!-- Fin Panel Lista Eventos -->
+
     </div>
   </div>
 </template>
