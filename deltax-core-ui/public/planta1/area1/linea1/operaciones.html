@@ -1,13 +1,12 @@
 <template>
 
   <div x-data="panelData()" x-init="setup" class="  text-black dark:text-white">
-    <div class="lg:p-4   | flex flex-row flex-wrap" style="height: calc(100vh - 130px);">
+    <div class="lg:p-4   | flex flex-grow flex-wrap" style="height: calc(100vh - 130px);">
 
 
       <!-- Panel Estado -->
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
-        <div
-          class="m-2 flex flex-col bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm rounded-tl-3xl | shadow-md  ">
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 50%;">
+        <div class="m-2 bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
 
           <!-- Estado de linea y contadores -->
           <div class="m-4">
@@ -123,9 +122,8 @@
 
 
       <!-- Panel Grafico -->
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
-        <div
-          class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm | shadow-md" >
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 50%;">
+        <div class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-tr-2xl | shadow-md" >
           <div class="block relative m-0 mt-0 mb-14 mr-2 ">
             <dx-rt-plot title="" realtime="1" interval="2000" x-bind:tags="tagsPlot2"></dx-rt-plot>
           </div>
@@ -135,47 +133,48 @@
 
      
       <!-- Panel Imagen -->
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" >
-        <div
-          class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | shadow-md overflow-hidden" >
-          <img class="object-cover h-full w-full" src="img_scada_1.jpg">
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 50%;">
+        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
+          <img class="h-full w-full" src="img_scada_1.jpg">
          
-
           <!-- superior izquiera -->
-          <div class="absolute text-base  left-0 top-0 md:left-10 md:top-10 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3">
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="top: 10%; left: 10%;">
             <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
-          </div>     
+          </div>         
 
           <!-- superior derecha -->
-          <div class="absolute text-base  right-0 top-0 md:right-10 md:top-40 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3">
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="top: 10%; right: 10%;">
             <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
-          </div>     
+          </div>         
 
           <!-- inferior izquiera -->
-          <div class="absolute text-base  left-0 bottom-0 md:left-10 md:bottom-20 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3">
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="bottom: 45%; left: 25%;">
             <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
-          </div>     
+          </div>         
 
           <!-- inferior derecha -->
-          <div class="absolute text-base right-0 bottom-0 md:right-10 md:bottom-10 flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 md:rounded-full md:py-3" >
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="bottom: 10%; right: 10%;">
             <dx-rt-value class="text-3xl text-gray-200"
-            topicname="=20.4"></dx-rt-value>
-          <span class="pl-1 text-xs">unidades</span>
-          </div>
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>         
         </div>
       </div>
       <!-- Fin Panel Imagen -->
 
       <!-- Panel Lista Eventos  -->
-      <div class="w-full md:w-1/2 lg:w-1/2 h-1/2 md:h-1/2 lg:h-1/2 grid" >
-        <div
-          class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm rounded-tr-3xl | flex flex-col | shadow-md "
+      <div class="w-full md:w-1/2 lg:w-1/2 grid" style="min-height: 300px; height: 50%;">
+        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-br-2xl | flex flex-col | shadow-md overflow-hidden"
           style="min-height: 200px; max-height: calc(50vh - 80px);" >
 
           <!-- TABLA 1 --> 
