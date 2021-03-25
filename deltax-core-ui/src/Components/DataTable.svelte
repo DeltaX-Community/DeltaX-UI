@@ -1,11 +1,16 @@
 <svelte:options tag={"dx-data-table"} />
 
 <script lang="ts">
+    import Common from "../Settings/Common";
+
     export let rows: string;
     export let columns: string;
     export let theadclass: string;
     export let tbodyclass: string;
     export let trclass: string;
+
+    $: IsDarkMode = Common.IsDarkMode;
+    $: dark = $IsDarkMode ? "dark" : "";
 
     $: rowsObj = (rows ? JSON.parse(rows) : []) as { [key: string]: unknown }[];
     $: columnsObj = (columns ? JSON.parse(columns) : []) as {
@@ -16,12 +21,12 @@
     }[];
 </script>
 
-<table class="relative overflow-x-auto | shadow w-full">
-    <thead class="sticky top-0 | items-center bg-gray-200 shadow {theadclass}">
+<table class="relative overflow-x-auto | shadow w-full {dark}">
+    <thead
+        class="sticky top-0 | items-center bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-100 shadow {theadclass}"
+    >
         {#each columnsObj as col}
-            <th
-                class="capitalize font-bold text-left text-gray-700 {col.class}"
-            >
+            <th class="capitalize font-bold text-left {col.class}">
                 <div contenteditable="false" bind:innerHTML={col.label} />
             </th>
         {/each}
@@ -29,7 +34,7 @@
     <tbody class={tbodyclass}>
         {#each rowsObj as row, idx}
             <tr
-                class="border-gray-200 dark:border-gray-400 border-t border-b px-3 {trclass}"
+                class="border-gray-200 dark:border-gray-600 border-b px-3 {trclass}"
             >
                 {#each columnsObj as col}
                     <td class={col["tdclass"]}>
