@@ -6,7 +6,7 @@
 
       <!-- Panel Estado -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
-        <div class="m-1 bg-white border-gray-400  dark:bg-gray-800  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
+        <div class="m-2 bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
 
           <!-- Estado de linea y contadores -->
           <div class="m-4">
@@ -33,13 +33,13 @@
           <div class="m-4">
             <div class="flex align-middle justify-around gap-2">
               <div class="w-1/3">
-                <dx-meter topicname="=41" name="Totales" color="blue"></dx-meter>
+                <dx-meter topicname="simulation/countTotal" name="Totales" color="blue"></dx-meter>
               </div>
               <div class="w-1/3">
-                <dx-meter topicname="=39" name="Buenas" color="green"></dx-meter>
+                <dx-meter topicname="simulation/countGood" name="Buenas" color="green"></dx-meter>
               </div>
               <div class="w-1/3">
-                <dx-meter topicname="=2" name="Malas" color="red"></dx-meter>
+                <dx-meter topicname="simulation/countBad" name="Malas" color="red"></dx-meter>
               </div>
             </div>
           </div>
@@ -54,12 +54,15 @@
                 En Marcha
               </div>
               <div class="relative flex-grow">
-                <dx-rt-plot realtime="1" interval="2000"
-                  tags='[{"tagName": "process_info/UI.RtViewer/AliveMs", "color": "#22FF44"}]' spark="true">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000"
+                  tags='[{"tagName": "simulation/running", "color": "#22FF44", "fill": "#22FF4444", "scaleOption": {"range": [-0.02, 1.02]} }]' 
+                  spark="true" >
                 </dx-rt-plot>
               </div>
               <div class="text-base w-44 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-base text-black dark:text-gray-200"
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
                   topicname="=round({process_info/UI.RtViewer/AliveMs}/124, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
@@ -71,12 +74,15 @@
                 Tiempo desde Ultima Parada
               </div>
               <div class="pr-0 relative flex-grow">
-                <dx-rt-plot realtime="1" interval="2000" tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs"}]'
-                  spark="true">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000" 
+                  tags='[{"tagName": "simulation/running",  "color": "#22FF44", "fill": "#22FF4444", "scaleOption": {"range": [-0.02, 1.02]} }]'
+                  spark="true" > 
                 </dx-rt-plot>
               </div>
               <div class="text-base w-44 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-base text-black dark:text-gray-200"
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
                   topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
@@ -88,12 +94,15 @@
                 Parada
               </div>
               <div class="pr-0 relative flex-grow">
-                <dx-rt-plot realtime="1" interval="2000"
-                  tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color": "#FF3300"}]' spark="true">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000"
+                  tags='[{"tagName": "simulation/idle", "color": "#FF3300", "fill": "#FF330044", "scaleOption": {"range": [-0.02, 1.02]} }]' 
+                  spark="true" > 
                 </dx-rt-plot>
               </div>
               <div class="text-base w-44 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-base text-black dark:text-gray-200"
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
                   topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 10, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
@@ -105,12 +114,15 @@
                 Bajo Ritmo
               </div>
               <div class="pr-0 relative flex-grow">
-                <dx-rt-plot realtime="1" interval="2000"
-                  tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color": "#FFAA33"}]' spark="true">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000"
+                  tags='[{"tagName": "simulation/slowRunning", "color": "#DDAA33", "fill": "#DDAA3388", "scaleOption": {"range": [-0.02, 1.02]} }]' 
+                  spark="true"> 
                 </dx-rt-plot>
               </div>
               <div class="text-base w-44 flex items-end justify-end font-bold">
-                <dx-rt-value class="text-base text-black dark:text-gray-200"
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
                   topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 80, 0)"></dx-rt-value>
                 <span class="pl-2">Min</span>
               </div>
@@ -123,9 +135,9 @@
 
       <!-- Panel Grafico -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
-        <div class="m-1 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-tr-xl | shadow-md" >
+        <div class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-tr-2xl | shadow-md" >
           <div class="block relative m-0 mt-0 mb-14 mr-2 ">
-            <dx-rt-plot title="" realtime="1" interval="2000" x-bind:tags="tagsPlot2"></dx-rt-plot>
+            <dx-rt-plot title="" realtime="1" interval="500" x-bind:tags="tagsPlot2" slice="true" period="480"></dx-rt-plot>
           </div>
         </div>
       </div>
@@ -134,13 +146,13 @@
      
       <!-- Panel Imagen -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100% - 450px);">
-        <div class="relative m-1 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
+        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
           <img class="h-full w-full" src="img_scada_1.jpg">
          
           <!-- superior izquiera -->
           <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
             style="top: 10%; left: 10%;">
-            <dx-rt-value class="text-3xl text-green-700 dark:text-green-300"
+            <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
           </div>         
@@ -148,7 +160,7 @@
           <!-- superior derecha -->
           <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
             style="top: 10%; right: 10%;">
-            <dx-rt-value class="text-3xl text-green-700 dark:text-green-300"
+            <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
           </div>         
@@ -156,7 +168,7 @@
           <!-- inferior izquiera -->
           <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
             style="bottom: 45%; left: 25%;">
-            <dx-rt-value class="text-3xl text-green-700 dark:text-green-300"
+            <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
           </div>         
@@ -164,7 +176,7 @@
           <!-- inferior derecha -->
           <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
             style="bottom: 10%; right: 10%;">
-            <dx-rt-value class="text-3xl text-green-700 dark:text-green-300"
+            <dx-rt-value class="text-3xl text-gray-200"
               topicname="=20.4"></dx-rt-value>
             <span class="pl-1 text-xs">%</span>
           </div>         
@@ -174,12 +186,14 @@
 
       <!-- Panel Lista Eventos  -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100% - 450px);">
-        <div class="grid relative m-1 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-br-xl | shadow-md overflow-hidden" >
-       
+        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
+        <!-- <div class="relative m-2 h-full bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-br-2xl | flex flex-col | shadow-md overflow-hidden" > -->
+
           <!-- TABLA 1 --> 
-          <div class="m-1 py-3 px-4 text-2xl font-bold font-sans uppercase | rounded-sm rounded-tr-2xl | shadow-inner">
-              Ocurrencias
-          </div>
+          <h2
+            class="m-0 py-3 px-4 text-lg font-bold font-sans uppercase | rounded-sm rounded-tr-2xl | shadow-inner">
+            Ocurrencias
+          </h2>
 
           <div class="m-1 px-4 overflow-y-auto flex-grow">
             <dx-data-table theadclass="bg-blue-200 dark:bg-gray-900" 
@@ -188,7 +202,6 @@
               x-bind:columns="columns"> 
             </dx-data-table>
           </div> 
-          
         </div>
       </div>
       <!-- Fin Panel Lista Eventos -->
@@ -210,23 +223,37 @@
       setup: async function () {
 
         /*Serie Trending Config*/
-        const series = [{
-          name: "RtViewer Alive",
-          tagName: "process_info/UI.RtViewer/AliveMs",
-          axisName: "#1",
-        }, {
-          name: "HistoricDB Alive",
-          tagName: "process_info/RealTimeHistoricDB/AliveMs",
-          axisName: "#1",
-        }, {
-          name: "TagsCount",
-          tagName: "process_info/UI.RtViewer/TagsCount",
+        const series = [{ 
+          name: "Totales",
+          tagName: "simulation/countTotal", 
+          color: "#55FF66AA",
           axisName: "#3",
         }, {
-          name: "RunningDateTime",
-          tagName: "process_info/UI.RtViewer/RunningDateTime",
-          color: "#FF3300",
-          isString: true
+          name: "Malas",
+          tagName: "simulation/countBad",
+          axisName: "#3",
+          color: "#AA3322AA",
+        }, {
+          name: "Buenas",
+          tagName: "simulation/countGood",
+          axisName: "#3",
+          color: "#55FFFFAA",
+        }, {
+          name: "Velocidad Mínima",
+          tagName: "simulation/lineSpeedMin",
+          color: "#AAAAFFAA",
+          axisName: "#1",
+        }, {
+          name: "Velocidad Máxima",
+          tagName: "simulation/lineSpeedMax",
+          color: "#FFAAAAAA",
+          axisName: "#1",
+          isString: false
+        }, {  
+          name: "Velocidad",
+          tagName: "simulation/lineSpeed",
+          axisName: "#1",
+          color: "#4466FF",
         }]
 
         await RtWs.RtAddSubscribe(series.map(s => s.tagName))
@@ -314,4 +341,5 @@
   }
 
   import("/build/alpine.js")
+  import("./simulation/tagSimulation.js")  
 </script>

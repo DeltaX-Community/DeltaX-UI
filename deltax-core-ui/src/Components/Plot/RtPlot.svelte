@@ -13,19 +13,20 @@
 
     export let baseUrl = "http://127.0.0.1:5010/api/v1";
     export let tags: string = null;
-    $: tagsObj = (tags ? JSON.parse(tags) : []) as {
+    $: tagsObj = (tags ? JSON.parse(tags) : []) as (uPlot.Series & {
         name: string;
         tagName: string;
         axisName: string;
         isString: boolean;
         color?: string;
-    }[];
+    })[];
 
     export let title: string = "";
     export let begin: string = null;
     export let end: string = null;
     export let realtime: boolean = null;
     export let interval: number = null;
+    export let period: number = null;
     export let slice: boolean = false;
     export let spark: boolean = false;
 
@@ -43,7 +44,7 @@
             beginDateTime: new Date(begin),
             endDateTime: new Date(end),
             maxPoints: 1000,
-            lastSeconds: 90,
+            lastSeconds: period || 90,
             strictMode: false,
         };
         if (!begin || !end) {
@@ -56,17 +57,20 @@
     };
 
     var configureSeries = async function (
-        series: {
+        series: (uPlot.Series & {
             name: string;
             axisName: string;
             isString: boolean;
             color?: string;
-        }[]
+            scaleOption?: uPlot.Scale;
+        })[]
     ) {
         for (const serie of series) {
             plot.addSerie(serie.name || "", serie.axisName, {
                 isString: serie.isString == true,
                 color: serie.color,
+                scaleOption: serie.scaleOption,
+                ...serie,
             });
         }
     };

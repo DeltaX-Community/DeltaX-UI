@@ -23,10 +23,10 @@
 
 <table class="relative overflow-x-auto | shadow w-full {dark}">
     <thead
-        class="sticky top-0 | items-center bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-100 shadow {theadclass}"
+        class="items-center {theadclass}"
     >
         {#each columnsObj as col}
-            <th class="capitalize font-bold text-left {col.class}">
+            <th class="sticky top-0 | bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-100 shadow capitalize font-bold text-left {col.class}">
                 <div contenteditable="false" bind:innerHTML={col.label} />
             </th>
         {/each}
@@ -38,7 +38,7 @@
             >
                 {#each columnsObj as col}
                     <td class={col["tdclass"]}>
-                        <div
+                        <div class="m-1"
                             contenteditable="false"
                             bind:innerHTML={row[`${col.field}`]}
                         />

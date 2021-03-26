@@ -67,10 +67,10 @@
     };
 </script>
 
-<div class={dark}>
+<div class="sticky w-full z-10 top-0 {dark}">
     <nav
         id="header"
-        class="bg-white dark:bg-gray-600 text-gray-800 dark:text-gray-100 sticky w-full z-10 top-0 shadow-md mb-0"
+        class="bg-white dark:bg-gray-600 text-gray-800 dark:text-gray-100 w-full shadow-md mb-0"
     >
         <div class="w-full mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3">
             <div class="pl-2 md:pl-2">

@@ -27,6 +27,7 @@ export class RealTimeWebSocket extends Client {
         this.KnownTopics = [];
         this.SubscribedTopics = new Set();
         this.Topics = writable({} as { [name: string]: TopicDto });
+        this.Value = {}
         this.IsConnected = writable(false);
         this.IsConnected.subscribe(val => this.isConnected = val)
 
@@ -38,6 +39,7 @@ export class RealTimeWebSocket extends Client {
     public KnownTopics: Array<string>;
     public SubscribedTopics: Set<string>;
     public Topics = writable({} as { [name: string]: TopicDto });
+    public Value = {} as { [name: string]: TopicDto };
     public IsConnected = writable(false);
     private isConnected = false
 
@@ -56,7 +58,7 @@ export class RealTimeWebSocket extends Client {
     }
 
     public async RtGetTopics() {
-        console.log("call RtGetTopics")
+        // console.log("call RtGetTopics")
         const tops = await this.call('rpc.rt.get_topics', [], this.timeout) as Array<string>;
         console.log("call RtGetTopics result", tops);
         this.KnownTopics = tops;
@@ -68,6 +70,7 @@ export class RealTimeWebSocket extends Client {
             result.tags.forEach(tag => {
                 tag.updated = new Date(tag.updated);
                 val[tag.tagName] = tag;
+                this.Value[tag.tagName] = tag;
             });
             return val;
         });
@@ -75,6 +78,7 @@ export class RealTimeWebSocket extends Client {
 
     public async RtSubscribeOnly(topics: Array<string>) {
         this.Topics.update(val => val = {});
+        this.Value = {}
         this.SubscribedTopics = new Set(topics);
 
         if (this.isConnected) {
@@ -97,7 +101,7 @@ export class RealTimeWebSocket extends Client {
     private async RtSubscribeTopics() {
         const topics = Array.from(this.SubscribedTopics);
         if (topics.length) {
-            console.log("******** RtSubscribeTopics topics", topics);
+            // console.log("******** RtSubscribeTopics topics", topics);
             const resultTags = await this.call('rpc.rt.subscribe', topics, this.timeout) as { tags: Array<TopicDto> };
             console.log("RtSubscribeTopics resultTags", resultTags);
 
@@ -106,9 +110,8 @@ export class RealTimeWebSocket extends Client {
     }
 
     public async RtSetValues(topicValue: Array<{ topic: string; value: string | number | unknown }>) {
-        console.log("send RtSetValues", topicValue);
         const result = await this.call('rpc.rt.set_value', topicValue, this.timeout) as boolean;
-        console.log("receive RtSetValues", result);
+        console.log("receive RtSetValues", topicValue, result);
 
         const toSubscribe = topicValue.map(t => t.topic);
         this.RtAddSubscribe(toSubscribe);
@@ -116,7 +119,7 @@ export class RealTimeWebSocket extends Client {
     }
 
     public async HistoryGetTopic(topicName: string) {
-        console.log("send HistoryGetTopic", topicName);
+        // console.log("send HistoryGetTopic", topicName);
         const result = await this.call('rpc.history.get_topic', [topicName]);
         console.log("receive HistoryGetTopic", result);
         return result;
