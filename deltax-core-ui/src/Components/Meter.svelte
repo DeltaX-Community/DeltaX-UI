@@ -17,7 +17,7 @@
 
 <div class={dark}>
     <div
-        class="grid overflow-hidden shadow-mb-xl bg-white hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-black"
+        class="grid overflow-hidden shadow-mb-xl bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-black"
     >
         <div class="text-center flex-row self-center">
             <span
