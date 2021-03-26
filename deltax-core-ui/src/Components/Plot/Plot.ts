@@ -166,7 +166,12 @@ export class Plot {
                 },
                 yString: {
                     time: false,
-                    range: [0, 20]
+                    range: [-1, 20]
+                },
+                ySpark: {
+                    time: false,
+                    auto: true,
+                    range: [-0.1, 1.1]
                 },
             },
             axes: [
@@ -263,7 +268,8 @@ export class Plot {
         return value
     }
 
-    public addSerie(name: string, scale = 'y', options = {} as { isString?: boolean, color?: string }) {
+    public addSerie(name: string, scale = null, options = {} as { isString?: boolean, color?: string }) {
+        scale = scale || (this.spark ? "ySpark" : "y")
         this.addScale(scale)
         const color = options.color || colorPalette[this.options.series.length]
         const isString = options.isString == true

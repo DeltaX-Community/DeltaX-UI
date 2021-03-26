@@ -26,6 +26,7 @@
     export let end: string = null;
     export let realtime: boolean = null;
     export let interval: number = null;
+    export let period: number = null;
     export let slice: boolean = false;
     export let spark: boolean = false;
 
@@ -43,7 +44,7 @@
             beginDateTime: new Date(begin),
             endDateTime: new Date(end),
             maxPoints: 1000,
-            lastSeconds: 90,
+            lastSeconds: period || 90,
             strictMode: false,
         };
         if (!begin || !end) {
