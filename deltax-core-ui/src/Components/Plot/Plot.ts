@@ -139,7 +139,7 @@ export class Plot {
                     size: 10,
                     width: 2,
                     // @ts-ignore: Unreachable code error 
-                    stroke: (u, seriesIdx) => u.series[seriesIdx].pointFill,
+                    // stroke: (u, seriesIdx) => u.series[seriesIdx].pointFill,
                     //  fill: (u, seriesIdx) => u.series[seriesIdx].points.stroke(u, seriesIdx), //"#00550088",
                 },
                 dataIdx: (self, seriesIdx, hoveredIdx) => {
@@ -167,12 +167,7 @@ export class Plot {
                 yString: {
                     time: false,
                     range: [-1, 20]
-                },
-                ySpark: {
-                    time: false,
-                    auto: true,
-                    range: [-0.1, 1.1]
-                },
+                }
             },
             axes: [
                 Object.assign({}, this.defaultAxes,
@@ -234,7 +229,7 @@ export class Plot {
     }
 
 
-    private addScale(scaleName: string) {
+    private addScale(scaleName: string, option: uPlot.Scale = null) {
         let scale = this.options.scales[scaleName];
         if (!scale) {
             this.options.scales[scaleName] = {
@@ -248,6 +243,9 @@ export class Plot {
                     side: 3,
                     show: this.spark == false
                 }))
+        }
+        if (option) {
+            this.options.scales[scaleName] = { ...this.options.scales[scaleName], ...option }
         }
     }
 
@@ -268,9 +266,8 @@ export class Plot {
         return value
     }
 
-    public addSerie(name: string, scale = null, options = {} as { isString?: boolean, color?: string }) {
-        scale = scale || (this.spark ? "ySpark" : "y")
-        this.addScale(scale)
+    public addSerie(name: string, scale = "y", options = {} as uPlot.Series & { isString?: boolean, color?: string, scaleOption?: uPlot.Scale }) {
+        this.addScale(scale, options.scaleOption)
         const color = options.color || colorPalette[this.options.series.length]
         const isString = options.isString == true
         const extraOptions = {

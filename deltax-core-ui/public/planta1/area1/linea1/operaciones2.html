@@ -1,0 +1,345 @@
+<template>
+
+  <div x-data="panelData()" x-init="setup" class="  text-black dark:text-white">
+    <div class="lg:p-4   | flex flex-grow flex-wrap" style="height: calc(100vh - 130px);">
+
+
+      <!-- Panel Estado -->
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
+        <div class="m-2 bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
+
+          <!-- Estado de linea y contadores -->
+          <div class="m-4">
+            <div class="flex align-middle gap-2">
+              <div class="uppercase text-2xl font-bold">
+                Estado
+              </div>
+              <div class="pr-0 flex-grow"></div>
+              <div class="flex justify-center items-center font-medium py-1 px-2 bg-green-600 border border-white">
+                <div class="text-base text-white font-bold max-w-full flex-initial uppercase">
+                  En Marcha
+                </div>
+              </div>
+              <div
+                class="flex justify-center items-center font-medium py-1 px-2 bg-red-700 border border-white shadow-inner opacity-20">
+                <div class="text-base text-gray-400 font-bold max-w-full flex-initial uppercase stroke-2">
+                  Parada
+                </div>
+              </div>
+            </div>
+          </div> 
+
+          <!-- Estado de linea y contadores -->
+          <div class="m-4">
+            <div class="flex align-middle justify-around gap-2">
+              <div class="w-1/3">
+                <dx-meter topicname="simulation/countTotal" name="Totales" color="blue"></dx-meter>
+              </div>
+              <div class="w-1/3">
+                <dx-meter topicname="simulation/countGood" name="Buenas" color="green"></dx-meter>
+              </div>
+              <div class="w-1/3">
+                <dx-meter topicname="simulation/countBad" name="Malas" color="red"></dx-meter>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Sprklines y tiempos de Marcha/Parada -->
+          <div class="m-4 grid gap-2">
+
+            <!-- Marcha -->
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
+                En Marcha
+              </div>
+              <div class="relative flex-grow">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000"
+                  tags='[{"tagName": "simulation/running", "color": "#22FF44", "fill": "#22FF4444", "scaleOption": {"range": [-0.02, 1.02]} }]' 
+                  spark="true" >
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
+                  topicname="=round({process_info/UI.RtViewer/AliveMs}/124, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+
+            <!-- Tiempo desde Ultima Parada -->
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
+                Tiempo desde Ultima Parada
+              </div>
+              <div class="pr-0 relative flex-grow">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000" 
+                  tags='[{"tagName": "simulation/running",  "color": "#22FF44", "fill": "#22FF4444", "scaleOption": {"range": [-0.02, 1.02]} }]'
+                  spark="true" > 
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
+                  topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+
+            <!-- Parada -->
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
+                Parada
+              </div>
+              <div class="pr-0 relative flex-grow">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000"
+                  tags='[{"tagName": "simulation/idle", "color": "#FF3300", "fill": "#FF330044", "scaleOption": {"range": [-0.02, 1.02]} }]' 
+                  spark="true" > 
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
+                  topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 10, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+
+            <!-- Bajo Ritmo -->
+            <div class="flex align-middle p-1 h-10 border-gray-200 dark:border-gray-500 border-b-2">
+              <div class="text-base w-52 flex items-center font-bold">
+                Bajo Ritmo
+              </div>
+              <div class="pr-0 relative flex-grow">
+                <dx-rt-plot 
+                  realtime="1" 
+                  interval="2000"
+                  tags='[{"tagName": "simulation/slowRunning", "color": "#DDAA33", "fill": "#DDAA3388", "scaleOption": {"range": [-0.02, 1.02]} }]' 
+                  spark="true"> 
+                </dx-rt-plot>
+              </div>
+              <div class="text-base w-44 flex items-end justify-end font-bold">
+                <dx-rt-value class="text-2xl text-black dark:text-gray-200"
+                  topicname="=round({process_info/RealTimeHistoricDB/AliveMs} / 80, 0)"></dx-rt-value>
+                <span class="pl-2">Min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin Panel Estado -->
+
+
+      <!-- Panel Grafico -->
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
+        <div class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-tr-2xl | shadow-md" >
+          <div class="block relative m-0 mt-0 mb-14 mr-2 ">
+            <dx-rt-plot title="" realtime="1" interval="500" x-bind:tags="tagsPlot2" slice="true" period="480"></dx-rt-plot>
+          </div>
+        </div>
+      </div>
+      <!-- Fin Panel Grafico -->
+
+     
+      <!-- Panel Imagen -->
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100% - 450px);">
+        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
+          <img class="h-full w-full" src="img_scada_1.jpg">
+         
+          <!-- superior izquiera -->
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="top: 10%; left: 10%;">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>         
+
+          <!-- superior derecha -->
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="top: 10%; right: 10%;">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>         
+
+          <!-- inferior izquiera -->
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="bottom: 45%; left: 25%;">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>         
+
+          <!-- inferior derecha -->
+          <div class="absolute text-base flex items-center justify-center font-bold bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-black p-2 rounded-full py-3"
+            style="bottom: 10%; right: 10%;">
+            <dx-rt-value class="text-3xl text-gray-200"
+              topicname="=20.4"></dx-rt-value>
+            <span class="pl-1 text-xs">%</span>
+          </div>         
+        </div>
+      </div>
+      <!-- Fin Panel Imagen -->
+
+      <!-- Panel Lista Eventos  -->
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100% - 450px);">
+        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
+        <!-- <div class="relative m-2 h-full bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-br-2xl | flex flex-col | shadow-md overflow-hidden" > -->
+
+          <!-- TABLA 1 --> 
+          <h2
+            class="m-0 py-3 px-4 text-lg font-bold font-sans uppercase | rounded-sm rounded-tr-2xl | shadow-inner">
+            Ocurrencias
+          </h2>
+
+          <div class="m-1 px-4 overflow-y-auto flex-grow">
+            <dx-data-table theadclass="bg-blue-200 dark:bg-gray-900" 
+              tbodyclass="bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-100" 
+              trclass="border-blue-500" x-bind:rows="rows"
+              x-bind:columns="columns"> 
+            </dx-data-table>
+          </div> 
+        </div>
+      </div>
+      <!-- Fin Panel Lista Eventos -->
+
+    </div>
+  </div>
+</template>
+
+<script>
+  function panelData() {
+    return {
+      columns: "",
+      rows: [],
+      baseUrl: 'simulation/table.json',
+      url: '',
+      refresh: 20,
+      tagsPlot2: null,
+
+      setup: async function () {
+
+        /*Serie Trending Config*/
+        const series = [{ 
+          name: "Totales",
+          tagName: "simulation/countTotal", 
+          color: "#55FF66AA",
+          axisName: "#3",
+        }, {
+          name: "Malas",
+          tagName: "simulation/countBad",
+          axisName: "#3",
+          color: "#AA3322AA",
+        }, {
+          name: "Buenas",
+          tagName: "simulation/countGood",
+          axisName: "#3",
+          color: "#55FFFFAA",
+        }, {
+          name: "Velocidad Mínima",
+          tagName: "simulation/lineSpeedMin",
+          color: "#AAAAFFAA",
+          axisName: "#1",
+        }, {
+          name: "Velocidad Máxima",
+          tagName: "simulation/lineSpeedMax",
+          color: "#FFAAAAAA",
+          axisName: "#1",
+          isString: false
+        }, {  
+          name: "Velocidad",
+          tagName: "simulation/lineSpeed",
+          axisName: "#1",
+          color: "#4466FF",
+        }]
+
+        await RtWs.RtAddSubscribe(series.map(s => s.tagName))
+        this.tagsPlot2 = JSON.stringify(series)
+        /*End Serie Trending Config*/
+
+
+        /*Table Config*/
+        this.columns = JSON.stringify(
+          [{
+              label: "Hora",
+              field: "time", 
+              class: "px-1",
+            },
+            {
+              label: "Tipo",
+              field: "type", 
+              class: "pr-1",
+            },
+            {
+              label: "Descripcion",
+              field: "description", 
+            }
+          ])
+
+        this.url = `${this.baseUrl}?time=${Date.now()}`
+
+        var formatTime = function (v) {
+          return `${new Date(v.time).toLocaleTimeString()}` 
+        }
+
+        var formatType = function (v) {
+          if(v.type == "alert")
+            return `<span class="text-xs p-0 m-0 px-1 bg-red-600 border border-white text-white font-bold uppercase">Alerta</span>`
+          if(v.type == "notification")
+            return `<span class="text-xs p-0 m-0 px-1 bg-green-600 border border-white text-white font-bold uppercase">Notificación</span>`
+          if(v.type == "event")
+            return `<span class="text-xs p-0 m-0 px-1 bg-blue-600 border border-white text-white font-bold uppercase">Evento</span>`
+          if(v.type == "action")
+            return `<span class="text-xs p-0 m-0 px-1 bg-yellow-600 border border-white text-white font-bold uppercase">Acción</span>` 
+          return v.type
+        }
+
+        var mappFields = function (rows) {
+          result = rows.map(r => {
+            return {
+              ...r,
+              time: formatTime(r),
+              type: formatType(r)
+            }
+          })
+          return JSON.stringify(result)
+        }
+
+        Api.Get(this.url)
+          .then(rows => {
+            this.rows = mappFields(rows)
+            console.log(this.rows)
+          })
+
+        // this.rows = JSON.stringify(
+        //   [{ 
+        //         f1: 1,
+        //         f2: 2 
+        //     },
+        //     { 
+        //         f1: 2,
+        //         f2: 3 
+        //     },
+        //     { 
+        //         f1: 5,
+        //         f2: 7 
+        //     }
+        //   ])
+
+
+
+        // setInterval(() => {
+        //   this.url = `${this.baseUrl}?time=${Date.now()}`
+        //   Api.Get(this.url)
+        //     .then(rows => this.rows = mappFields(rows))
+        // }, this.refresh * 1000);
+      },
+    }
+  }
+
+  import("/build/alpine.js")
+  import("./simulation/tagSimulation.js")  
+</script>
