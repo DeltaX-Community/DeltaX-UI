@@ -3,7 +3,7 @@
   <style>
     .active {
       background-color: royalblue;
-    }
+    } 
   </style>
 
   <div x-data="testFunction()">
@@ -17,10 +17,10 @@
       <dx-rt-value topicname="process_info/UI.RtViewer/AliveMs"></dx-rt-value>
       Bar
       <div class="flex flex-row items-stretch overflow-hidden my-auto | rounded-md border-2 border-blue-600">
-        <div class="py-1 flex-grow px-2 auto-cols-max font-bold bg-blue-600 text-white"> 
-          <div class=" py-1 px-2">  
+        <div class="py-1 flex-grow px-2 auto-cols-max font-bold bg-blue-600 text-white">
+          <div class=" py-1 px-2">
             Prueba
-            </div>   
+          </div>
         </div>
         <div class="py-1 flex-grow px-2 auto-cols-max font-bold my-auto">
           <dx-rt-value topicname="process_info/UI.RtViewer/AliveMs"></dx-rt-value>
@@ -33,6 +33,16 @@
     <!-- <dx-meter name="prueba1" topic-name="process_info/UI.RtViewer/RunningDateTime" unit="sec" ></dx-meter>
     <dx-meter name="prueba2" topic-name="tag1" unit="sec" ></dx-meter> -->
     <dx-rt-value topic-name="tag1"></dx-rt-value>
+
+    <div id="parent" class="overflow-hidden h-96 w-96">
+      <div class="zoom-wheel">
+        <img src="http://www.publicdomainpictures.net/pictures/60000/velka/beach-1375595507fMI.jpg">
+      </div>
+    </div>
+
+    <div class="zoom-wheel">
+      <img src="http://www.publicdomainpictures.net/pictures/60000/velka/beach-1375595507fMI.jpg">
+    </div>
   </div>
 
 </template>
@@ -46,5 +56,29 @@
     }
   }
 
-  console.log("LOAD DEMO PANEL TAB", testFunction)
+  function zoomWheel() {
+    return {
+      scale: 1,
+      callback: function (event) {
+        event.preventDefault();
+
+        const delta = Math.min(Math.max(0.02, Math.abs(event.deltaY * -0.01)), 0.2)
+        this.scale += event.deltaY < 0 ? -delta : +delta;
+        this.scale = Math.min(Math.max(0.5, this.scale), 2)
+
+        // Apply scale transform
+        event.target.style.transformOrigin = this.scale < 1 ? "" : `${event.layerX}px ${event.layerY}px`
+        event.target.style.transform = `scale(${this.scale})`;
+      }
+    }
+  }
+
+  const els = document.getElementsByClassName('zoom-wheel');
+  for (const el of els) {
+    const f = zoomWheel()
+    el.addEventListener("wheel", function (e) {
+      f.callback(e)
+    });
+    console.log("LOAD DEMO PANEL scroll", el, f, f.callback)
+  }
 </script>
