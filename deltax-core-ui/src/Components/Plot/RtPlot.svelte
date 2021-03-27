@@ -6,6 +6,7 @@
     import { GetTopicHistory } from "../../api/request";
     import type { TagValue } from "../../api/request";
     import RtWs from "../../services/RtWs";
+    import RtTimer from "../../services/RtTimer";
     import Common from "../../Settings/Common";
 
     $: IsDarkMode = Common.IsDarkMode;
@@ -29,10 +30,8 @@
     export let period: number = null;
     export let slice: boolean = false;
     export let spark: boolean = false;
+    export let timername: string = "default";
 
-    $: Topics = RtWs.Topics;
-
-    let timer;
     let elPlot;
     let plot: Plot;
     let clientHeight;
@@ -93,10 +92,9 @@
         }
     };
 
-    var updateValuesAllSeries = function () {
-        const now = new Date();
+    var updateValuesAllSeries = function (now: Date) {
         let values = tagsObj.map((t) => {
-            var tag = $Topics[t.tagName];
+            var tag = RtWs.Value[t.tagName];
             return `${tag.value}`;
         });
         plot.addPoints(now, values);
@@ -104,9 +102,14 @@
 
     var makeRealTimeSerie = async function () {
         interval = interval > 100 ? interval : 1000;
+
         const topics = tagsObj.map((t) => t.tagName);
         await RtWs.RtAddSubscribe(topics);
-        timer = setInterval(updateValuesAllSeries, interval);
+
+        const timer = RtTimer.get(timername || "default", interval);
+        timer.value.subscribe((d) => {
+            updateValuesAllSeries(d);
+        });
     };
 
     onMount(() => {
@@ -124,10 +127,6 @@
 
     onDestroy(() => {
         plot.plot.destroy();
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
     });
 
     // Update Width and Height on resize
