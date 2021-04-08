@@ -5,6 +5,7 @@
 
     export let rows: string;
     export let columns: string;
+    export let thclass: string;
     export let theadclass: string;
     export let tbodyclass: string;
     export let trclass: string;
@@ -22,11 +23,11 @@
 </script>
 
 <table class="relative overflow-x-auto | shadow w-full {dark}">
-    <thead
-        class="items-center {theadclass}"
-    >
+    <thead class="items-center {theadclass}">
         {#each columnsObj as col}
-            <th class="sticky top-0 | bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-100 shadow capitalize font-bold text-left {col.class}">
+            <th
+                class="sticky top-0 shadow capitalize font-bold text-left {thclass} {col.class}"
+            >
                 <div contenteditable="false" bind:innerHTML={col.label} />
             </th>
         {/each}
@@ -38,7 +39,8 @@
             >
                 {#each columnsObj as col}
                     <td class={col["tdclass"]}>
-                        <div class="m-1"
+                        <div
+                            class="m-1"
                             contenteditable="false"
                             bind:innerHTML={row[`${col.field}`]}
                         />

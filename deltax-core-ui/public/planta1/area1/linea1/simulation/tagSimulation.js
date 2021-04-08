@@ -117,10 +117,10 @@ class Simulation {
     }
 
     start() {
-        this.countGood = RtWs.Value['simulation/countGood'].value
-        this.countBad = RtWs.Value['simulation/countBad'].value
-        this.lineSpeed = RtWs.Value['simulation/lineSpeed'].value
-        this.running = RtWs.Value['simulation/running'].value || this.getRandom(0, 50) > 1 ? 1 : 0
+        this.countGood = 0+RtWs.Value['simulation/countGood'].value
+        this.countBad = 0+RtWs.Value['simulation/countBad'].value
+        this.lineSpeed = 0+RtWs.Value['simulation/lineSpeed'].value 
+        this.running =  RtWs.Value['simulation/running'].value || this.getRandom(0, 50) > 1 ? 1 : 0
 
         console.log("START SIMULATION")
         // velocidad 

@@ -1,12 +1,11 @@
 <template>
 
   <div x-data="panelData()" x-init="setup" class="  text-black dark:text-white">
-    <div class="lg:p-4   | flex flex-grow flex-wrap" style="height: calc(100vh - 130px);">
-
-
+    <div class="lg:p-4   | flex flex-grow flex-wrap">
+ 
       <!-- Panel Estado -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
-        <div class="m-2 bg-white border-blue-300  dark:bg-gray-700  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
+        <div class="m-1 bg-white border-gray-400  dark:bg-gray-800  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
 
           <!-- Estado de linea y contadores -->
           <div class="m-4">
@@ -135,7 +134,7 @@
 
       <!-- Panel Grafico -->
       <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
-        <div class="m-2 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-tr-2xl | shadow-md" >
+        <div class="m-1 grid relative bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-tr-2xl | shadow-md" >
           <div class="block relative m-0 mt-0 mb-14 mr-2 ">
             <dx-rt-plot title="" realtime="1" interval="500" timername="timer500" x-bind:tags="tagsPlot2" slice="true" period="480"></dx-rt-plot>
           </div>
@@ -145,8 +144,8 @@
 
      
       <!-- Panel Imagen -->
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100% - 450px);">
-        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100vh - 580px);">
+        <div class="relative m-1 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
           <img class="h-full w-full" src="img_scada_1.jpg">
          
           <!-- superior izquiera -->
@@ -185,23 +184,23 @@
       <!-- Fin Panel Imagen -->
 
       <!-- Panel Lista Eventos  -->
-      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100% - 450px);">
-        <div class="relative m-2 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-bl-2xl | shadow-md overflow-hidden" >
-        <!-- <div class="relative m-2 h-full bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-br-2xl | flex flex-col | shadow-md overflow-hidden" > -->
-
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 450px; height: calc(100vh - 580px);">
+        <div class="grid relative m-1 bg-white dark:bg-gray-800 border-gray-400 dark:border-gray-900 border-4 rounded-sm md:rounded-br-xl | shadow-md overflow-hidden" >
+       
           <!-- TABLA 1 --> 
-          <h2
-            class="m-0 py-3 px-4 text-lg font-bold font-sans uppercase | rounded-sm rounded-tr-2xl | shadow-inner">
-            Ocurrencias
-          </h2>
+          <div class="m-1 py-3 px-4 text-2xl font-bold font-sans uppercase | rounded-sm rounded-tr-2xl | shadow-inner">
+              Ocurrencias
+          </div>
 
-          <div class="m-1 px-4 overflow-y-auto flex-grow">
-            <dx-data-table theadclass="bg-blue-200 dark:bg-gray-900" 
+          <div class="m-1 px-1 overflow-y-auto flex-grow">
+            <dx-data-table 
+              thclass="bg-blue-200 dark:bg-gray-900 px-2" 
               tbodyclass="bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-100" 
               trclass="border-blue-500" x-bind:rows="rows"
               x-bind:columns="columns"> 
             </dx-data-table>
           </div> 
+          
         </div>
       </div>
       <!-- Fin Panel Lista Eventos -->
@@ -226,34 +225,39 @@
         const series = [{ 
           name: "Totales",
           tagName: "simulation/countTotal", 
-          color: "#55FF66AA",
+          color: "#55FF66",
+          fill: "transparent",
           axisName: "#3",
         }, {
           name: "Malas",
           tagName: "simulation/countBad",
           axisName: "#3",
-          color: "#AA3322AA",
+          color: "#AA3322",
+          fill: "transparent",
         }, {
           name: "Buenas",
           tagName: "simulation/countGood",
           axisName: "#3",
-          color: "#55FFFFAA",
+          color: "#5566FF",
+          fill: "transparent",
         }, {
           name: "Velocidad Mínima",
           tagName: "simulation/lineSpeedMin",
-          color: "#AAAAFFAA",
+          color: "#AAAAFF",
+          fill: "transparent",
           axisName: "#1",
         }, {
           name: "Velocidad Máxima",
           tagName: "simulation/lineSpeedMax",
-          color: "#FFAAAAAA",
+          color: "#FFAAAA",
+          fill: "transparent",
           axisName: "#1",
           isString: false
         }, {  
           name: "Velocidad",
           tagName: "simulation/lineSpeed",
           axisName: "#1",
-          color: "#4466FF",
+          color: "#44FF66",
         }]
 
         await RtWs.RtAddSubscribe(series.map(s => s.tagName))

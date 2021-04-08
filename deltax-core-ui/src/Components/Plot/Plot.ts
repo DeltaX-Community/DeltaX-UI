@@ -336,7 +336,10 @@ export class Plot {
 
                 return y;
             } else {
-                return s.map(r => Number.parseFloat(r.value))
+                return s.map(r => {
+                    const res = Number.parseFloat(r.value);
+                    return Number.isNaN(res) ? 0 : res;
+                })
             }
         })
 
