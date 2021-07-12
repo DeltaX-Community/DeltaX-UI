@@ -15,6 +15,7 @@
     "loader/"
   ],
   "scripts": {
+    "www": "sirv www --port 5055",
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
@@ -22,7 +23,11 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/core": "^2.0.1"
+    "@stencil/core": "^2.0.1",
+    "@stencil/router": "^1.0.1",
+    "@stencil/store": "^1.4.1",
+    "sirv-cli": "^1.0.12",
+    "uplot": "^1.6.13"
   },
   "license": "MIT"
 }

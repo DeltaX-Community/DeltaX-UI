@@ -6,56 +6,65 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
+    interface DemoWc {
         /**
           * The first name
          */
         "first": string;
+        "timeout": number;
+    }
+    interface DxPlotRaw {
         /**
-          * The last name
+          * The first name
          */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "first": string;
+        "timeout": number;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLDemoWcElement extends Components.DemoWc, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLDemoWcElement: {
+        prototype: HTMLDemoWcElement;
+        new (): HTMLDemoWcElement;
+    };
+    interface HTMLDxPlotRawElement extends Components.DxPlotRaw, HTMLStencilElement {
+    }
+    var HTMLDxPlotRawElement: {
+        prototype: HTMLDxPlotRawElement;
+        new (): HTMLDxPlotRawElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "demo-wc": HTMLDemoWcElement;
+        "dx-plot-raw": HTMLDxPlotRawElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface DemoWc {
         /**
           * The first name
          */
         "first"?: string;
+        "timeout"?: number;
+    }
+    interface DxPlotRaw {
         /**
-          * The last name
+          * The first name
          */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "first"?: string;
+        "timeout"?: number;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "demo-wc": DemoWc;
+        "dx-plot-raw": DxPlotRaw;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "demo-wc": LocalJSX.DemoWc & JSXBase.HTMLAttributes<HTMLDemoWcElement>;
+            "dx-plot-raw": LocalJSX.DxPlotRaw & JSXBase.HTMLAttributes<HTMLDxPlotRawElement>;
         }
     }
 }

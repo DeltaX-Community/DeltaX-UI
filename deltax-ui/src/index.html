@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/deltax-ui.esm.js"></script>
-    <script nomodule src="/build/deltax-ui.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title> 
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div>
+    demo-wc 1: <demo-wc first="first" timeout="10000"></demo-wc>
+  </div>
+
+  <div style="position: relative; width: 50vw; height: 50vh; ">
+    <dx-plot-raw></dx-plot-raw>
+  </div>
+</body>
+
 </html>
