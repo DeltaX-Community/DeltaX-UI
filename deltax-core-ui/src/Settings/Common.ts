@@ -16,7 +16,7 @@ if (window.matchMedia) {
 }
 
 // read config from session storage
-var sessionDark = sessionStorage.getItem('DarkMode')
+var sessionDark = localStorage.getItem('DarkMode')
 if (sessionDark) {
     darkMode = JSON.parse(sessionDark) == true
 }
@@ -28,7 +28,7 @@ class CommonClass {
 
     public setDarkMode(darkMode = true) {
         document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
-        sessionStorage.setItem('DarkMode', JSON.stringify(darkMode))
+        localStorage.setItem('DarkMode', JSON.stringify(darkMode))
         this.IsDarkMode.set(darkMode)
     }
 }

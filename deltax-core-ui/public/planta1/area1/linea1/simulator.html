@@ -1,0 +1,106 @@
+<template>
+
+  <style>
+    .active {
+      background-color: red;
+    }
+  </style>
+
+  <div x-data="useAlpine()" x-init="setup" class="text-black dark:text-white">
+    <div class="lg:p-4   | flex flex-grow flex-wrap">
+
+      <!-- Panel Estado -->
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
+        <div
+          class="m-1 bg-white border-gray-400  dark:bg-gray-800  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
+
+          <div class="m-4 ">
+            <div class="flex gap-1">
+              <div class="self-center uppercase text-2xl font-bold ">
+                Estado
+              </div>
+              <div class="pr-0 flex-grow"></div>
+              <div class="flex justify-center items-center font-medium py-1 px-2  border border-white shadow-inner hover:opacity-100 hover:bg-green-600" 
+                x-bind:class="{ 'bg-green-400 bg-opacity-60 cursor-pointer': !running, 'bg-green-600' : running}">    
+                <button class="text-base text-white font-bold max-w-full flex-initial uppercase stroke-2 cursor-default"
+                    x-bind:class="{'cursor-pointer': !running}"
+                    @click="onActionStart">
+                    En Marcha
+                </button> 
+              </div>
+              <div
+                class="flex justify-center items-center font-medium py-1 px-2 border border-white shadow-inner hover:opacity-100 hover:bg-red-700"
+                  x-bind:class="{ 'bg-red-500 bg-opacity-60 cursor-pointer': running, 'bg-red-700':!running}">         
+                 <button class="text-base text-gray-400 font-bold max-w-full flex-initial uppercase stroke-2 cursor-default"
+                    x-bind:class="{'cursor-pointer': running}"
+                    @click="onActionStop">
+                    Parada
+                  </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Fin Panel Estado -->
+
+    </div>
+  </div>
+
+</template>
+
+<script>
+  import("/build/alpine.js")
+
+  function useAlpine() {
+    return {
+      tab: 'bar',
+      running: 10,
+      pepe:1,
+      refreshSeconds: 1,
+
+      subscribeTopics: async function () {
+        const tags = [
+          "simulation/running" 
+        ]
+
+        await RtWs.RtAddSubscribe(tags)
+      },
+
+      updateValues: async function () {
+        console.log("updateValues... ")
+        this.running = RtWs.Value['simulation/running'].value
+        
+        console.log(`updateValues... ${this.running} pepe:${this.pepe}`)
+      },
+
+      setup: async function () {
+        await this.subscribeTopics()
+        this.updateValues()
+
+        setInterval(() => this.updateValues(), this.refreshSeconds * 1000);
+      },
+
+      onActionStart: async function () {
+        RtWs.RtSetValues([{
+          topic: "simulation/actionStart",
+          value: 1
+        }])
+      },
+
+      onActionStop: async function () {
+        RtWs.RtSetValues([{
+          topic: "simulation/actionReset",
+          value: 1
+        }])
+      },
+
+      onActionReset: async function () {
+        RtWs.RtSetValues([{
+          topic: "simulation/actionReset",
+          value: 1
+        }])
+      }
+    }
+  }
+</script>

@@ -18,3 +18,4 @@ export { default as DataTable } from "./Components/DataTable.svelte";
 export { default as Meter } from "./Components/Meter.svelte";
 export { default as RawPlot } from "./Components/Plot/RawPlot.svelte";
 export { default as RtPlot } from "./Components/Plot/RtPlot.svelte";
+export { default as SmButton } from "./Components/smelte/SmButton.svelte";

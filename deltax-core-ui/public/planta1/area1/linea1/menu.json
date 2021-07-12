@@ -24,6 +24,11 @@
             "url": "#gestion.html", 
             "color": "blue-600",
             "icon": "fas fa-home mr-1"
+        },{
+            "title": "Simulador",
+            "url": "#simulator.html", 
+            "color": "blue-600",
+            "icon": "fas fa-home mr-1"
         },
         {
             "title": "Linea 2",

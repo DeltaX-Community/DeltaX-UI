@@ -111,7 +111,7 @@ export class RealTimeWebSocket extends Client {
 
     public async RtSetValues(topicValue: Array<{ topic: string; value: string | number | unknown }>) {
         const result = await this.call('rpc.rt.set_value', topicValue, this.timeout) as boolean;
-        console.log("receive RtSetValues", topicValue, result);
+        // console.log("receive RtSetValues", topicValue, result);
 
         const toSubscribe = topicValue.map(t => t.topic);
         this.RtAddSubscribe(toSubscribe);

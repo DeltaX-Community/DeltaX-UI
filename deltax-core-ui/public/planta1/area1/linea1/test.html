@@ -1,0 +1,45 @@
+<template>
+
+  <div x-data="panelData()" x-init="setup" class="  text-black dark:text-white">
+    <div class="lg:p-4   | flex flex-grow flex-wrap">
+
+      <!-- Panel Estado -->
+      <div class="w-full md:w-1/2 lg:w-1/2 h-full grid" style="min-height: 300px; height: 450px;">
+        <div
+          class="m-1 bg-white border-gray-400  dark:bg-gray-800  dark:border-gray-900  border-4 rounded-sm md:rounded-tl-2xl | shadow-md  ">
+
+          <!-- Estado de linea y contadores -->
+          <div class="m-4 bg-gold-light">
+            <div class="flex gap-1">
+              <div class="self-center uppercase text-2xl font-bold ">
+                 Estado 
+              </div> 
+              <div class="pr-0 flex-grow"></div>
+              <div class="flex justify-center items-center font-medium py-1 px-2 bg-green-600 border border-white">
+                <div class="text-base text-white font-bold max-w-full flex-initial uppercase">
+                  En Marcha
+                </div>
+              </div>
+              <div
+                class="flex justify-center items-center font-medium py-1 px-2 bg-red-700 border border-white shadow-inner opacity-20">
+                <div class="text-base text-gray-400 font-bold max-w-full flex-initial uppercase stroke-2">
+                  Parada
+                </div>
+              </div>
+
+              <h1>Esto es H1</h1>
+
+              <div class="flex justify-center items-center font-medium   ">
+                <dx-sm-button color="red" light block outlined>asdf </dx-sm-button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- Fin Panel Estado -->
+
+    </div>
+  </div>
+</template>

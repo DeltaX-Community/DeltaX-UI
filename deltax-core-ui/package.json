@@ -39,6 +39,7 @@
     "cross-env": "^7.0.3",
     "rpc-websockets": "^7.4.9",
     "sirv-cli": "^1.0.0",
+    "smelte": "^1.1.5",
     "uplot": "^1.6.7"
   }
 }
