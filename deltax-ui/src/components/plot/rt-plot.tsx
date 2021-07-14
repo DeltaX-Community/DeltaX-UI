@@ -1,21 +1,15 @@
-import { Component, Prop, State, Listen, Element, Host, h } from '@stencil/core';
+import { Component, Listen, Element, Host, h } from '@stencil/core';
 import { Plot } from './Plot';
 import Common from '../../services/Common';
 
 @Component({
-  tag: 'dx-plot-raw',
-  styleUrl: 'dx-plot-raw.css',
+  tag: 'dx-rt-plot',
+  styleUrl: 'rt-plot.css',
   shadow: true,
 })
 
-export class DxPlotRaw {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
-  @Prop() timeout: number = 2000;
+export class DxRtPlot {
   @Element() element: HTMLElement;
-  @State() date: Date;
 
   private plotHeight = 200;
   private plotWidth = 400;
@@ -24,7 +18,6 @@ export class DxPlotRaw {
   private plot: Plot;
 
   componentDidLoad() {
-    console.log("componentDidLoad", this.element); // outputs HTMLElement <my-component ... 
     this.wrapperEl = this.element.shadowRoot.querySelector('.plot-wrapper');
     this.plotEl = this.element.shadowRoot.querySelector('.plot-plot');
 
@@ -36,8 +29,7 @@ export class DxPlotRaw {
   }
 
   @Listen('resize', { target: 'window' })
-  handleResize(ev) {
-    console.log('handleResize ', ev);
+  handleResize() {
     this.plotHeight = this.wrapperEl?.clientHeight || this.plotHeight
     this.plotWidth = this.wrapperEl?.clientWidth - 2 || this.plotWidth
 
@@ -46,7 +38,7 @@ export class DxPlotRaw {
       height: this.plotHeight
     });
   }
- 
+
   loadPlot(el: HTMLElement) {
     this.plot = new Plot(this.plotWidth, this.plotHeight, null, Common.state.IsDarkMode, false, false);
 
@@ -93,5 +85,4 @@ export class DxPlotRaw {
       </Host>
     );
   }
-
 }

@@ -7,7 +7,10 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'www',
-      serviceWorker: null
+      serviceWorker: null,
+      copy: [
+        { src: 'pages', dest: 'pages/' }
+      ]
     },
   ],
 };

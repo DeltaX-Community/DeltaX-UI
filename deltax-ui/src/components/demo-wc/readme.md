@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute | Description    | Type     | Default     |
-| --------- | --------- | -------------- | -------- | ----------- |
-| `first`   | `first`   | The first name | `string` | `undefined` |
-| `timeout` | `timeout` |                | `number` | `2000`      |
+| Property  | Attribute | Description | Type     | Default     |
+| --------- | --------- | ----------- | -------- | ----------- |
+| `name`    | `name`    | The name    | `string` | `undefined` |
+| `timeout` | `timeout` |             | `number` | `2000`      |
 
 
 ----------------------------------------------

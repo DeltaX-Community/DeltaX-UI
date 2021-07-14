@@ -1,0 +1,28 @@
+.page-loader {
+  position: relative;
+}
+
+.page-loader .loading {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(133, 130, 130);
+  background-image: url("/assets/img/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.page-loader .loading-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.page-loader .loading-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}

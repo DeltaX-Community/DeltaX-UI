@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-  <title>Stencil Component Starter</title> 
+  <title>Stencil Component Starter</title>
 
   <script type="module" src="/build/app.esm.js"></script>
   <script nomodule src="/build/app.js"></script>
@@ -13,13 +13,23 @@
 </head>
 
 <body>
-  <div>
-    demo-wc 1: <demo-wc first="first" timeout="10000"></demo-wc>
-  </div>
+  <section>
+    <div>
+      <p> demo-wc 10 Seconds: </p>
+      <demo-wc first="first" timeout="10000"></demo-wc>
+    </div>
 
-  <div style="position: relative; width: 50vw; height: 50vh; ">
-    <dx-plot-raw></dx-plot-raw>
-  </div>
+    <div style="position: relative; width: 50vw; height: 200px; ">
+      <dx-plot-raw></dx-plot-raw>
+    </div>
+  </section>
+
+  <section>
+    <h1>Router:</h1>
+    <dx-page-loader></dx-page-loader>
+    <dx-page-loader template-url="#header.html"></dx-page-loader>
+  </section>
+
 </body>
 
 </html>

@@ -8,17 +8,19 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface DemoWc {
         /**
-          * The first name
+          * The name
          */
-        "first": string;
+        "name": string;
         "timeout": number;
     }
+    interface DxPageLoader {
+        "defaultTemplateUrl": string;
+        "templateUrl": string;
+        "useHash": boolean;
+    }
     interface DxPlotRaw {
-        /**
-          * The first name
-         */
-        "first": string;
-        "timeout": number;
+    }
+    interface DxRtPlot {
     }
 }
 declare global {
@@ -28,35 +30,53 @@ declare global {
         prototype: HTMLDemoWcElement;
         new (): HTMLDemoWcElement;
     };
+    interface HTMLDxPageLoaderElement extends Components.DxPageLoader, HTMLStencilElement {
+    }
+    var HTMLDxPageLoaderElement: {
+        prototype: HTMLDxPageLoaderElement;
+        new (): HTMLDxPageLoaderElement;
+    };
     interface HTMLDxPlotRawElement extends Components.DxPlotRaw, HTMLStencilElement {
     }
     var HTMLDxPlotRawElement: {
         prototype: HTMLDxPlotRawElement;
         new (): HTMLDxPlotRawElement;
     };
+    interface HTMLDxRtPlotElement extends Components.DxRtPlot, HTMLStencilElement {
+    }
+    var HTMLDxRtPlotElement: {
+        prototype: HTMLDxRtPlotElement;
+        new (): HTMLDxRtPlotElement;
+    };
     interface HTMLElementTagNameMap {
         "demo-wc": HTMLDemoWcElement;
+        "dx-page-loader": HTMLDxPageLoaderElement;
         "dx-plot-raw": HTMLDxPlotRawElement;
+        "dx-rt-plot": HTMLDxRtPlotElement;
     }
 }
 declare namespace LocalJSX {
     interface DemoWc {
         /**
-          * The first name
+          * The name
          */
-        "first"?: string;
+        "name"?: string;
         "timeout"?: number;
     }
+    interface DxPageLoader {
+        "defaultTemplateUrl"?: string;
+        "templateUrl"?: string;
+        "useHash"?: boolean;
+    }
     interface DxPlotRaw {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        "timeout"?: number;
+    }
+    interface DxRtPlot {
     }
     interface IntrinsicElements {
         "demo-wc": DemoWc;
+        "dx-page-loader": DxPageLoader;
         "dx-plot-raw": DxPlotRaw;
+        "dx-rt-plot": DxRtPlot;
     }
 }
 export { LocalJSX as JSX };
@@ -64,7 +84,9 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "demo-wc": LocalJSX.DemoWc & JSXBase.HTMLAttributes<HTMLDemoWcElement>;
+            "dx-page-loader": LocalJSX.DxPageLoader & JSXBase.HTMLAttributes<HTMLDxPageLoaderElement>;
             "dx-plot-raw": LocalJSX.DxPlotRaw & JSXBase.HTMLAttributes<HTMLDxPlotRawElement>;
+            "dx-rt-plot": LocalJSX.DxRtPlot & JSXBase.HTMLAttributes<HTMLDxRtPlotElement>;
         }
     }
 }

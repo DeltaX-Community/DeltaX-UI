@@ -1,0 +1,134 @@
+<template>
+  <section class="container">
+    <h1>Prueba Mini.Css</h1>
+    <div>
+      <div class="section ">
+        <h3>Example</h3>
+        <form class="shadowed p1 m1">
+          <fieldset>
+            <legend class="doc">Sample form</legend>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-text" class="doc">Text</label></div>
+              <div class="col-sm-12 col-md"><input type="text" placeholder="Text" id="sf1-text" style="width:85%;"
+                  class="doc"></div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-pwd" class="doc">Password</label></div>
+              <div class="col-sm-12 col-md"><input type="password" placeholder="Password" id="sf1-pwd"
+                  style="width:85%;" class="doc"></div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-num" class="doc">Number</label></div>
+              <div class="col-sm-12 col-md"><input type="number" value="42" id="sf1-num" style="width:85%;" class="doc">
+              </div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-select" class="doc">Select</label></div>
+              <div class="col-sm-12 col-md"><select id="sf1-select" style="width:85%;" class="doc">
+                  <option class="doc">Apples</option>
+                  <option class="doc">Oranges</option>
+                </select></div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-check" class="doc noselect">Checkbox</label></div>
+              <div class="col-sm-12 col-md"><input type="checkbox" autocomplete="off" id="sf1-check" class="doc"
+                  label="Check"></div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-radio" class="doc">Radio</label></div>
+              <div class="col-sm-12 col-md"><input type="radio" autocomplete="off" id="sf1-radio" class="doc"></div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-textarea" class="doc">Textarea</label></div>
+              <div class="col-sm-12 col-md"><textarea class="doc w100" placeholder="Textarea"></textarea>
+              </div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3">
+                <label for="sf1-invalid" class="doc">Invalid</label>
+              </div>
+              <div class="col-sm-12 col-md">
+                <input value="Invalid" id="sf1-invalid" class="doc w100">
+                <div class="w100 help-block red">
+                  The price must be a number
+                </div>
+              </div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-disabled" class="doc">Disabled</label></div>
+              <div class="col-sm-12 col-md"><input disabled="" value="Disabled" id="sf1-disabled" style="width:85%;"
+                  class="doc"></div>
+            </div>
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-readonly" class="doc">Readonly</label></div>
+              <div class="col-sm-12 col-md"><input readonly="" value="Readonly" id="sf1-readonly" style="width:85%;"
+                  class="doc"></div>
+            </div>
+
+            <div class="row responsive-label">
+              <div class="col-sm-12 col-md-3"><label for="sf1-readonly" class="doc">Readonly</label></div>
+              <div class="col-sm-12 col-md">
+                <label class="switch">
+                  <input type="checkbox" id="ckb-switch-theme" checked="1">
+                  <span class="slider round"></span>
+                </label>
+                <label for="ckb-switch-theme" class="doc noselect">Enable Dark Mode!</label>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div>
+      <form>
+        <fieldset>
+          <legend>Simple form</legend>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <label for="username">Username</label>
+              <input type="text" id="Username" placeholder="Username" />
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Password" />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <label for="drawer-control" class="drawer-toggle"></label>
+
+      <input type="checkbox" id="drawer-control" class="drawer">
+
+      <div class="demo doc">
+        <label for="drawer-control" class="drawer-close doc"></label>
+        <a href="#" class="doc">Home</a><br>
+        <a href="#" class="doc">News</a><br>
+        <a href="#" class="doc">About</a> <br>
+        <a href="#" class="doc"> Contact </a><br>
+      </div>
+
+
+      <button>Button</button>
+      <input type="button" value="Button" />
+      <input type="reset" value="Button" />
+      <input type="submit" value="Button" />
+      <a href="#" class="button">Link</a>
+      <a href="#" role="button">Link</a>
+      <label class="button">Label</label>
+      <label role="button">Label</label>
+
+      <button class="primary">Primary</button>
+      <button class="secondary">Secondary</button>
+      <button class="tertiary">Tertiary</button>
+      <button class="inverse">Inverse</button>
+    </div>
+  </section>
+</template>
+
+<script>
+  var el = document.getElementById("ckb-switch-theme")
+  el.checked = window.Common.state.IsDarkMode
+  el.onchange = (e) => window.Common.setDarkMode(el.checked)
+
+</script>

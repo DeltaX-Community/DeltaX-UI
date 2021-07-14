@@ -8,9 +8,9 @@ import RtTimer from '../../services/RtTimer';
 })
 export class DemoWc {
   /**
-   * The first name
+   * The name
    */
-  @Prop() first: string;
+  @Prop() name: string;
   @Prop() timeout: number = 2000;
 
   @State() date: Date;
@@ -30,7 +30,7 @@ export class DemoWc {
   render() {
     return (
       <Host>
-        <div>RtTimer Date: {this.date.toISOString()}</div>
+        <div>RtTimer Date: {this.date.toISOString()} name: {this.name}</div>
       </Host>
     );
   }

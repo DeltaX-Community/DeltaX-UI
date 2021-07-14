@@ -1,1 +1,4 @@
-@import url("main.css");
+@import url("./styles/mini.css");
+@import url("./styles/extras/extra.css");
+@import url("./styles/extras/spaces.css");
+@import url("./styles/extras/switch.css");

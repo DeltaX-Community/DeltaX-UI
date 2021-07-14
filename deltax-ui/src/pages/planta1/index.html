@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+
+  <style>
+    .body-loading {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 200;
+      background-color: rgba(133, 130, 130, 0.9);
+      background-image: url("/assets/img/loading.gif");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 1;
+      transition: opacity 1s linear;
+    }
+
+    .loading-visible {
+      visibility: visible;
+      opacity: 1;
+      transition: none;
+    }
+
+    .loading-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 1s, opacity 1s linear;
+    }
+
+  </style>
+  <script>
+    function setLoading(loading = false) {
+      if (loading) {
+        document.getElementById("body-loading").classList.add("loading-visible")
+        document.getElementById("body-loading").classList.remove("loading-hidden")
+        document.getElementById("body-loading").style.zIndex = 10
+      } else {
+        document.getElementById("page").style.display = "block";
+        document.getElementById("body-loading").classList.remove("loading-visible")
+        document.getElementById("body-loading").classList.add("loading-hidden")
+      }
+    }
+
+    document.addEventListener("loading-page", function (e) {
+      setLoading(JSON.parse(e.detail))
+    })
+
+  </script>
+
+</head>
+
+<body onload="setLoading()" >
+  <div id="body-loading" class="body-loading loading-visible"></div>
+  <div id="page">
+    <section>
+      <div>
+        <p> demo-wc 10 Seconds: </p>
+        <demo-wc first="first" timeout="10000"></demo-wc>
+      </div>
+
+      <div style="position: relative; width: 50vw; height: 200px; ">
+        <dx-plot-raw></dx-plot-raw>
+      </div>
+    </section>
+
+    <section>
+      <h1>Router:</h1>
+      <dx-page-loader use-hash="true"></dx-page-loader>
+      <dx-page-loader template-url="#header.html"></dx-page-loader>
+    </section>
+  </div>
+</body>
+
+</html>

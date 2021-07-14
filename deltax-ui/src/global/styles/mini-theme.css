@@ -1,0 +1,106 @@
+:root {
+  --fore-color: #2e3440;
+  --secondary-fore-color: #3b4252;
+  --back-color: #eceff4;
+  --secondary-back-color: #e5e9f0;
+  --blockquote-color: #d08770;
+  --pre-color: #b48ead;
+  --border-color: #d8dee9;
+  --secondary-border-color: #e5e9f0;
+  --heading-ratio: 1.19;
+  --universal-margin: .5rem;
+  --universal-padding: .5rem;
+  --universal-border-radius: .125rem;
+  --a-link-color: #88c0d0;
+  --a-visited-color: #5e81ac;
+}
+
+:root.dark,
+.dark {
+  --fore-color: #fdfdfd;
+  --secondary-fore-color: #f0f0f0;
+  --back-color: #111;
+  --secondary-back-color: #222;
+  --blockquote-color: #f57c00;
+  --pre-color: #1565c0;
+  --border-color: #ddd;
+  --secondary-border-color: #aaa; 
+  --a-link-color: #0277bd;
+  --a-visited-color: #01579b ;
+}
+
+:root {
+  --card-back-color: #eceff4;
+  --card-fore-color: #2e3440;
+  --card-border-color: #e5e9f0;
+}
+
+:root.dark,
+.dark {
+  --card-back-color: #111;
+  --card-fore-color: #fdfdfd;
+  --card-border-color: #aaa;
+}
+
+.card.warning {
+  --card-back-color: #ebcb8b;
+  --card-border-color: #d08770;
+}
+
+.card.error {
+  --card-back-color: #bf616a;
+  --card-border-color: #434c5e;
+}
+
+.card>.section.dark {
+  --card-back-color: #d8dee9;
+}
+
+.dark .card.warning {
+  --card-back-color: #ffca28;
+  --card-fore-color: #111;
+  --card-border-color: #e8b825;
+}
+
+.dark .card.error {
+  --card-back-color: #b71c1c;
+  --card-fore-color: #f8f8f8;
+  --card-border-color: #a71a1a;
+}
+
+.dark .card>.section.dark {
+  --card-back-color: #e0e0e0;
+  --card-fore-color: #111;
+}
+
+:root {
+  --form-back-color: #e5e9f0;
+  --form-fore-color: #2e3440;
+  --form-border-color: #e5e9f0;
+  --input-back-color: #eceff4;
+  --input-fore-color: #2e3440;
+  --input-border-color: #e5e9f0;
+  --input-focus-color: #88c0d0;
+  --input-invalid-color: #bf616a;
+  --button-back-color: #e5e9f0;
+  --button-hover-back-color: #d8dee9;
+  --button-fore-color: #2e3440;
+  --button-border-color: rgba(0, 0, 0, 0);
+  --button-hover-border-color: rgba(0, 0, 0, 0);
+  --button-group-border-color: rgba(124, 124, 124, 0.54);
+}
+
+:root.dark,
+.dark {
+  --form-back-color: #222;
+  --form-fore-color: #fdfdfd;
+  --form-border-color: #aaa;
+  --input-back-color: #111;
+  --input-fore-color: #fdfdfd;
+  --input-border-color: #aaa;
+  --input-focus-color: #0288d1;
+  --input-invalid-color: #d32f2f;
+  --button-back-color: #212121;
+  --button-hover-back-color: #444;
+  --button-fore-color: #e2e2e2;
+}
