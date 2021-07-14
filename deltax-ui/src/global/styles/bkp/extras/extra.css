@@ -3,6 +3,7 @@
   font-size: 0.8rem;
 }
 
+.disable,
 .noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

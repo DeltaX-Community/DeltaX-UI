@@ -1,3 +1,37 @@
 <template>
-  <p>Header <strong>hola mundo</strong></p>  
+  <p>Header <strong>hola mundo</strong></p>
+
+  <h3>
+    Fancy display heading
+    <small class="text-muted">With faded secondary text</small>
+  </h3>
+  <div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword">
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md">
+    <label class="switch">
+      <input type="checkbox" id="ckb-switch-theme" checked="1">
+      <span class="slider round"></span>
+    </label>
+    <label for="ckb-switch-theme" class="doc noselect">Enable Dark Mode!</label>
+  </div>
+
 </template>
+
+<script>
+  // var el = document.getElementById("ckb-switch-theme")
+  // el.checked = window.Common.state.IsDarkMode
+  // el.onchange = (e) => window.Common.setDarkMode(el.checked) 
+
+</script>
+

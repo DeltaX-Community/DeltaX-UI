@@ -25,9 +25,14 @@
   "dependencies": {
     "@stencil/core": "^2.0.1",
     "@stencil/store": "^1.4.1",
+    "bootstrap": "^5.0.2",
+    "bulma": "^0.9.3",
+    "material-design-lite": "^1.3.0",
     "sirv-cli": "^1.0.12",
     "uplot": "^1.6.13"
   },
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "@stencil/sass": "^1.4.1"
+  }
 }

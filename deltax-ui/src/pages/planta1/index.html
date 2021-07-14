@@ -46,7 +46,7 @@
       if (loading) {
         document.getElementById("body-loading").classList.add("loading-visible")
         document.getElementById("body-loading").classList.remove("loading-hidden")
-        document.getElementById("body-loading").style.zIndex = 10
+        document.getElementById("body-loading").style.zIndex = 29
       } else {
         document.getElementById("page").style.display = "block";
         document.getElementById("body-loading").classList.remove("loading-visible")
@@ -62,9 +62,86 @@
 
 </head>
 
-<body onload="setLoading()" >
+<body onload="setLoading()">
+
+  <header class="sticky dark1 mb1 shadow-small">
+    <dx-page-loader template-url="#header2.html"></dx-page-loader>
+  </header>
+
   <div id="body-loading" class="body-loading loading-visible"></div>
   <div id="page">
+
+
+    <section>
+      <table>
+        <caption>People</caption>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Alias</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Name">Chad</td>
+            <td data-label="Surname">Wilberts</td>
+            <td data-label="Alias">MrOne</td>
+          </tr>
+          <tr>
+            <td data-label="Name">Adam</td>
+            <td data-label="Surname">Smith</td>
+            <td data-label="Alias">TheSmith</td>
+          </tr>
+          <tr>
+            <td data-label="Name">Sophia</td>
+            <td data-label="Surname">Canderson</td>
+            <td data-label="Alias">Candee</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <p>This is a <mark class="secondary">secondary highlight</mark> and this is a <mark class="tertiary">tertiary
+            highlight</mark>.</p>
+        <p>This is a highlight styled as a <mark class="tag">tag</mark>.</p>
+        <p><mark class="inline-block">This is some highlighted text that is displayed as an inline block.</mark></p>
+        <span class="toast">This is a toast message!</span>
+
+        <label for="modal-control" class="primary"> Show</label>
+        <input type="checkbox" id="modal-control" class="modal">
+        <div>
+          <div class="card">
+            <label for="modal-control" class="modal-close"></label>
+            <h3 class="section">Modal</h3>
+            <p class="section">This is a modal dialog!</p>
+          </div>
+        </div>
+        <button class="small">Small</button>
+        <button class="large">Large</button>
+
+        <span class="icon-alert"></span>
+        <span class="icon-bookmark"></span>
+        <span class="icon-calendar"></span>
+        <span class="icon-cart"></span>
+        <span class="icon-credit"></span>
+        <span class="icon-edit"></span>
+        <span class="icon-help"></span>
+        <span class="icon-home"></span>
+        <span class="icon-info"></span>
+        <span class="icon-link"></span>
+        <span class="icon-location"></span>
+        <span class="icon-lock"></span>
+        <span class="icon-mail"></span>
+        <span class="icon-phone"></span>
+        <span class="icon-rss"></span>
+        <span class="icon-search"></span>
+        <span class="icon-settings"></span>
+        <span class="icon-share"></span>
+        <span class="icon-upload"></span>
+        <span class="icon-user"></span>
+      </div>
+    </section>
+ 
     <section>
       <div>
         <p> demo-wc 10 Seconds: </p>

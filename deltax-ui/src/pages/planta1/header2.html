@@ -1,0 +1,75 @@
+<template>
+  <div class="nav" style="height: 4rem;">
+    <div class="nav-left">
+      <div class="row only-sm" style="align-items: center;">
+        <label for="drawer-control" class="drawer-toggle persistent"></label>
+        <input type="checkbox" id="drawer-control" class="drawer   persistent">
+        <div>
+          <label for="drawer-control" class="drawer-close"></label>
+
+          <p>Header <strong>hola mundo</strong></p>
+
+          <h3>
+            Fancy display heading
+            <small class="text-muted">With faded secondary text</small>
+          </h3>
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="staticEmail" value="email@example.com">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword">
+            </div>
+          </div>
+          <a href="#home.html">Home</a>
+          <a href="#home2.html">Home2</a>
+          <a href="#tile.html">Tile</a>
+          <a class="active">Link 2</a>
+          <a>Link 3</a>
+          <a class="disable">Link 4</a>
+        </div>
+      </div>
+      <a class="brand px-2 uppercase"  href="#">Delta X</a>
+      <div class="tabs hidden-sm mt-5">
+        <a href="#home.html">Gestion</a>
+        <a href="#home2.html">Proceso</a>
+        <a href="#tile.html">Produccion</a>
+        <a class="px-1 active">Linea 2</a>
+        <a>Link 3</a>
+        <a class="disable">Link 4</a>
+      </div>
+    </div>
+    <div class="nav-right pr-1" style="align-items: center;">
+      <div id="header-switch-theme" class="block">
+        <label class="switch hidden-sm">
+          <input type="checkbox" id="header-ckb-switch-theme">
+          <span class="slider round"></span>
+        </label>
+        <label for="header-ckb-switch-theme" class="icon noselect"></label>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  var el = document.querySelector("#header-switch-theme input[type='checkbox']")
+  var elIcon = document.querySelector("#header-switch-theme label.icon")
+
+  el.checked = window.Common.state.IsDarkMode
+
+  function changeDarkMode() {
+    let isDark = window.Common.state.IsDarkMode
+    if (isDark != el.checked) {
+      window.Common.setDarkMode(el.checked)
+    }
+    elIcon.innerHTML = window.Common.state.IsDarkMode ? "🌙" : "☀️";
+  }
+
+  changeDarkMode()
+  el.onchange = (e) => changeDarkMode()
+
+</script>

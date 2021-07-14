@@ -1,0 +1,130 @@
+.nav .tabs {
+  --nav-tab-color-link: rgba(255, 127, 80, 0.541);
+  --nav-tab-color-active: rgb(247, 92, 36);
+  --nav-tab-back-color-active: rgb(3, 3, 3);
+  --nav-tab-color-disable: #81a2db;
+  --nav-tab-color-hover: #e49f39;
+}
+
+
+.nav {
+  display: flex;
+  min-height: 20px;
+  align-items: stretch;
+}
+
+.nav img {
+  max-height: 3rem;
+}
+
+.nav>.container {
+  display: flex;
+}
+
+.nav-center,
+.nav-left,
+.nav-right {
+  display: flex;
+  flex: 1;
+}
+
+.nav-left {
+  justify-content: flex-start;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.nav-center {
+  justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
+
+  .nav,
+  .nav>.container {
+    flex-direction: column;
+  }
+
+  .nav-center,
+  .nav-left,
+  .nav-right {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.nav a,
+.nav .brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  /* padding: 1rem 2rem; */
+  color: coral;
+}
+
+.nav [aria-current="page"]:not(.button),
+.nav .active:not(.button) {
+  color: #000;
+  /* fallback */
+  color: var(--nav-tab-color-active);
+}
+
+.nav .brand {
+  font-size: 1.75em;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.nav .brand img {
+  padding-right: 1rem;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: -0.25rem;
+}
+
+.tabs a {
+  text-decoration: none;
+}
+
+.tabs>.dropdown>summary,
+.tabs>a {
+  /* padding: 1rem 2rem; */
+  padding: 2px 5px;
+  flex: 0 1 auto;
+  color: var(--nav-tab-color-link);
+  border-bottom: calc(var(--header-border-size)) solid var(--nav-tab-color-link);
+  text-align: center;
+  cursor: pointer;
+}
+
+.nav .tabs>a {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.tabs>a:hover {
+  opacity: 1;
+  color: var(--nav-tab-color-hover);
+  border-bottom: calc(var(--header-border-size)) solid var(--nav-tab-color-hover);
+}
+
+.tabs>a[aria-current="page"],
+.tabs>a.active {
+  color: var(--nav-tab-color-active);
+  background-color: var(--nav-tab-back-color-active);
+  border-color: var(--nav-tab-color-active);
+}
+
+.tabs>a.disable {
+  color: var(--nav-tab-color-disable);
+  border-color: var(--nav-tab-color-disable);
+  cursor: default;
+}
+
+.tabs.is-full a {
+  flex: 1 1 auto;
+}

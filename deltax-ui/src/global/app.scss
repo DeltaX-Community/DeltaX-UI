@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+@import url("./styles/bkp/mini.css");
+@import url("./styles/bkp/extras/extra.css");
+@import url("./styles/bkp/extras/spaces.css");
+@import url("./styles/bkp/extras/switch.css");
+@import url("./styles/bkp/extras/tile.css");
+@import url("./styles/bkp/extras/nav.css");
+
+
+$body-background-color-var: '--body-background-color' !default;
+$input-background-color-var: '--input-background-color' !default;
+
+:root {
+  #{$body-background-color-var}: rgb(129, 26, 26);
+  #{$input-background-color-var}: rgb(131, 211, 26);
+}
+
+:root.dark,
+.dark {
+  #{$body-background-color-var}: rgb(129, 26, 26);
+  #{$input-background-color-var}: rgb(131, 211, 26);
+}

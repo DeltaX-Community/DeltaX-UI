@@ -23,8 +23,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 4px;
-  background-color: var(--back-color);
+  margin: 8px;
+  background-color: var(--input-back-color);
+  border: 1px solid var(--input-border-color);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -37,6 +38,8 @@
   background-color: var(--fore-color);
   -webkit-transition: .4s;
   transition: .4s;
+  top: -5px;
+  left: -5px;
 }
 
 .switch input:checked+.slider {
