@@ -1,0 +1,113 @@
+// Core variables
+$version: "0.5.9";
+
+// Core features
+$rtl: false !default;
+
+// Core colors variables
+$primary-color-var: '--primary-color' !default;
+$primary-color-dark-var: '--primary-color-dark' !default;
+$primary-color-light-var: '--primary-color-light' !default;
+$secondary-color-var: '--secondary-color' !default;
+$secondary-color-dark-var: '--secondary-color-dark' !default;
+$secondary-color-light-var: '--secondary-color-light' !default;
+
+// Gray colors variables
+$dark-color-var: '--dark-color' !default;
+$light-color-var:'--light-color' !default;
+$gray-color-var: '--gray-color' !default;
+$gray-color-dark-var:'--gray-color-dark' !default;
+$gray-color-light-var:'--gray-color-light' !default;
+
+// 
+$border-color-var: '--border-color' !default;
+$border-color-dark-var: '--border-color-dark' !default;
+$border-color-light-var: '--border-color-light' !default;
+$bg-color-var: '--bg-color' !default;
+$bg-color-dark-var: '--bg-color-dark' !default;
+$bg-color-light-var: '--bg-color-light' !default;
+
+// Core colors Default
+$primary-color-def: #5755d9;
+$secondary-color-def: lighten($primary-color-def, 37.5%) !default;
+$dark-color-def: #303742 !default;
+$light-color-def: #fff !default;
+$gray-color-def: lighten($dark-color-def, 55%) !default;
+
+$border-color-def: lighten($dark-color-def, 65%) !default;
+$bg-color-def: lighten($dark-color-def, 75%) !default;
+
+// Control colors
+$success-color-def: #73d9e6 !default;
+$warning-color-def: #ff8800 !default;
+$error-color-def: #e82e00 !default;
+
+// Other colors
+$code-color-def: #d73e48 !default;
+$highlight-color-def: #ffe9b3 !default;
+$body-bg-def:rgb(225, 237, 255) !default;
+$body-font-color-def: lighten($dark-color-def, 5%) !default;
+$link-color-def: $primary-color-def !default;
+
+// Core colors
+:root {
+  #{$primary-color-var}: $primary-color-def;
+  #{$primary-color-dark-var}: darken($primary-color-def, 5%);
+  #{$primary-color-light-var}: lighten($primary-color-def, 6%);
+  #{$secondary-color-var}: $secondary-color-def;
+  #{$secondary-color-dark-var}: darken($secondary-color-def, 5%);
+  #{$secondary-color-light-var}: lighten($secondary-color-def, 6%);
+}
+
+$primary-color: var(#{$primary-color-var}) !default;
+$primary-color-dark: var(#{$primary-color-dark-var}) !default;
+$primary-color-light: var(#{$primary-color-light-var}) !default;
+$secondary-color: var(#{$secondary-color-var}) !default;
+$secondary-color-dark: var(#{$secondary-color-dark-var}) !default;
+$secondary-color-light:var(#{$secondary-color-light-var}) !default;
+
+// Gray colors
+:root {
+  #{$dark-color-var}: $dark-color-def;
+  #{$light-color-var}: $light-color-def;
+  #{$gray-color-var}: $gray-color-def;
+  #{$gray-color-dark-var}: darken($gray-color-def, 30%);
+  #{$gray-color-light-var}: lighten($gray-color-def, 20%);
+}
+
+$dark-color: var(#{$dark-color-var}) !default;
+$light-color: var(#{$light-color-var}) !default;
+$gray-color: var(#{$gray-color-var}) !default;
+$gray-color-dark: var(#{$gray-color-dark-var}) !default;
+$gray-color-light: var(#{$gray-color-light-var}) !default;
+
+//  
+:root {
+  #{$border-color-var}: $border-color-def;
+  #{$border-color-dark-var}: darken($border-color-def, 10%);
+  #{$border-color-light-var}: lighten($border-color-def, 8%);
+  #{$bg-color-var}: $bg-color-def;
+  #{$bg-color-dark-var}: darken($bg-color-def, 3%);
+  #{$bg-color-light-var}: $light-color;
+}
+
+$border-color: var(#{$border-color-var}) !default;
+$border-color-dark: var(#{$border-color-dark-var}) !default;
+$border-color-light: var(#{$border-color-light-var}) !default;
+$bg-color: var(#{$bg-color-var}) !default;
+$bg-color-dark: var(#{$bg-color-dark-var}) !default;
+$bg-color-light: var(#{$bg-color-light-var}) !default;
+
+// Control colors
+$success-color: #32b643 !default;
+$warning-color: #ffb700 !default;
+$error-color: #e9354d !default;
+
+// Other colors
+$code-color: #d73e48 !default;
+$highlight-color: #ffe9b3 !default;
+$body-bg: $bg-color-light !default;
+$body-font-color: lighten($dark-color-def, 5%) !default;
+$link-color: $primary-color-def !default;
+$link-color-dark: mixb($link-color, 15%) !default;
+$link-color-light: mixw($link-color, 15%) !default;

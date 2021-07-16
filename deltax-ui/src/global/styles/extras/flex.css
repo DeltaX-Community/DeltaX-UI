@@ -1,0 +1,36 @@
+ .flex {
+   display: flex;
+   align-items: stretch;
+ }
+
+ .justify-center,
+ .justify-left,
+ .justify-right {
+   display: flex;
+   flex: 1;
+ }
+
+ .justify-left {
+   justify-content: flex-start;
+ }
+
+ .justify-right {
+   justify-content: flex-end;
+ }
+
+ .justify-center {
+   justify-content: center;
+ }
+
+ .align-center {
+   display: flex;
+   align-items: center;
+ }
+
+ .flex .center {
+   align-self: center;
+ }
+
+ .grow-1 {
+   flex-grow: 1;
+ }

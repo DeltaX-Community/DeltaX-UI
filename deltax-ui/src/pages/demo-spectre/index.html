@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+
+  <style>
+    .body-loading {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 200;
+      background-color: rgba(133, 130, 130, 0.9);
+      background-image: url("/assets/img/loading.gif");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 1;
+      transition: opacity 1s linear;
+    }
+
+    .loading-visible {
+      visibility: visible;
+      opacity: 1;
+      transition: none;
+    }
+
+    .loading-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 1s, opacity 1s linear;
+    }
+
+  </style>
+  <script>
+    function setLoading(loading = false) {
+      if (loading) {
+        document.getElementById("body-loading").classList.add("loading-visible")
+        document.getElementById("body-loading").classList.remove("loading-hidden")
+        document.getElementById("body-loading").style.zIndex = 29
+      } else {
+        document.getElementById("page").style.display = "block";
+        document.getElementById("body-loading").classList.remove("loading-visible")
+        document.getElementById("body-loading").classList.add("loading-hidden")
+      }
+    }
+
+    function onLoaded() {
+      document.addEventListener("loading-page", function (e) {
+        setLoading(JSON.parse(e.detail))
+      })
+
+      /*
+      var el = document.querySelector("#header-switch-theme input[type='checkbox']")
+      var elIcon = document.querySelector("#header-switch-theme label.icon")
+
+      el.checked = window.Common.state.IsDarkMode
+
+      function changeDarkMode() {
+        let isDark = window.Common.state.IsDarkMode
+        if (isDark != el.checked) {
+          window.Common.setDarkMode(el.checked)
+        }
+        elIcon.innerHTML = window.Common.state.IsDarkMode ? "🌙" : "☀️";
+      }
+
+      changeDarkMode()
+      el.onchange = (e) => changeDarkMode()
+      */
+    }
+
+  </script>
+
+</head>
+
+<body onload="onLoaded()">
+
+  <header class="navbar" style="position: sticky; top: 0; z-index: 10; background-color: beige;">
+    <div class="navbar-section">
+      <a class="navbar-brand text-bold mr-2" href="#navbar">SPECTRE.CSS</a>
+    </div>
+    <div class="navbar-section" style="flex-direction: column; margin-bottom: -2px;"> 
+      <ul class="tab">
+        <li class="tab-item active"><a class="badge" href="#tabs" data-badge="999">Music</a></li>
+        <li class="tab-item"><a href="#tabs">Playlists</a></li>
+        <li class="tab-item"><a href="#tabs">Radio</a></li>
+      </ul>
+    </div>
+    <div class="navbar-section">
+      <div class="input-group input-inline">
+        <input class="form-input" type="text" placeholder="search">
+        <button class="btn btn-primary input-group-btn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="bar bar-slider">
+    <div class="bar-item" role="progressbar" style="width:25%;">
+      <button class="bar-slider-btn btn" role="slider"></button>
+    </div>
+  </div>
+
+  <!-- range slider -->
+  <div class="bar bar-slider">
+    <div class="bar-item" role="progressbar" style="width:15%;">
+      <button class="bar-slider-btn btn" role="slider"></button>
+    </div>
+    <div class="bar-item" role="progressbar" style="width:65%;">
+      <button class="bar-slider-btn btn" role="slider"></button>
+    </div>
+  </div>
+
+
+  <div class="docs-demo columns">
+    <div class="column col-sm-12">
+      <ul class="tab">
+        <li class="tab-item active"><a class="badge" href="#tabs" data-badge="999">Music</a></li>
+        <li class="tab-item"><a href="#tabs">Playlists</a></li>
+        <li class="tab-item"><a href="#tabs">Radio</a></li>
+      </ul>
+    </div>
+    <div class="column col-sm-12">
+      <ul class="tab tab-block">
+        <li class="tab-item active"><a class="badge" href="#tabs" data-badge="9">Music</a></li>
+        <li class="tab-item"><a class="badge" href="#tabs" data-badge="99">Playlists</a></li>
+        <li class="tab-item"><a href="#tabs">Radio</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="modal modal-lg" id="modal-id">
+    <a href="#close" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+      <div class="modal-header">
+        <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+        <div class="modal-title h5">Modal title</div>
+      </div>
+      <div class="modal-body">
+        <div class="content">
+          Add a container element with the modal class. And add a real container modal-container and overlay
+          modal-overlay inside it. You can add child elements with the modal-header, modal-body and modal-footer - any
+          or all of them.
+
+          Spectre.css does not include JavaScript code, you will need to implement your JS to interact with modals. To
+          make a modal appear, add the active class to the modal container.
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="bar-item" role="progressbar" style="width:65%;">
+          <button class="bar-slider-btn btn" role="slider"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    buttons:
+
+    <button class="button">button</button>
+    <button class="button2">button2</button>
+    <button class="button2 active">button2</button>
+    <button class="button3 ">button3</button>
+    <button class="button3 active">button3</button>
+
+    <button class="btn btn-success">success button</button>
+    <button class="btn btn-error">error button</button>
+
+  </section>
+
+  <section>
+    <div class="form-group">
+      <label class="form-switch">
+        <input type="checkbox">
+        <i class="form-icon"></i> Send me emails with news and tips
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label class="form-checkbox">
+        <input type="checkbox">
+        <i class="form-icon"></i> Remember me
+      </label>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container">
+      <div class="columns">
+        <div class="column col-6">col-6
+          <div class="columns">
+            <div class="column col-6">col-6</div>
+            <div class="column col-6">col-6</div>
+          </div>
+        </div>
+        <div class="column col-6">col-6</div>
+      </div>
+  </section>
+
+  <section>
+    <span class="badge">
+      Notifications
+    </span>
+
+    <span class="badge" data-badge="8">
+      Notifications
+    </span>
+
+    <button class="btn badge" data-badge="8">
+      Button
+    </button>
+
+  </section>
+
+  <section>
+    <ul class="menu">
+      <!-- menu header text -->
+      <li class="divider" data-content="LINKS">
+      </li>
+      <!-- menu item standard -->
+      <li class="menu-item">
+        <a href="#">
+          <i class="icon icon-link"></i> Slack
+        </a>
+      </li>
+      <!-- menu item with form control -->
+      <li class="menu-item">
+        <label class="form-checkbox">
+          <input type="checkbox">
+          <i class="form-icon"></i> form-checkbox
+        </label>
+      </li>
+      <!-- menu divider -->
+      <li class="divider"></li>
+      <!-- menu item with badge -->
+      <li class="menu-item">
+        <a href="#">
+          <i class="icon icon-link"></i> Settings
+        </a>
+        <div class="menu-badge">
+          <label class="label label-primary">2</label>
+        </div>
+      </li>
+
+      <li class="menu-item">
+        <a href="#">My profile</a>
+        <div class="menu-badge">
+          <label class="form-checkbox">
+            <input type="checkbox">
+            <i class="form-icon"></i> Public
+          </label>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <ul class="nav">
+      <li class="nav-item">
+        <a href="#">Elements</a>
+      </li>
+      <li class="nav-item active">
+        <a href="#">Layout</a>
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="#">Flexbox grid</a>
+          </li>
+          <li class="nav-item">
+            <a href="#">Responsive</a>
+          </li>
+          <li class="nav-item">
+            <a href="#">Navbar</a>
+          </li>
+          <li class="nav-item">
+            <a href="#">Empty states</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#">Components</a>
+      </li>
+      <li class="nav-item">
+        <a href="#">Utilities</a>
+      </li>
+    </ul>
+  </section>
+
+
+  <section>
+    <ul class="tab">
+      <li class="tab-item active">
+        <a href="#">
+          Music
+        </a>
+      </li>
+      <li class="tab-item tab-action">
+        <div class="input-group input-inline">
+          <input class="form-input input-sm" type="text">
+          <button class="btn btn-primary btn-sm input-group-btn">Search</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+</body>
+
+</html>

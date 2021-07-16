@@ -1,23 +1,82 @@
 @charset "utf-8";
 
-@import url("./styles/bkp/mini.css");
-@import url("./styles/bkp/extras/extra.css");
-@import url("./styles/bkp/extras/spaces.css");
-@import url("./styles/bkp/extras/switch.css");
-@import url("./styles/bkp/extras/tile.css");
-@import url("./styles/bkp/extras/nav.css");
 
+// darken ~ mix with black function
+@function mixb($variable, $opacity) {
+  @return unquote('linear-gradient(to top,rgba(0, 0, 0,'+ $opacity +'),rgba(0, 0, 0,'+ $opacity + '))'+ $variable);
+}
 
-$body-background-color-var: '--body-background-color' !default;
-$input-background-color-var: '--input-background-color' !default;
+// lighten ~ mix with white function
+@function mixw($variable, $opacity) {
+  @return unquote('linear-gradient(to top,rgba(255, 255, 255,'+ $opacity +'),rgba(255, 255, 255,'+ $opacity + ')) '+ $variable);
+}
+
+$color-x-var: '--color-x' !default;
+$color-primary: rgb(93, 201, 60);
 
 :root {
-  #{$body-background-color-var}: rgb(129, 26, 26);
-  #{$input-background-color-var}: rgb(131, 211, 26);
+  #{$color-x-var}: $color-primary
 }
 
-:root.dark,
-.dark {
-  #{$body-background-color-var}: rgb(129, 26, 26);
-  #{$input-background-color-var}: rgb(131, 211, 26);
+$color-primary2: var(#{$color-x-var});
+
+.button2 {
+  background: $color-primary;
+
+  &:hover,
+  &:focus {
+    background: lighten($color-primary, 50%);
+  }
+
+  &.active {
+    background: darken($color-primary, 50%);
+  }
 }
+
+.button3 {
+  background: $color-primary2;
+
+  &:hover,
+  &:focus {
+    background: mixw($color-primary2, 50%);
+  }
+
+  &.active {
+    background: mixb($color-primary2, 50%);
+  }
+}
+
+@import "styles/spectre.variables.scss";
+@import "../../node_modules/spectre.css/src/spectre.scss"
+
+// @import "./styles/hiq-variables.css";
+// @import "./styles/extras/flex.css";
+// @import "./styles/extras/row-cols.css";
+// @import "./styles/extras/text.css";
+// @import "./styles/extras/spaces.css";
+// @import "./styles/extras/switch.css";
+// @import '../../node_modules/hiq/dist/hiq.css'; 
+
+///  
+/// 
+/// @import url("./styles/bkp/mini.css");
+/// @import url("./styles/bkp/extras/extra.css");
+/// @import url("./styles/bkp/extras/spaces.css");
+/// @import url("./styles/bkp/extras/switch.css");
+/// @import url("./styles/bkp/extras/tile.css");
+/// @import url("./styles/bkp/extras/nav.css");
+/// 
+/// 
+/// $body-background-color-var: '--body-background-color' !default;
+/// $input-background-color-var: '--input-background-color' !default;
+/// 
+/// :root {
+///   #{$body-background-color-var}: rgb(129, 26, 26);
+///   #{$input-background-color-var}: rgb(131, 211, 26);
+/// }
+/// 
+/// :root.dark,
+/// .dark {
+///   #{$body-background-color-var}: rgb(129, 26, 26);
+///   #{$input-background-color-var}: rgb(131, 211, 26);
+/// }

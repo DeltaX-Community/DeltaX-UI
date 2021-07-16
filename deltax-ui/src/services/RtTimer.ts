@@ -9,7 +9,7 @@ export class TimerInterval {
         this.store = createStore({} as { date: Date });
         this.timeout = timeout;
 
-        this.timer = setInterval(() => {
+        this.timer = window.setInterval(() => {
             // console.log("TimerInterval", this.timeout, new Date().toISOString())
             this.store.set('date', new Date())
         }, this.timeout);

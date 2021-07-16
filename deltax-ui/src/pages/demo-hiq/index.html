@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+
+  <style>
+    .body-loading {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 200;
+      background-color: rgba(133, 130, 130, 0.9);
+      background-image: url("/assets/img/loading.gif");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 1;
+      transition: opacity 1s linear;
+    }
+
+    .loading-visible {
+      visibility: visible;
+      opacity: 1;
+      transition: none;
+    }
+
+    .loading-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 1s, opacity 1s linear;
+    }
+
+  </style>
+  <script>
+    function setLoading(loading = false) {
+      if (loading) {
+        document.getElementById("body-loading").classList.add("loading-visible")
+        document.getElementById("body-loading").classList.remove("loading-hidden")
+        document.getElementById("body-loading").style.zIndex = 29
+      } else {
+        document.getElementById("page").style.display = "block";
+        document.getElementById("body-loading").classList.remove("loading-visible")
+        document.getElementById("body-loading").classList.add("loading-hidden")
+      }
+    }
+
+    function onLoaded() {
+      document.addEventListener("loading-page", function (e) {
+        setLoading(JSON.parse(e.detail))
+      })
+
+      var el = document.querySelector("#header-switch-theme input[type='checkbox']")
+      var elIcon = document.querySelector("#header-switch-theme label.icon")
+
+      el.checked = window.Common.state.IsDarkMode
+
+      function changeDarkMode() {
+        let isDark = window.Common.state.IsDarkMode
+        if (isDark != el.checked) {
+          window.Common.setDarkMode(el.checked)
+        }
+        elIcon.innerHTML = window.Common.state.IsDarkMode ? "🌙" : "☀️";
+      }
+
+      changeDarkMode()
+      el.onchange = (e) => changeDarkMode()
+    }
+
+  </script>
+
+</head>
+
+<body onload="onLoaded()">
+
+  <style>
+    .is-stiky {
+      position: sticky;
+      top: 0;
+      background: aquamarine;
+      z-index: 10;
+    }
+
+  </style>
+
+  <header class="is-stiky ">
+    <div class="mb-3 flex">
+      <div  class="center" style="background-color: red;">
+        <span>Hola mundo</span>
+      </div>
+
+      <div class="grow-1 center flex justify-center" style="background-color: blue;">
+        <label class="align-center  mb-0 " for="inputPassword">Password</label>
+        <input type="password" class="form-control m-1" id="inputPassword" style="max-width: 200px; height: 44px;">
+      </div>
+
+      <div class="center" style="background-color: cadetblue;">Hola mundo2</div>
+
+      <div class="  pr-1 align-center" id="header-switch-theme">
+        <label class="switch hidden-sm">
+          <input type="checkbox" id="header-ckb-switch-theme">
+          <span class="slider round"></span>
+        </label>
+        <label for="header-ckb-switch-theme" class="icon noselect" style="margin-bottom: 0;"></label>
+      </div>
+
+    </div>
+  </header>
+  <div class="container is-fluid">
+
+    <section>
+      <button>Button</button>
+      <button type="button">Button</button>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+      <a role="button">Link as button</a>
+      <a class="button">Link with button styling</a>
+      <button type="button" disabled>Disabled</button>
+    </section>
+
+    <section>
+      <fieldset>
+        <legend>Checkboxes</legend>
+        <div class="checkbox">
+          <input type="checkbox" name="checkbox" id="check-option1" value="option1" />
+          <label for="check-option1">Option 1</label>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" name="checkbox" id="check-option2" value="option2" />
+          <label for="check-option2">Option 2</label>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" name="checkbox" id="check-option3" value="option3" disabled />
+          <label for="check-option3">Option 3</label>
+        </div>
+        <div>
+          <label for="range">Range</label>
+          <input type="range" id="range" min="100" max="500" step="10">
+        </div>
+      </fieldset>
+    </section>
+
+    The <code>code</code> element represents a fragment of computer code.
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Column 1</th>
+          <th scope="col">Column 2</th>
+          <th scope="col">Column 3</th>
+          <th scope="col">Column 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Row 1 Cell 1</td>
+          <td>Row 1 Cell 2</td>
+          <td>Row 1 Cell 3</td>
+          <td>Row 1 Cell 4</td>
+        </tr>
+        <tr>
+          <td>Row 2 Cell 1</td>
+          <td>Row 2 Cell 2</td>
+          <td>Row 2 Cell 3</td>
+          <td>Row 2 Cell 4</td>
+        </tr>
+        <tr>
+          <td>Row 3 Cell 1</td>
+          <td>Row 3 Cell 2</td>
+          <td>Row 3 Cell 3</td>
+          <td>Row 3 Cell 4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <form>
+      <fieldset>
+        <legend>Related Fields:</legend>
+        <p>
+          <label>Field 1:</label>
+          <input type="text">
+        </p>
+        <p>
+          <label>Field 2:</label>
+          <input type="text">
+        </p>
+        <p>
+          <label>Field 3:</label>
+          <input type="text">
+        </p>
+      </fieldset>
+    </form>
+
+    <table>
+      <caption>This is a caption for this table.</caption>
+      <thead>
+        <tr>
+          <th scope="col">Column 1</th>
+          <th scope="col">Column 2</th>
+          <th scope="col">Column 3</th>
+          <th scope="col">Column 4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Row 1</th>
+          <td>Row 1 Cell 1</td>
+          <td>Row 1 Cell 2</td>
+          <td>Row 1 Cell 3</td>
+        </tr>
+        <tr>
+          <th scope="row">Row 2</th>
+          <td>Row 2 Cell 1</td>
+          <td>Row 2 Cell 2</td>
+          <td>Row 2 Cell 3</td>
+        </tr>
+        <tr>
+          <th scope="row">Row 3</th>
+          <td>Row 3 Cell 1</td>
+          <td>Row 3 Cell 2</td>
+          <td>Row 3 Cell 3</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="is-size-1">Font size 1</p>
+    <p class="is-size-2">Font size 2</p>
+    <p class="is-size-3">Font size 3</p>
+    <p class="is-size-4">Font size 4</p>
+    <p class="is-size-5">Font size 5</p>
+    <p class="is-size-6">Font size 6</p>
+
+    <ul>
+      <li>Unordered list item 1</li>
+      <li>Unordered list item 2</li>
+      <li>Unordered list item 3
+        <ul>
+          <li>Nested list item 1</li>
+          <li>Nested list item 2</li>
+          <li>Nested list item 3</li>
+        </ul>
+      </li>
+    </ul>
+    <ol>
+      <li>Ordered list item 1</li>
+      <li>Ordered list item 2</li>
+      <li>Ordered list item 3</li>
+    </ol>
+
+
+    <ul>
+      <li>Unordered list item 1</li>
+      <li>Unordered list item 2</li>
+      <li>Unordered list item 3
+        <ul>
+          <li>Nested list item 1</li>
+          <li>Nested list item 2</li>
+          <li>Nested list item 3</li>
+        </ul>
+      </li>
+    </ul>
+    <ol>
+      <li>Ordered list item 1</li>
+      <li>Ordered list item 2</li>
+      <li>Ordered list item 3</li>
+    </ol>
+
+
+  </div>
+
+
+
+</body>
+
+</html>
