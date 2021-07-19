@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="dark" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+  <style>
+    html{ 
+      overflow-x: auto;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header class="dx-header">
+    <div class="dx-header-container">
+      <div class="dx-menu-logo">
+        <img src="/assets/img/avatar.jpg" height="40px" />
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <div>
+      <aside class="dx-aside">
+        <span>Aside</span>
+      </aside>
+    </div>
+
+    <section class="dx-container debugd">
+
+      <div class="tile is-vertical "
+        style="min-height: calc(100vh - 120px); background-color: rgba(243, 152, 33, 0.158);">
+        <div class="tile">
+          <div class="tile is-child   is-6" style="min-width: 1000px;">
+            <form class="m-2 p-2 shadowed" style="--rhythm: 1.2rem;">
+              <h4 class="mt-zero">Payment Information</h4>
+              <label class="field">
+                <input type="text" value="Leroy Jenkins" />
+                <span class="label">Name on Card</span>
+              </label>
+
+              <label class="label">
+                Nombre de Pepe y su Hijo
+              </label>
+
+              <label class="field -no-label">
+                <input type="text" value="1234 5678 9012 3456" />
+              </label>
+
+              <div class="grid -medium ta-right" style="--columns: 2;">
+                <label class="field">
+                  <select>
+                    <option selected="selected">04</option>
+                  </select>
+                  <span class="label" for="select">Exp. Month</span>
+                </label>
+
+                <label class="field">
+                  <select>
+                    <option selected="selected">2024</option>
+                  </select>
+                  <span class="label" for="select">Exp. Year</span>
+                </label>
+
+                <div>
+                  <label class="label">Zipcode</label>
+                  <label class="field -no-label">
+                    <input type="text" value="90210" />
+                  </label>
+                </div>
+
+                <label class="field">
+                  <input type="text" value="123" />
+                  <span class="label">CVV</span>
+                </label>
+
+                <input type="reset" class="button -secondary" value="Reset" />
+                <input type="submit" class="button" value="Submit" />
+              </div>
+            </form>
+          </div>
+          <div class="tile">
+            <div class="m-2 p-2 shadowed" style="background-color:rgba(255, 0, 0, 0.116); flex: content;">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea odio asperiores quis unde tenetur amet nemo
+              accusantium, magnam distinctio modi autem cumque consequatur libero, sapiente accusamus similique corrupti
+              quas voluptate.
+            </div>
+          </div>
+        </div>
+        <div class="tile ">
+          <div class="tile is-6">
+            <div class="m-2 p-2 shadowed" style="background-color:rgba(255, 0, 0, 0.116); flex: content;">
+              3
+            </div>
+          </div>
+          <div class="tile ">
+            <div class="m-2 p-2 shadowed" style="background-color:rgba(255, 0, 0, 0.116); flex: content;">
+              4
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 10px;  border: 2px solid whitesmoke;">
+
+        <div class="tile is-vertical " debug="1-1">
+          <div class="tile " debug="1-1-1">
+            <div class="tile is-child is-4" debug="1-1-1-1">
+              <article class=" bordered shadowed m-2 p-2">
+                <p class="title">asdfasdf...</p>
+                <p class="subtitle">Top tile</p>
+              </article>
+              <article class=" bordered shadowed m-2 p-2">
+                <p class="title">...tiles</p>
+                <p class="subtitle">Bottom tile</p>
+              </article>
+            </div>
+            <div class="tile  " debug="1-1-1-2">
+              <article class="tile is-child">
+                <div class="m-2 p-2  shadowed">
+                  <p class="title">Middle tile</p>
+                  <p class="subtitle">With an image</p>
+                  <figure>
+                    <img src="/assets/img/avatar.jpg" width="640" height="480" style="filter: opacity(0.1);">
+                  </figure>
+                </div>
+              </article>
+              <article class="tile is-child  is-6   ">
+                <div class="m-2 p-2  shadowed">
+                  <p class="title">Wide tile</p>
+                  <p class="subtitle">Aligned with the right tile</p>
+                  <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque
+                      tortor
+                      vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="tile is-child " debug="1-1-2">
+            <div class="tile is-child m-2 p-2 shadowed">
+              <p class="title">Wide tile</p>
+              <p class="subtitle">Aligned with the right tile</p>
+              <div class="content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque
+                  tortor
+                  vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea odio asperiores quis unde tenetur amet nemo
+          accusantium, magnam distinctio modi autem cumque consequatur libero, sapiente accusamus similique corrupti
+          quas
+          voluptate.</p>
+
+        <h1>Hola mundo 1</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt quam reprehenderit assumenda debitis
+          repellendus quisquam odio maxime inventore fugit? Nobis sed maxime reiciendis libero fugit minus ut amet.
+          Molestias, impedit?</p>
+        <div style="height: 600px; width: 400px; background-color: saddlebrown;">
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <footer style="background-color: aqua; bottom: 0px; position: fixed; height: 1.2rem;">
+    <span>Footer</span>
+  </footer>
+</body>
+
+</html>

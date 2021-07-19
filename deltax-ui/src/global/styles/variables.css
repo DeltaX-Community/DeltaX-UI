@@ -1,0 +1,74 @@
+html {
+  --color-primary-shade1: hsl(350, 80%, 60%);
+  --color-primary: hsl(350, 80%, 45%);
+  --color-primary-tint1: hsl(350, 80%, 35%);
+  --color-accent-shade1: hsl(170, 80%, 60%);
+  --color-accent: hsl(170, 80%, 45%);
+  --color-accent-tint1: hsl(170, 80%, 35%);
+  --color-link: hsl(230, 80%, 60%);
+  --color-link-visited: hsl(290, 80%, 60%);
+  --color-link-hover: hsl(230, 60%, 50%);
+  --color-link-active: hsl(350, 60%, 50%);
+  --color-neutral-shade4: hsl(170, 10%, 98%);
+  --color-neutral-shade3: hsl(170, 10%, 94%);
+  --color-neutral-shade2: hsl(170, 10%, 85%);
+  --color-neutral-shade1: hsl(170, 10%, 68%);
+  --color-neutral: hsl(170, 10%, 55%);
+  --color-neutral-tint1: hsl(170, 10%, 41%);
+  --color-neutral-tint2: hsl(170, 10%, 30%);
+  --color-neutral-tint3: hsl(170, 10%, 18%);
+  --color-neutral-tint4: hsl(170, 10%, 2%);
+
+  --color-meter: var(--color-neutral-tint3);
+  --color-bg-meter: var(--color-neutral-shade3);
+  --box-shadow-meter: inset 0px -0.2em 1.5em var(--color-neutral-shade4);
+
+  --font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
+  --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+  --font-heading: var(--font-family);
+  --font-body: var(--font-family);
+
+  --color-bg-body: var(--color-neutral-shade4);
+  --color-body: var(--color-neutral-tint4);
+}
+
+html[data-theme="dark"] {
+  --color-primary-tint1: hsl(350, 80%, 60%);
+  --color-primary: hsl(350, 80%, 45%);
+  --color-primary-shade1: hsl(350, 80%, 35%);
+  --color-accent-tint1: hsl(170, 80%, 60%);
+  --color-accent: hsl(170, 80%, 45%);
+  --color-accent-shade1: hsl(170, 80%, 35%);
+  --color-link: hsl(230, 60%, 50%);
+  --color-link-visited: hsl(290, 60%, 50%);
+  --color-link-hover: hsl(230, 80%, 60%);
+  --color-link-active: hsl(350, 60%, 50%);
+  --color-neutral-tint4: hsl(170, 10%, 98%);
+  --color-neutral-tint3: hsl(170, 10%, 94%);
+  --color-neutral-tint2: hsl(170, 10%, 85%);
+  --color-neutral-tint1: hsl(170, 10%, 68%);
+  --color-neutral: hsl(170, 10%, 55%);
+  --color-neutral-shade1: hsl(170, 10%, 41%);
+  --color-neutral-shade2: hsl(170, 10%, 30%);
+  --color-neutral-shade3: hsl(170, 10%, 18%);
+  --color-neutral-shade4: hsl(170, 10%, 2%);
+
+  --color-meter: var(--color-neutral-tint1);
+  --color-bg-meter: var(--color-neutral-shade3);
+  --box-shadow-meter: inset 0px -0.2em 1.5em var(--color-neutral-shade4);
+}
+
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1.0rem;
+  --space-5: 1.5rem;
+  --space-6: 3.0rem;
+}
+
+body {
+  background-color: var(--color-bg-body);
+  color: var(--color-body);
+  font-family: var(--font-body);
+}

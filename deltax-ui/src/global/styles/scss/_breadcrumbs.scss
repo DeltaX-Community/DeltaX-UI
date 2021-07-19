@@ -1,0 +1,37 @@
+// Breadcrumbs
+.breadcrumb {
+  --color: var(--color-link);
+  --last-child-color: var(--color-link-visited);
+  --separator: "/";
+  --space-1: var(--rhythm-fourth);
+
+  list-style: none;
+  margin: 0;
+
+  .breadcrumb-item {
+    color: var(--color);
+    display: inline-block;
+    margin: 0;
+    padding: var(--space-1) 0;
+
+    &:not(:last-child) {
+      margin-right: var(--space-1);
+
+      a {
+        color: var(--color);
+      }
+    }
+
+    &:last-child a {
+      color: var(--last-child-color) !important;
+    }
+
+    &:not(:first-child) {
+      &::before {
+        color: var(--color);
+        content: var(--separator);
+        padding-right: var(--space-1);
+      }
+    }
+  }
+}

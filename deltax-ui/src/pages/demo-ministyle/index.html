@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" class="dark" data-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+
+  <style>
+    .body-loading {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 200;
+      background-color: rgba(133, 130, 130, 0.9);
+      background-image: url("/assets/img/loading.gif");
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 1;
+      transition: opacity 1s linear;
+    }
+
+    .loading-visible {
+      visibility: visible;
+      opacity: 1;
+      transition: none;
+    }
+
+    .loading-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 1s, opacity 1s linear;
+    }
+
+  </style>
+  <script>
+    function setLoading(loading = false) {
+      if (loading) {
+        document.getElementById("body-loading").classList.add("loading-visible")
+        document.getElementById("body-loading").classList.remove("loading-hidden")
+        document.getElementById("body-loading").style.zIndex = 29
+      } else {
+        document.getElementById("page").style.display = "block";
+        document.getElementById("body-loading").classList.remove("loading-visible")
+        document.getElementById("body-loading").classList.add("loading-hidden")
+      }
+    }
+
+    function onLoaded() {
+      document.addEventListener("loading-page", function (e) {
+        setLoading(JSON.parse(e.detail))
+      })
+
+      /*
+      var el = document.querySelector("#header-switch-theme input[type='checkbox']")
+      var elIcon = document.querySelector("#header-switch-theme label.icon")
+
+      el.checked = window.Common.state.IsDarkMode
+
+      function changeDarkMode() {
+        let isDark = window.Common.state.IsDarkMode
+        if (isDark != el.checked) {
+          window.Common.setDarkMode(el.checked)
+        }
+        elIcon.innerHTML = window.Common.state.IsDarkMode ? "🌙" : "☀️";
+      }
+
+      changeDarkMode()
+      el.onchange = (e) => changeDarkMode()
+      */
+    }
+
+  </script>
+
+</head>
+
+<body onload="onLoaded()">
+
+
+  <style>
+    header.sticky{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+  </style>
+
+<div>
+  <header class="ms-menu sticky" >
+    <div class="ms-menu-logo">
+      <img src="/img/logo.png" />
+    </div>
+    <nav class="ms-menu-link">
+      <input type="checkbox" id="ms-menu-toggle">
+      <label for="ms-menu-toggle" class="ms-menu-icon"><i class="fa fa-bars"></i></label>
+      <ul>
+        <a href="">
+          <li>Home</li>
+        </a>
+        <a href="#">
+          <li>Link 1</li>
+        </a>
+        <a href="#">
+          <li>Link 2</li>
+        </a>
+        <a href="#">
+          <li>Link 3</li>
+        </a>
+        <a href="#">
+          <li>Link 4</li>
+        </a>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="ms-browser m-4">
+    <div class="ms-tab-browser">
+      <span>pepe</span>
+    </div>
+    <div class="ms-content">
+      <div class="ms-tab ms-fullwidth ms-info">
+        <ul>
+          <li><a href="#"><i class="fas fa-igloo"></i> Home</a></li>
+          <li><a href="#" class="ms-active"><i class="far fa-file-word"></i> Doc</a></li>
+          <li><a href="#"><i class="far fa-envelope"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div style="height: 200px; background-color: rgba(168, 102, 54, 0.068);"> </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+  <button class="ms-btn ms-info">ms-info</button>
+  <button class="ms-btn ms-success">ms-success</button>
+  <button class="ms-btn ms-danger">ms-danger</button>
+  <button class="ms-btn ms-warning">ms-warning</button>
+
+  <button class="ms-btn ms-shadow ms-info">ms-info</button>
+  <button class="ms-btn ms-shadow ms-success">ms-success</button>
+  <button class="ms-btn ms-shadow ms-danger">ms-danger</button>
+  <button class="ms-btn ms-shadow ms-warning">ms-warning</button>
+
+  <div class="container">
+
+
+    <div class="row">
+      <div class="ms-breadcrumb ms-background">
+        <ul>
+          <li>Home</li>
+          <li>Buttons</li>
+          <li><a href="#">Colors</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-3">
+      <form>
+        <div class="row">
+          <div class="col-sm">
+            <div class="ms-form-group">
+              <label for="Login">Login</label>
+              <input type="text" placeholder="Login" id="Login">
+            </div>
+            <div class="ms-form-group">
+              <label for="Mail">Mail</label>
+              <input type="text" placeholder="Mail" id="Mail">
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="ms-form-group">
+              <label for="Password">Password</label>
+              <input type="password" placeholder="Password" id="Password">
+            </div>
+            <div class="ms-form-group">
+              <label for="Password">Retype password</label>
+              <input type="password" placeholder="Password" id="Password">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="ms-form-group">
+    <label for="Email"><i class="far fa-envelope-open"></i> Email</label>
+    <input type="email" class="ms-success" id="Email" value="mail@minstyle.io">
+    <span class="ms-under-input ms-text-success">The email is valid.</span>
+  </div>
+
+  <div class="ms-form-group">
+    <label for="Email"><i class="far fa-envelope-open"></i> Email</label>
+    <input type="email" class="ms-danger" id="Email" value="mail@minstyle.io">
+    <span class="ms-under-input ms-text-danger">The email is invalid.</span>
+  </div>
+
+  <div class="ms-form-group">
+    <label for="Email"><i class="far fa-envelope-open"></i> Email</label>
+    <input type="email" class="ms-info" id="Email" value="mail@minstyle.io">
+    <span class="ms-under-input ms-text-info">Thanks...</span>
+  </div>
+
+  <div class="ms-form-group">
+    <label for="Email"><i class="far fa-envelope-open"></i> Email</label>
+    <input type="email" class="ms-warning" id="Email" value="mail@minstyle.io">
+    <span class="ms-under-input ms-text-warning">Email already used.</span>
+  </div>
+</body>
+
+</html>

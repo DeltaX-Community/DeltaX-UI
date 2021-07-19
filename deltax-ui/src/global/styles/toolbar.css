@@ -1,0 +1,13 @@
+.toolbar {
+  background-color: var(--color-neutral-tint4);
+  border-bottom: 1px solid var(--color-neutral-tint1);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  padding: var(--rhythm-half) var(--rhythm);
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}

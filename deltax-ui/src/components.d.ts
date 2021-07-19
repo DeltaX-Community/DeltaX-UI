@@ -20,7 +20,25 @@ export namespace Components {
     }
     interface DxPlotRaw {
     }
+    interface DxRtMeter {
+        "animateColor": string;
+        "animateDuration": string;
+        "bgColor": string;
+        "color": string;
+        "name": string;
+        "size": "xx-small" | "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large";
+        "topicName": string;
+        "unit": string;
+    }
     interface DxRtPlot {
+    }
+    interface DxRtValue {
+        "animateColor": string;
+        "animateDuration": string;
+        "bgColor": string;
+        "color": string;
+        "inline": boolean;
+        "topicName": string;
     }
 }
 declare global {
@@ -42,17 +60,31 @@ declare global {
         prototype: HTMLDxPlotRawElement;
         new (): HTMLDxPlotRawElement;
     };
+    interface HTMLDxRtMeterElement extends Components.DxRtMeter, HTMLStencilElement {
+    }
+    var HTMLDxRtMeterElement: {
+        prototype: HTMLDxRtMeterElement;
+        new (): HTMLDxRtMeterElement;
+    };
     interface HTMLDxRtPlotElement extends Components.DxRtPlot, HTMLStencilElement {
     }
     var HTMLDxRtPlotElement: {
         prototype: HTMLDxRtPlotElement;
         new (): HTMLDxRtPlotElement;
     };
+    interface HTMLDxRtValueElement extends Components.DxRtValue, HTMLStencilElement {
+    }
+    var HTMLDxRtValueElement: {
+        prototype: HTMLDxRtValueElement;
+        new (): HTMLDxRtValueElement;
+    };
     interface HTMLElementTagNameMap {
         "demo-wc": HTMLDemoWcElement;
         "dx-page-loader": HTMLDxPageLoaderElement;
         "dx-plot-raw": HTMLDxPlotRawElement;
+        "dx-rt-meter": HTMLDxRtMeterElement;
         "dx-rt-plot": HTMLDxRtPlotElement;
+        "dx-rt-value": HTMLDxRtValueElement;
     }
 }
 declare namespace LocalJSX {
@@ -70,13 +102,33 @@ declare namespace LocalJSX {
     }
     interface DxPlotRaw {
     }
+    interface DxRtMeter {
+        "animateColor"?: string;
+        "animateDuration"?: string;
+        "bgColor"?: string;
+        "color"?: string;
+        "name"?: string;
+        "size"?: "xx-small" | "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large";
+        "topicName"?: string;
+        "unit"?: string;
+    }
     interface DxRtPlot {
+    }
+    interface DxRtValue {
+        "animateColor"?: string;
+        "animateDuration"?: string;
+        "bgColor"?: string;
+        "color"?: string;
+        "inline"?: boolean;
+        "topicName"?: string;
     }
     interface IntrinsicElements {
         "demo-wc": DemoWc;
         "dx-page-loader": DxPageLoader;
         "dx-plot-raw": DxPlotRaw;
+        "dx-rt-meter": DxRtMeter;
         "dx-rt-plot": DxRtPlot;
+        "dx-rt-value": DxRtValue;
     }
 }
 export { LocalJSX as JSX };
@@ -86,7 +138,9 @@ declare module "@stencil/core" {
             "demo-wc": LocalJSX.DemoWc & JSXBase.HTMLAttributes<HTMLDemoWcElement>;
             "dx-page-loader": LocalJSX.DxPageLoader & JSXBase.HTMLAttributes<HTMLDxPageLoaderElement>;
             "dx-plot-raw": LocalJSX.DxPlotRaw & JSXBase.HTMLAttributes<HTMLDxPlotRawElement>;
+            "dx-rt-meter": LocalJSX.DxRtMeter & JSXBase.HTMLAttributes<HTMLDxRtMeterElement>;
             "dx-rt-plot": LocalJSX.DxRtPlot & JSXBase.HTMLAttributes<HTMLDxRtPlotElement>;
+            "dx-rt-value": LocalJSX.DxRtValue & JSXBase.HTMLAttributes<HTMLDxRtValueElement>;
         }
     }
 }

@@ -1,0 +1,44 @@
+.meter-main {
+  --color: var(--color-meter);
+  --bg-color: var(--color-bg-meter);
+  --animation-opacity: 56;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2em;
+  color: var(--color);
+  background-color: var(--bg-color);
+  box-shadow: var(--box-shadow-meter);
+}
+
+.meter-main:hover,
+.meter-main:focus {
+  filter: sepia(40%) brightness(90%);
+}
+
+.meter-main .value {
+  display: flex;
+  gap: .2em;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: baseline;
+}
+
+.meter-main>.value>.rt-value {
+  font-size: 2.2em;
+  font-weight: 700;
+  flex: 1;
+}
+
+.meter-main .value span {
+  font-size: 1em;
+  margin-left: .2rem;
+}
+
+.meter-main .name {
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0.2em .2em 0.2em;
+}
