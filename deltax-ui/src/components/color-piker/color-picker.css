@@ -1,0 +1,30 @@
+.color-picker {
+  border: 2px solid #afafaf;
+  display: inline-flex;
+  max-width: 175px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.color-picker input {
+  cursor: pointer;
+  border-width: 0;
+  width: 50px;
+  height: 30px;
+}
+
+.color-picker span {
+  padding: 0 10px 0 10px;
+  width: 70px;
+  text-transform: uppercase;
+  color: #afafaf;
+}
+
+.color-picker button {
+  border: none;
+  border-left: 1px solid #afafaf;
+  font-size: 0.9em;
+  width: 30px;
+  height: 25px;
+}

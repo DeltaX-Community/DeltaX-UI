@@ -33,8 +33,11 @@ export class PageLoader {
   getUrlPath(): string {
     let url = this.useHash ? this.locationHash : this.templateUrl
     if (url && url[0] === "#") {
-      return url.substr(1);
+      url = url.substr(1);
     }
+
+    url = url || "home.tpl.html"
+    url = url.endsWith("html") ? url : `${url}.tpl.html`;
     return url || this.defaultTemplateUrl;
   }
 
@@ -59,20 +62,26 @@ export class PageLoader {
     console.log('loadTemplate', url);
     try {
       let res = await fetch(url, { headers: GetHeader() })
-      let tmpl = await res.text()
-      const parser = new DOMParser();
-      const fragment = parser.parseFromString(tmpl, 'text/html');
 
-      // load TEMPLATE
-      const originalTemplate = fragment.getElementsByTagName('TEMPLATE')[0];
-      this.wrapperEl.innerHTML = originalTemplate?.innerHTML || `<div class="load-page-fail">Fail Loading ${url}!</div>`
+      if (res.ok) {
+        let tmpl = await res.text()
+        const parser = new DOMParser();
+        const fragment = parser.parseFromString(tmpl, 'text/html');
 
-      // Load SCRIPT
-      const originalScript = fragment.getElementsByTagName('SCRIPT')[0];
-      if (originalScript) {
-        this.scriptEl = document.createElement('script');
-        this.scriptEl.innerHTML = originalScript.innerHTML;
-        this.wrapperEl.appendChild(this.scriptEl);
+        // load TEMPLATE
+        const originalTemplate = fragment.getElementsByTagName('TEMPLATE')[0];
+        this.wrapperEl.innerHTML = originalTemplate?.innerHTML || `<div class="load-page-fail">Fail Loading page: '${url}'. Template bad format!</div>`
+
+        // Load SCRIPT
+        const originalScript = fragment.getElementsByTagName('SCRIPT')[0];
+        if (originalScript) {
+          this.scriptEl = document.createElement('script');
+          this.scriptEl.innerHTML = originalScript.innerHTML;
+          this.wrapperEl.appendChild(this.scriptEl);
+        }
+      }
+      else {
+        this.wrapperEl.innerHTML = `<div class="load-page-fail">Fail Loading '${url}'. Template not found!</div>`
       }
     }
     finally {

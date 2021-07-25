@@ -6,12 +6,19 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface ColorPicker {
+        "defaultValue": string;
+        "resettable": boolean;
+    }
     interface DemoWc {
         /**
           * The name
          */
         "name": string;
         "timeout": number;
+    }
+    interface DxHeaderBar {
+        "menuUrl": string;
     }
     interface DxPageLoader {
         "defaultTemplateUrl": string;
@@ -40,13 +47,30 @@ export namespace Components {
         "inline": boolean;
         "topicName": string;
     }
+    interface InputWrapper {
+        "label": string;
+        "type": string;
+        "value": string;
+    }
 }
 declare global {
+    interface HTMLColorPickerElement extends Components.ColorPicker, HTMLStencilElement {
+    }
+    var HTMLColorPickerElement: {
+        prototype: HTMLColorPickerElement;
+        new (): HTMLColorPickerElement;
+    };
     interface HTMLDemoWcElement extends Components.DemoWc, HTMLStencilElement {
     }
     var HTMLDemoWcElement: {
         prototype: HTMLDemoWcElement;
         new (): HTMLDemoWcElement;
+    };
+    interface HTMLDxHeaderBarElement extends Components.DxHeaderBar, HTMLStencilElement {
+    }
+    var HTMLDxHeaderBarElement: {
+        prototype: HTMLDxHeaderBarElement;
+        new (): HTMLDxHeaderBarElement;
     };
     interface HTMLDxPageLoaderElement extends Components.DxPageLoader, HTMLStencilElement {
     }
@@ -78,22 +102,40 @@ declare global {
         prototype: HTMLDxRtValueElement;
         new (): HTMLDxRtValueElement;
     };
+    interface HTMLInputWrapperElement extends Components.InputWrapper, HTMLStencilElement {
+    }
+    var HTMLInputWrapperElement: {
+        prototype: HTMLInputWrapperElement;
+        new (): HTMLInputWrapperElement;
+    };
     interface HTMLElementTagNameMap {
+        "color-picker": HTMLColorPickerElement;
         "demo-wc": HTMLDemoWcElement;
+        "dx-header-bar": HTMLDxHeaderBarElement;
         "dx-page-loader": HTMLDxPageLoaderElement;
         "dx-plot-raw": HTMLDxPlotRawElement;
         "dx-rt-meter": HTMLDxRtMeterElement;
         "dx-rt-plot": HTMLDxRtPlotElement;
         "dx-rt-value": HTMLDxRtValueElement;
+        "input-wrapper": HTMLInputWrapperElement;
     }
 }
 declare namespace LocalJSX {
+    interface ColorPicker {
+        "defaultValue"?: string;
+        "onColor-changed"?: (event: CustomEvent<any>) => void;
+        "resettable"?: boolean;
+    }
     interface DemoWc {
         /**
           * The name
          */
         "name"?: string;
+        "onInput-change"?: (event: CustomEvent<any>) => void;
         "timeout"?: number;
+    }
+    interface DxHeaderBar {
+        "menuUrl"?: string;
     }
     interface DxPageLoader {
         "defaultTemplateUrl"?: string;
@@ -122,25 +164,37 @@ declare namespace LocalJSX {
         "inline"?: boolean;
         "topicName"?: string;
     }
+    interface InputWrapper {
+        "label"?: string;
+        "onValueChange"?: (event: CustomEvent<any>) => void;
+        "type"?: string;
+        "value"?: string;
+    }
     interface IntrinsicElements {
+        "color-picker": ColorPicker;
         "demo-wc": DemoWc;
+        "dx-header-bar": DxHeaderBar;
         "dx-page-loader": DxPageLoader;
         "dx-plot-raw": DxPlotRaw;
         "dx-rt-meter": DxRtMeter;
         "dx-rt-plot": DxRtPlot;
         "dx-rt-value": DxRtValue;
+        "input-wrapper": InputWrapper;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "color-picker": LocalJSX.ColorPicker & JSXBase.HTMLAttributes<HTMLColorPickerElement>;
             "demo-wc": LocalJSX.DemoWc & JSXBase.HTMLAttributes<HTMLDemoWcElement>;
+            "dx-header-bar": LocalJSX.DxHeaderBar & JSXBase.HTMLAttributes<HTMLDxHeaderBarElement>;
             "dx-page-loader": LocalJSX.DxPageLoader & JSXBase.HTMLAttributes<HTMLDxPageLoaderElement>;
             "dx-plot-raw": LocalJSX.DxPlotRaw & JSXBase.HTMLAttributes<HTMLDxPlotRawElement>;
             "dx-rt-meter": LocalJSX.DxRtMeter & JSXBase.HTMLAttributes<HTMLDxRtMeterElement>;
             "dx-rt-plot": LocalJSX.DxRtPlot & JSXBase.HTMLAttributes<HTMLDxRtPlotElement>;
             "dx-rt-value": LocalJSX.DxRtValue & JSXBase.HTMLAttributes<HTMLDxRtValueElement>;
+            "input-wrapper": LocalJSX.InputWrapper & JSXBase.HTMLAttributes<HTMLInputWrapperElement>;
         }
     }
 }

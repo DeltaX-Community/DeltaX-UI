@@ -10,7 +10,6 @@ export class TimerInterval {
         this.timeout = timeout;
 
         this.timer = window.setInterval(() => {
-            // console.log("TimerInterval", this.timeout, new Date().toISOString())
             this.store.set('date', new Date())
         }, this.timeout);
         this.store.set('date', new Date())

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" data-theme="dark2" lang="en">
+<html dir="ltr" data-theme="dark21" lang="en">
 
 <head>
   <meta charset="utf-8" />
@@ -9,209 +9,38 @@
   <script type="module" src="/build/app.esm.js"></script>
   <script nomodule src="/build/app.js"></script>
   <link href="/build/app.css" rel="stylesheet">
-
+ 
+  <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body>
 
-  <section class="container">
-    <div class="ms-menu" style="position: sticky; top: 0;">
-      <div class="ms-menu-logo">
-        <p>MinStyle.io</p>
-      </div>
+  <div class="dx-header-bar">
+    <dx-header-bar></dx-header-bar>
+  </div>
 
-    </div>
-    <div>
-      <p> demo-wc 10 Seconds: </p>
-      <demo-wc first="first" timeout="10000"></demo-wc>
-    </div>
+  <div class="container p-2">
 
-    <div>
+    <!-- AlpineJs
+    <div x-data="{ open: false, color:'' }">
+      <button x-on:click="open = ! open">
+        Toggle
+      </button>
+      <span x-text="new Date().getFullYear()"></span>
+      <span x-text="open"></span>
+      <span x-text="color"></span>
 
-      <div class="ms-browser">
-        <div class="ms-tab-browser">
-          <h3>dx-meter</h3>
-          <div class="ms-tab ms-error">
-            <ul>
-              <li class="ms-logo"><a href="#"><img src="/img/logo.png" alt="Logo"></a></li>
-              <li><a href="#" class="ms-active">Soccer</a></li>
-              <li><a href="#">Basket-ball</a></li>
-              <li><a href="#">Baseball</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="ms-content">
-          <div class="grid" style="--box-shadow-meter: transparent"> 
-            <dx-rt-meter animate-duration="500ms" bg-color="rgba(51, 65, 85)" color="white" animate-color="#ffff0022"
-              topic-name="simulation/countGood"></dx-rt-meter>
-            <dx-rt-meter animate-duration="500ms" bg-color="#a01111" color="white" name="Buenas" size="small"
-              topic-name="simulation/countGood"></dx-rt-meter>
-            <dx-rt-meter animate-duration="500ms" bg-color="#1b055a" color="white" size="x-small" animate-color="teal"
-              name="Malas" unit="[mts/seg]" topic-name="simulation/countBad"></dx-rt-meter>
-            <dx-rt-meter size="x-small" name="Malas2"  style="--color-neutral-shade4: red" topic-name="simulation/countBad"></dx-rt-meter>
-          </div>
-         
-          <div class="grid"  >
-            <dx-rt-meter animate-duration="500ms" bg-color="rgba(51, 65, 85)" color="white" animate-color="#ffff0022"
-              topic-name="simulation/countGood"></dx-rt-meter>
-            <dx-rt-meter animate-duration="500ms" bg-color="#a01111" color="white" name="Buenas" size="small"
-              topic-name="simulation/countGood"></dx-rt-meter>
-            <dx-rt-meter animate-duration="500ms" bg-color="#1b055a" color="white" size="x-small" animate-color="teal"
-              unit="[mts/seg]" topic-name="simulation/NA"></dx-rt-meter>
-            <dx-rt-meter size="x-small" name="Malas2"  style="--color-neutral-shade4: red" topic-name="simulation/countBad"></dx-rt-meter>
-          </div>
-        </div>
-      </div>
-    </div>
+      <color-picker x-model="color"></color-picker>
+      <color-picker x-on:color-changed="console.log($event.currentTarget)">Pepe value</color-picker>
 
+      <demo-wc first="first" x-model="color" timeout="10000" x-on:input-change="console.log($event.currentTarget)">
+      </demo-wc>
 
-    <div class="ms-browser">
-      <div class="ms-content">
-        <form>
-          <div class="row">
-            <div class="col-sm">
-              <div class="ms-form-group">
-                <label for="Login">Login</label>
-                <input type="text" placeholder="Login" id="Login">
-              </div>
-              <div class="ms-form-group">
-                <label for="Mail">Mail</label>
-                <input type="text" placeholder="Mail" id="Mail">
-              </div>
-            </div>
-            <div class="col-sm">
-              <div class="ms-form-group">
-                <label for="Password">Password</label>
-                <input type="password" placeholder="Password" id="Password">
-              </div>
-              <div class="ms-form-group">
-                <label for="Password">Retype password</label>
-                <input type="password" placeholder="Password" id="Password">
-              </div>
-            </div>
+      <input-wrapper x-model="color" x-on:input="console.log($event.currentTarget)" ></input-wrapper>
+    </div> -->
 
-          </div>
-          <div class="row" style="background-color: red; margin: 0 0px;">
-            <button class="ms-btn ms-success ms-medium" style="flex: 1;">Register</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-
-    <div>
-      <h3>dx-rt-value</h3>
-      <p><b>simulation/lineSpeed:</b>
-        <dx-rt-value animate-duration="200ms" topic-name="simulation/lineSpeed"></dx-rt-value>
-      </p>
-      <p>
-        <b>countGood:</b>
-        <div style=" display: block; width: 300px; height: 80px; border: 3px solid rgba(27, 5, 90, 0.514); ">
-          <dx-rt-value inline='false' bg-color="green" animate-color="yellowgreen" style="font-size: 40px;"
-            topic-name="simulation/countGood"></dx-rt-value>
-        </div>
-        <div style=" display: block; width: 300px; height: 80px; border: 3px solid rgba(245, 120, 74, 0.514); border-radius: 20px; overflow: hidden; ">
-          <dx-rt-value inline='false' bg-color="blue" animate-color="aqua" style="font-size: 40px;"
-            topic-name="simulation/countBad"></dx-rt-value>
-        </div>
-
-        <div style=" display: block; max-width: 300px; height: 60px; border: 3px solid rgb(0, 0, 0); ">
-          <dx-rt-value inline='false' style="font-size: 30px;" animate-duration="500ms"
-            topic-name="simulation/countBad"></dx-rt-value>
-        </div>
-      </p>
-
-      Align width grid <span style="display: grid; width: 400px; height: 80px; background-color: red; padding: 2px;">
-        <span style=" text-align: center; vertical-align: middle;  background-color: yellowgreen;">
-          value</span>
-      </span>
-
-      <div style="background-color: rebeccapurple; padding: 4px;">
-        <div
-          style="font-size: 4rem; background-color: aqua;  display: inline-block; margin: 2px; padding: 2px; box-sizing: border-box; ">
-          <p>Hola mundo 2</p>
-        </div>
-        <div style="font-size: 2rem; background-color: aquamarine;">
-          Hola mundo 2
-        </div>
-      </div>
-    </div>
-
-    <div style="position: relative; width: 50vw; height: 200px; ">
-      <dx-plot-raw></dx-plot-raw>
-    </div>
-
-    <div>
-      <div class="column  ">
-        <form class="form-horizontal" action="#forms">
-          <div class="form-group">
-            <div class="col-3 col-sm-12">
-              <label class="form-label" for="input-example-4">Name</label>
-            </div>
-            <div class="col-9 col-sm-12">
-              <input class="form-input" id="input-example-4" type="text" placeholder="Name">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-3 col-sm-12">
-              <label class="form-label" for="input-example-5">Email</label>
-            </div>
-            <div class="col-9 col-sm-12">
-              <input class="form-input" id="input-example-5" type="email" placeholder="Email">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-3 col-sm-12">
-              <label class="form-label">Gender</label>
-            </div>
-            <div class="col-9 col-sm-12">
-              <label class="form-radio">
-                <input type="radio" name="gender"><i class="form-icon"></i> Male
-              </label>
-              <label class="form-radio">
-                <input type="radio" name="gender" checked=""><i class="form-icon"></i> Female
-              </label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-3 col-sm-12">
-              <label class="form-label">Source</label>
-            </div>
-            <div class="col-9 col-sm-12">
-              <select class="form-select" multiple="">
-                <option>Slack</option>
-                <option>Skype</option>
-                <option>Hipchat</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-9 col-sm-12 col-ml-auto">
-              <label class="form-switch">
-                <input type="checkbox"><i class="form-icon"></i> Send me emails with news and tips
-              </label>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-3 col-sm-12">
-              <label class="form-label" for="input-example-6">Message</label>
-            </div>
-            <div class="col-9 col-sm-12">
-              <textarea class="form-input" id="input-example-6" placeholder="Textarea" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-9 col-sm-12 col-ml-auto">
-              <label class="form-checkbox">
-                <input type="checkbox"><i class="form-icon"></i> Remember me
-              </label>
-            </div>
-          </div>
-        </form>
-      </div>
-
-    </div>
-  </section>
+    <dx-page-loader use-hash="true"></dx-page-loader>
+  </div>
 
 </body>
 

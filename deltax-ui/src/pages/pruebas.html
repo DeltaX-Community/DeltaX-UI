@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html dir="ltr" data-theme="dark2" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/app.esm.js"></script>
+  <script nomodule src="/build/app.js"></script>
+  <link href="/build/app.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <section class="container">
+    <div class="ms-menu" style="position: sticky; top: 0;">
+      <div class="ms-menu-logo">
+        <p>MinStyle.io</p>
+        <a href="/index.html" >Main</a>
+      </div>
+
+    </div>
+    <div>
+      prueba flex:
+      <div class="flex">
+        <div style="background-color: red;">item 1</div>
+        <div class="panel-browser">
+          <div class="container">esto es container</div>
+        </div>
+      </div>
+      prueba flex space-around:
+      <div class="flex justify-space-around">
+        <div style="background-color: red;">item 1</div>
+        <div class="panel-browser">
+          <div class="container">esto es container</div>
+        </div>
+      </div>
+      flex stretch:
+      <div class="flex justify-stretch gap-4 m-4">
+        <div class="dark panel-browser">
+          <div class="header">Esto es header</div>
+          <div class="container">
+            esto es container con texto
+            <dx-rt-meter size="x-small" name="Malas2" style="--color-neutral-shade4: red"
+              topic-name="simulation/countBad"></dx-rt-meter>
+          </div>
+        </div>
+        <div class=" panel-browser col-4">1</div>
+        <div class="panel-browser" style="width: 500px;">
+          <div class="header">Esto es header</div>
+          <div class="container">
+            esto es container 500px
+            <dx-rt-meter size="x-small" name="Malas2" style="--color-neutral-shade4: red"
+              topic-name="simulation/countBad"></dx-rt-meter>
+          </div>
+        </div>
+      </div>
+
+      stretch with grid:
+      <div class="grid gap-1">
+        <div class="panel-browser">
+          <div class="header">Esto es header</div>
+          <div class="container">esto es container</div>
+        </div>
+        <div class="panel-browser"></div>
+        <div class="panel-browser"></div>
+      </div>
+
+      stretch with row
+      <div class="row">
+        <div class="col-4">.col-4</div>
+        <div class="col-4">.col-4</div>
+        <div class="col-4">.col-4</div>
+      </div>
+
+
+      flex space-between:
+      <div class="flex justify-space-between">
+        <div>item 1</div>
+        <div class="panel-browser">
+          <div class="header">Esto es header</div>
+          <div class="container">esto es container</div>
+        </div>
+      </div>
+
+      flex justify-end
+      <div class="flex justify-end">
+        <div>item 1</div>
+        <div class="panel-browser">
+          <div class="header">Esto es header</div>
+          <div class="container">esto es container</div>
+        </div>
+      </div>
+
+
+
+      <p> demo-wc 10 Seconds: </p>
+      <demo-wc first="first" timeout="10000"></demo-wc>
+
+      <div class="grid -md">
+        <div class="grid">
+          <p>Hola mundo col 1</p>
+          <p>Hola mundo col 2</p>
+        </div>
+        <div class="grid">
+          <p>Hola mundo row 2 col 1</p>
+          <p>Hola mundo row 2 col 2</p>
+        </div>
+      </div>
+
+      Ahora: grid 3 columnas
+      <div class="grid -md" style="--columns:1">
+        <div class="row-span-1"> 1</div>
+        <div class="row-span-4 p-4" style="background-color: red; height: 50px;">row 1 col 2 con padding 4</div>
+        <div>row 2 col 1</div>
+        <div class="row-span-3 m-4" style="background-color: rgb(56, 165, 42) ;">row 2 col 2 con margin 4</div>
+      </div>
+
+
+      Ahora: grid con columnas distintos tamaños
+      <div class="grid -md" style="--columns: 5">
+        <div
+          style="background-color: aqua; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+          <div style="background-color: red;">Título 1</div>
+        </div>
+        <div class="col-span-4" style="margin: 20px; background-color: red; height: 50px;">row 1 col 2 span 4</div>
+        <div>Título 2</div>
+        <div>val 2 1</div>
+        <div>val 2 2</div>
+        <div>val 2 3</div>
+        <div>val 2 4</div>
+        <div>Título 3</div>
+        <div style="background-color: rgb(56, 165, 42) ;  width: 500px; ">row 2 col 2 span 2</div>
+        <!-- <div>fill col 4</div> -->
+        <!-- <div>fill col 5</div> -->
+      </div>
+
+      Ahora: Tile distintos tamaños
+      <div class="tile">
+        <div class="tile is-vertical">
+          <div style="  background-color: red; height: 50px;">
+            row 1 col 2 span 4
+          </div>
+          <div style="  background-color: rgb(0, 255, 157);  ">
+            row 1 col 2 span 4
+          </div>
+        </div>
+        <div class="tile is-vertical">
+          <div style="  background-color: red; height: 50px;">
+            row 1 col 2 span 4
+          </div>
+          <div style="  background-color: rgb(0, 255, 157);  ">
+            row 1 col 2 span 4
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="pepe">pepe</div>
+
+      <div class="ms-browser">
+        <div class="ms-tab-browser">
+          <h3>dx-meter</h3>
+          <div class="ms-tab ms-error">
+            <ul>
+              <li class="ms-logo"><a href="#"><img src="/img/logo.png" alt="Logo"></a></li>
+              <li><a href="#" class="ms-active">Soccer</a></li>
+              <li><a href="#">Basket-ball</a></li>
+              <li><a href="#">Baseball</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="ms-content">
+          <div class="grid" style="--box-shadow-meter: transparent">
+            <dx-rt-meter animate-duration="500ms" bg-color="rgba(51, 65, 85)" color="white" animate-color="#ffff0022"
+              topic-name="simulation/countGood"></dx-rt-meter>
+            <dx-rt-meter animate-duration="500ms" bg-color="#a01111" color="white" name="Buenas" size="small"
+              topic-name="simulation/countGood"></dx-rt-meter>
+            <dx-rt-meter animate-duration="500ms" bg-color="#1b055a" color="white" size="x-small" animate-color="teal"
+              name="Malas" unit="[mts/seg]" topic-name="simulation/countBad"></dx-rt-meter>
+            <dx-rt-meter size="x-small" name="Malas2" style="--color-neutral-shade4: red"
+              topic-name="simulation/countBad"></dx-rt-meter>
+          </div>
+
+          <div class="grid -md">
+            <dx-rt-meter animate-duration="500ms" bg-color="rgba(51, 65, 85)" color="white" animate-color="#ffff0022"
+              topic-name="simulation/countGood"></dx-rt-meter>
+            <dx-rt-meter animate-duration="500ms" bg-color="#a01111" color="white" name="Buenas" size="small"
+              topic-name="simulation/countGood"></dx-rt-meter>
+            <dx-rt-meter animate-duration="500ms" bg-color="#1b055a" color="white" size="x-small" animate-color="teal"
+              unit="[mts/seg]" topic-name="simulation/NA"></dx-rt-meter>
+            <dx-rt-meter size="x-small" name="Malas2" style="--color-neutral-shade4: red"
+              topic-name="simulation/countBad"></dx-rt-meter>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ms-browser">
+      <div class="ms-content">
+        <form>
+          <div class="row">
+            <div class="col-sm">
+              <div class="ms-form-group">
+                <label for="Login">Login</label>
+                <input type="text" placeholder="Login" id="Login">
+              </div>
+              <div class="ms-form-group">
+                <label for="Mail">Mail</label>
+                <input type="text" placeholder="Mail" id="Mail">
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="ms-form-group">
+                <label for="Password">Password</label>
+                <input type="password" placeholder="Password" id="Password">
+              </div>
+              <div class="ms-form-group">
+                <label for="Password">Retype password</label>
+                <input type="password" placeholder="Password" id="Password">
+              </div>
+            </div>
+
+          </div>
+          <div class="row" style="background-color: red; margin: 0 0px;">
+            <button class="ms-btn ms-success ms-medium" style="flex: 1;">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <div>
+      <h3>dx-rt-value</h3>
+      <p><b>simulation/lineSpeed:</b>
+        <dx-rt-value animate-duration="200ms" topic-name="simulation/lineSpeed"></dx-rt-value>
+      </p>
+      <p>
+        <b>countGood:</b>
+        <div style=" display: block; width: 300px; height: 80px; border: 3px solid rgba(27, 5, 90, 0.514); ">
+          <dx-rt-value inline='false' bg-color="green" animate-color="yellowgreen" style="font-size: 40px;"
+            topic-name="simulation/countGood"></dx-rt-value>
+        </div>
+        <div
+          style=" display: block; width: 300px; height: 80px; border: 3px solid rgba(245, 120, 74, 0.514); border-radius: 20px; overflow: hidden; ">
+          <dx-rt-value inline='false' bg-color="blue" animate-color="aqua" style="font-size: 40px;"
+            topic-name="simulation/countBad"></dx-rt-value>
+        </div>
+
+        <div style=" display: block; max-width: 300px; height: 60px; border: 3px solid rgb(0, 0, 0); ">
+          <dx-rt-value inline='false' style="font-size: 30px;" animate-duration="500ms"
+            topic-name="simulation/countBad"></dx-rt-value>
+        </div>
+      </p>
+
+      Align width grid <span style="display: grid; width: 400px; height: 80px; background-color: red; padding: 2px;">
+        <span style=" text-align: center; vertical-align: middle;  background-color: yellowgreen;">
+          value</span>
+      </span>
+
+      <div style="background-color: rebeccapurple; padding: 4px;">
+        <div style=" background-color: aqua;  margin: 10px; padding: 1px; ">
+          Hola mundo 2
+        </div>
+        <div style="font-size: 2rem; background-color: aquamarine;">
+          Hola mundo 2
+        </div>
+      </div>
+    </div>
+
+    <div style="position: relative; width: 50vw; height: 200px; ">
+      <dx-plot-raw></dx-plot-raw>
+    </div>
+
+    <div>
+      <div class="column  ">
+        <form class="form-horizontal" action="#forms">
+          <div class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="input-example-4">Name</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <input class="form-input" id="input-example-4" type="text" placeholder="Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="input-example-5">Email</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <input class="form-input" id="input-example-5" type="email" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label">Gender</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <label class="form-radio">
+                <input type="radio" name="gender"><i class="form-icon"></i> Male
+              </label>
+              <label class="form-radio">
+                <input type="radio" name="gender" checked=""><i class="form-icon"></i> Female
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label">Source</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <select class="form-select" multiple="">
+                <option>Slack</option>
+                <option>Skype</option>
+                <option>Hipchat</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-9 col-sm-12 col-ml-auto">
+              <label class="form-switch">
+                <input type="checkbox"><i class="form-icon"></i> Send me emails with news and tips
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-3 col-sm-12">
+              <label class="form-label" for="input-example-6">Message</label>
+            </div>
+            <div class="col-9 col-sm-12">
+              <textarea class="form-input" id="input-example-6" placeholder="Textarea" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-9 col-sm-12 col-ml-auto">
+              <label class="form-checkbox">
+                <input type="checkbox"><i class="form-icon"></i> Remember me
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>
+        <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">.col-md-6 .offset-md-3</div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+// Example
+/*
+<div class="dropdown -left">
+  <span>Mouse over -left</span> 
+  <div class="dropdown-content">
+     <div class="dropdown-effect-demo">
+       <p>Hello World!</p>
+    </div>
+  </div>
+</div>
+*/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: #09f9f9;
+
+  .-left .dropdown-content {
+    right: 0px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+  }
+
+  :hover .dropdown-content {
+    display: block;
+    z-index: 1;
+  }
+
+  /*
+  .dropdown-effect-demo {
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 0.2rem 0.4rem;
+    margin-top: 0.2rem;
+    right: 0px;
+  }
+  */
+}

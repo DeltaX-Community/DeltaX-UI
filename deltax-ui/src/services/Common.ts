@@ -24,7 +24,9 @@ class CommonClass {
             darkMode = JSON.parse(lsDark) == true
         }
 
-        document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
+        let htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.toggle("dark", darkMode)
+        htmlEl.setAttribute("data-theme", darkMode ? "dark" : "light");
         this.store.set("IsDarkMode", darkMode)
     }
 
@@ -33,7 +35,10 @@ class CommonClass {
     }
 
     public setDarkMode(darkMode = true) {
-        document.getElementsByTagName('html')[0].classList.toggle("dark", darkMode)
+        let htmlEl = document.getElementsByTagName('html')[0];
+        htmlEl.classList.toggle("dark", darkMode)
+        htmlEl.setAttribute("data-theme", darkMode ? "dark" : "light");
+
         localStorage.setItem('IsDarkMode', JSON.stringify(darkMode))
         this.store.set("IsDarkMode", darkMode)
     }

@@ -1,0 +1,36 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg-body);
+  color: var(--color-body);
+  font-family: var(--font-body);
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+} 
+
+a,
+b,
+del,
+em,
+i,
+ins,
+q,
+span,
+strong,
+u {
+  font-size: 1em
+}

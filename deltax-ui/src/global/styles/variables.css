@@ -23,15 +23,21 @@ html {
   --color-bg-meter: var(--color-neutral-shade3);
   --box-shadow-meter: inset 0px -0.2em 1.5em var(--color-neutral-shade4);
 
+  --color-bg-body: var(--color-neutral-shade4);
+  --color-body: var(--color-neutral-tint2);
+
+  --box-shadow1: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade1);
+  --box-shadow2: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade2);
+  --box-shadow3: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade3);
+  --box-shadow4: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade4);
+
   --font-family: 'Avenir', 'Avenir Next', 'Helvetica Neue', 'Segoe UI', 'Verdana', sans-serif;
   --font-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
   --font-heading: var(--font-family);
   --font-body: var(--font-family);
-
-  --color-bg-body: var(--color-neutral-shade4);
-  --color-body: var(--color-neutral-tint4);
 }
 
+.dark,
 html[data-theme="dark"] {
   --color-primary-tint1: hsl(350, 80%, 60%);
   --color-primary: hsl(350, 80%, 45%);
@@ -53,22 +59,30 @@ html[data-theme="dark"] {
   --color-neutral-shade3: hsl(170, 10%, 18%);
   --color-neutral-shade4: hsl(170, 10%, 2%);
 
-  --color-meter: var(--color-neutral-tint1);
+  --color-meter: var(--color-neutral-tint3);
   --color-bg-meter: var(--color-neutral-shade3);
   --box-shadow-meter: inset 0px -0.2em 1.5em var(--color-neutral-shade4);
+
+  --color-bg-body: #22272e;
+  --color-body: #b7c4d1;
+
+  --box-shadow1: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade1);
+  --box-shadow2: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade2);
+  --box-shadow3: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade3);
+  --box-shadow4: 0.1rem 0.1rem 0.3rem 0.1rem var(--color-neutral-shade4);
 }
 
 :root {
+  /* spaces */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1.0rem;
   --space-5: 1.5rem;
   --space-6: 3.0rem;
-}
 
-body {
-  background-color: var(--color-bg-body);
-  color: var(--color-body);
-  font-family: var(--font-body);
+  /* grid */
+  --universal-margin: .5rem;
+  --universal-padding: .5rem;
+  --universal-border-radius: .125rem;
 }

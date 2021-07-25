@@ -74,13 +74,9 @@ export function GetTopicHistory(
         lastSeconds,
         strictMode,
     } = Object.assign(
-        {},
         {
-            beginDateTime: null,
-            endDateTime: null,
             maxPoints: 1000,
             lastSeconds: 60,
-            strictMode: null,
         },
         options
     );

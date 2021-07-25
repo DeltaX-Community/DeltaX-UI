@@ -1,0 +1,40 @@
+{
+    "title": "Planta1",
+    "home": "#home.html",
+    "header": "#header.html",
+    "logoHtml": "<i class='fas fa-sun text-xl lg:text-4xl'></i>",
+    "items": [
+        {
+            "title": "Planta 2",
+            "url": "#planta1.html",
+            "color": "green",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Area 2",
+            "url": "#area2.html",
+            "color": "aqua",
+            "icon": "fas fa-home"
+        } ,
+        {
+            "title": "Linea 2",
+            "url": "#linea2.html",
+            "color": "blue",
+            "icon": "fas fa-home"
+        }
+    ],
+    "tabs": [
+        {
+            "title": "Operaciones1",
+            "url": "#operaciones.html",
+            "color": "#220000",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Operaciones2",
+            "url": "#operaciones2.html",
+            "color": "#330000",
+            "icon": "fas fa-home"
+        }
+    ]
+}

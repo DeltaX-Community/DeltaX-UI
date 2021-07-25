@@ -9,17 +9,35 @@
 // @import "./styles/grid.css";
 // @import "./styles/spaces.css";
 
-@import "styles/variables.css";
-// @import "styles/cuestrap.css";
-@import "styles/normalize.css";
-// @import "../../node_modules/spectre.css/src/variables";
-// @import "../../node_modules/spectre.css/src/normalize";
-// @import "./styles-bkp/bkp/mini-dark.css";
+// @import "styles/variables.css";
+// @import "styles/external/normalize.css";
+// @import "styles/base.css";
+// @import "styles/deltax.css";
 
-@import "styles/deltax.css";
-@import "styles/spaces.css";
-@import "styles/grid.css";
-@import "styles/tile.css";
+// @import "styles-bkp/bkp/mini.css";
+// @import "../../node_modules/spectre.css/dist/spectre.css";
+@import "../../node_modules/@primer/css/index.scss";
+
+
+// @import "../../node_modules/minstyle.io/css/minstyle.io.css";
+// @import "styles/layout/grid.css";
+// @import "../../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+
+// @import "styles/layout/spaces.css";
+// @import "styles/layout/tile.css";
+// @import "styles/layout/flex.css";
+// @import "styles/layout/containers.css";
+// @import "styles/elements/breadcrumbs";
+
+
+// @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+// @import "../../node_modules/tailwindcss/base.css";
+
+// @import "styles/deltax.css";
+// @import "styles/spaces.css";
+
+// @import "styles/tile.css";
 // @import "styles/scss/_breadcrumbs.scss";
 // @import "../../node_modules/bootstrap/dist/css/bootstrap-grid.css";
 // @import "../../node_modules/spectre.css/src/spectre.scss";
