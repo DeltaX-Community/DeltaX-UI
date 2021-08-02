@@ -16,11 +16,10 @@ export class RtMeter {
   @Prop() animateDuration: string = "1s";
 
   get style() {
-    return {
-      "--color": this.color || "var(--color-meter);",
-      "--bg-color": this.bgColor || "var(--color-bg-meter);",
-      "font-size": this.size || "medium"
-    }
+    let style = { "font-size": this.size || "medium" }
+    if (this.color) style["--rt-meter-color"] = this.color
+    if (this.bgColor) style["--rt-meter-bg-color"] = this.bgColor
+    return style;
   }
 
   render() {
@@ -38,7 +37,7 @@ export class RtMeter {
           </div>
 
           {this.unit &&
-            <span>
+            <span class="unit">
               {this.unit}
             </span>
           }

@@ -1,0 +1,61 @@
+{
+    "title": "Planta1",
+    "home": "#home",
+    "header": "#header",
+    "logoHtml": "<i class='fas fa-sun text-xl lg:text-4xl'></i>",
+    "items": [
+        {
+            "title": "Planta 2",
+            "url": "#planta1.html", 
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Area 2",
+            "url": "#area2.html",
+            "icon": "fas fa-home"
+        } ,
+        {
+            "title": "Linea 2",
+            "url": "#linea2.html", 
+            "icon": "fas fa-home"
+        }
+    ],
+    "tabs": [
+        {
+            "title": "Home",
+            "url": "#home",
+            "color": "orange",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Gestion de Producto",
+            "url": "#gestion",
+            "color": "#AA0000",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Operaciones Locas",
+            "url": "#operaciones",
+            "color": "#00AA00",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Tile Layout",
+            "url": "#tile",
+            "color": "aqua",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Estados",
+            "url": "#estados",
+            "color": "aqua",
+            "icon": "fas fa-home"
+        },
+        {
+            "title": "Input",
+            "url": "#input",
+            "color": "green",
+            "icon": "fas fa-home"
+        }
+    ]
+}

@@ -1,0 +1,359 @@
+<template>
+  <style>
+    .panels {
+      grid-template-rows: max-content auto;
+      min-height: calc(100vh - 105px);
+      --gap: 0.2rem;
+    }
+
+
+    @media (min-height: 1000px) {
+      .panels {
+        grid-template-rows: 2fr 3fr;
+      }
+    }
+
+    .panels .spark {
+      height: 40px;
+      position: relative;
+    }
+
+  </style>
+  <div class="panels grid grid-lg columns-2">
+
+    <div class="panel-browser m-1 border color-shadow-medium  ">
+      <div class="header">
+        <div class="grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
+          <div>
+            Estado Marcha Parada
+          </div>
+          <dx-rt-label topic-name="={simulation/prueba}==1">
+            <div slot="0" class="label red">Parada</div>
+            <div slot="1" class="label grey">Parada</div>
+          </dx-rt-label>
+          <dx-rt-label topic-name="={simulation/prueba}==1">
+            <span slot="0" class="label grey">Marcha</span>
+            <span slot="1" class="label green">Marcha</span>
+          </dx-rt-label>
+        </div>
+      </div>
+      <div class="container grid columns-1" style="--gap:0.5em; grid-template-rows: max-content max-content auto ;">
+        <div class="grid m-2" style="--gap:0.5rem">
+          <dx-rt-meter name="Totales" animate-color="#FFFFFF11" topic-name="simulation/countTotal"></dx-rt-meter>
+          <dx-rt-meter name="Buenas" color="var(--color-auto-green-8)" animate-color="#44FF3311" topic-name="simulation/countGood">
+          </dx-rt-meter>
+          <dx-rt-meter name="Malas" color="#FF3322" animate-color="#44FF3311" topic-name="simulation/countBad">
+          </dx-rt-meter>
+        </div>
+        <div class="grid center m-2"
+          style="--gap:0.5rem; grid-template-columns: max-content auto 50px max-content; font-size: large; font-weight: 600;">
+
+          <div>En Marcha</div>
+          <div class="spark">
+            <dx-rt-plot realtime="1" interval="2000" spark="true"
+              tags='[{"tagName": "simulation/running", "color": "#22FF44", "fill": "#22FF4444", "scaleOption": {"range": [-0.02, 1.02]} }]'>
+            </dx-rt-plot>
+          </div>
+          <dx-rt-value topic-name="=round({process_info/UI.Server/AliveMs}/123.456, 0)">
+          </dx-rt-value>
+          <span>Min</span>
+
+          <div>Tiempo desde Ultima Parada</div>
+          <div class="spark">
+            <dx-rt-plot realtime="1" interval="2000" tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs"}]'
+              spark="true">
+            </dx-rt-plot>
+          </div>
+          <dx-rt-value topic-name="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
+          <span>Min</span>
+
+          <div>Velocidad de linea</div>
+          <div class="spark">
+            <dx-rt-plot realtime="1" interval="2000" tags='[{"tagName": "simulation/lineSpeed"}]' spark="true">
+            </dx-rt-plot>
+          </div>
+          <dx-rt-value animate-color="transparent" topic-name="=round({simulation/lineSpeed}, 1)"></dx-rt-value>
+          <span>Min</span>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-browser m-1 border color-shadow-medium  ">
+      <div class="container grid">
+        <div style="position: relative; min-height: 200px;">
+          <dx-rt-plot realtime="1" interval="200" slice="true" legend-floated="true"
+            tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs", "color":"red"}]'>
+          </dx-rt-plot>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-browser m-1 border color-shadow-medium">
+      <div class="header">
+        <div>
+          Tabla de prueba
+        </div>
+      </div>
+      <div class="container flex p-0">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Superpower</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Luther</td>
+                <td>Super-strength</td>
+                <td>luther@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Diego</td>
+                <td>Telekinesis</td>
+                <td>diego@umbrella.eduasfdiego@umbrella.edudiego@umbrella.edudiego@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Klaus</td>
+                <td>Seance</td>
+                <td>klaus@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Five</td>
+                <td>Time-travel</td>
+                <td>five@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Ben</td>
+                <td>Inter-dimensional monster</td>
+                <td>ben@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Vanya</td>
+                <td>Apocalyptic destruction</td>
+                <td>vanya@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Reginald</td>
+                <td>[Spoiler] powers</td>
+                <td>reginald@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Pogo</td>
+                <td>Human communication</td>
+                <td>pogo@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Cha-Cha</td>
+                <td>Ruthlessness</td>
+                <td>chacha@temps.comm</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Hazel</td>
+                <td>Compassion</td>
+                <td>hazel@temps.comm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-browser m-1 border color-shadow-medium">
+      <div class="container grid">
+        <div style="position: relative; min-height: 200px;">
+          <dx-rt-plot realtime="1" interval="200" slice="true"
+            tags='[{"tagName": "simulation/lineSpeed", "color": "#22FF44", "fill": "#22FF4411", "scaleOption": {"range": [-0.02, 800.02]} }]'>
+          </dx-rt-plot>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+
+</script>

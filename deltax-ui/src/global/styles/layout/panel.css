@@ -1,0 +1,40 @@
+/* VARIABLES */
+html {
+  /* --browser-bg-color: var(--color-counter-primary-bg);
+  --browser-bg-content-color: var(--color-counter-primary-bg); */
+  --browser-bg-color: var(--color-bg-canvas-inverse);
+  --browser-bg-content-color: var(--color-bg-tertiary);
+  --browser-radius: 0.2rem;
+}
+
+html.dark {
+  --browser-bg-color: var(--color-bg-tertiary);
+  --browser-bg-content-color: var(--color-bg-tertiary);
+}
+
+.panel-browser {
+  background-color: var(--color-header-bg);
+  /* border: 4px solid var(--browser-bg-color); */
+  border-radius: var(--browser-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0.5em;
+}
+
+.panel-browser>.header {
+  background-color: var(--color-header-bg);
+  color: var(--color-header-text);
+  font-size: large;
+  font-weight: bold;
+  padding: 0.4rem;
+  align-items: center;
+}
+
+.panel-browser>.container {
+  flex-basis: 100%;
+  background-color: var(--browser-bg-content-color);
+  padding: 0.4rem;
+  margin: 0;
+}

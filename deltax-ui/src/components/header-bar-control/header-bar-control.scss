@@ -1,0 +1,19 @@
+.dx-header-bar-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dx-header-bar-control summary {
+  font-size: 1.1rem;
+}
+
+.dx-header-bar-control .dropdown-menu a {
+  cursor: pointer;
+}
+
+.dx-header-bar-control .time {
+  font-size: xx-large;
+  font-weight: 900;
+  width: 140px;
+}

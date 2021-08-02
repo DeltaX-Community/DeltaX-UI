@@ -1,0 +1,184 @@
+<template>
+  <style>
+    .panels {
+      grid-template-rows: max-content auto;
+      min-height: calc(100vh - 105px);
+      --gap: 0.2rem;
+    }
+
+
+    @media (min-height: 1000px) {
+      .panels {
+        grid-template-rows: 2fr 3fr;
+      }
+    }
+
+    .panels .spark {
+      height: 40px;
+      position: relative;
+    }
+
+    .form-field {
+      --form-field-margin-top: 1em;
+      position: relative;
+      /* margin-top:  calc(1*var(--form-field-margin-top)); */
+      /* margin-top: 0.2em; */
+      /* font-size: 16px; */
+    }
+
+    .form-field input {
+      display: grid;
+      width: 100%;
+      padding-top: var(--form-field-margin-top);
+      /* padding-bottom: calc(0.45*var(--form-field-margin-top) ); */
+      /* margin: 0; */
+      /* padding: var(--form-field-margin-top) 0.2em 0.2em 0.2em; */
+      /* background-color: var(--color-input-bg);
+      color: var(--color-text-primary); */
+    }
+
+    .form-field label {
+      position: absolute;
+      /* top: var(--form-field-margin-top); */
+      top: var(--form-field-margin-top);
+      left: 0.4em;
+      padding: 0 0.4em;
+      /* line-height: 1em; */
+      transition: 250ms;
+      border-radius: 0.3em;
+      /* color: var(--color-text-primary); */
+    }
+
+    .form-field input:focus+label,
+    .form-field input[placeholder]+label,
+    .form-field input:not([value=""])+label {
+      transform: translate(0, calc(-1.8*var(--form-field-margin-top)));
+      font-size: 0.9em;
+      background-color: var(--color-input-bg);
+      border: 1px solid var(--color-input-border);
+      /* background-color: var(--color-input-bg); */
+      /* color: var(--color-text-primary); */
+    }
+
+    .form-field input:focus+label {
+      /* color: var(--color-state-focus-border); */
+    }
+
+
+    .field4 .helper1 {
+      top: 0;
+      left: 0;
+      transform: translate(1.25em, 2.75em) scale(1);
+      transform-origin: 0 0;
+      color: #b8b8c1;
+      font-size: 1.25em;
+      font-weight: 600;
+      opacity: 1;
+      pointer-events: none;
+      transition: transform .2s ease-out;
+    }
+
+    .field4:hover .helper1 {
+      transform: translate(1.25em, 2.25em) scale(.7);
+    }
+
+  </style>
+  <div class="panels grid grid-lg columns-2">
+
+    <div class="panel-browser m-1 border color-shadow-medium  ">
+      <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
+
+      </div>
+      <div class="container grid columns-1" style="--gap:0.5em; grid-template-rows: max-content max-content auto ;">
+
+
+
+        <form>
+          <div class="form-field">
+            <input class="form-control" type="email" id="email4" placeholder="Ingrese un correo electronico"
+              onkeyup="this.setAttribute('value', this.value);" />
+            <label for="email4">Email</label>
+          </div>
+
+          <label for="name">Name</label>
+          <input class="form-control" type="text" id="name" />
+
+          <label for="email">Email address</label>
+          <input class="form-control" type="email" id="email" />
+
+          <label> <input type="checkbox" /> Remember me </label>
+
+          <label> <input type="radio" id="potato" name="radio-group-example" checked /> Potato </label>
+          <label> <input type="radio" id="tomato" name="radio-group-example" /> Tomato </label>
+
+          <button class="btn" type="submit">Submit</button>
+        </form>
+
+        <form>
+          <div class="grid mt-4 columns-1" style="--gap: 0.1em;">
+            <dx-input-field label="Contraseña" type="password" min="4" max="20" placeholder="Escriba la contraseña"></dx-input-field>
+            <dx-input-field label="Confirmación de contraseña" expected="asdf" required
+              expected-error="las contraseñas no coinciden" type="password"
+              placeholder="Vuelva a escribir la contraseña"></dx-input-field>
+            <dx-input-field label="El Label 2 " type="email" placeholder="Ingrese el correo electrónico">
+            </dx-input-field>
+            <dx-input-field label="El Label Numerico 55" value="55" type="number" min="2" max="20" required>
+            </dx-input-field>
+            <dx-input-field label="El  expected" type="number" expected="6" expected-error2="que cargaste" min="2"
+            placeholder="Ingrese un numero"
+              max="20" required> </dx-input-field>
+            <dx-input-field label="El Label Numerico" type="number" value="56" readonly min="2" max="20" required >
+            </dx-input-field>
+            <input value="1" type="date" min="2" max="20">
+            <input value="1" type="datetime" min="2" max="20">
+            <input value="1" type="datetime-local" min="2" max="20">
+            <input value="1" type="time" min="2" max="20">
+            <input value="1" type="tel" min="2" max="20">
+            <input value="1" type="number" min="2" max="20">
+            <input value="1" type="month" min="2" max="20">
+            <input value="1" type="password" min="2" max="20">
+            <input value="1" type="text" min="2" max="20">
+            <input value="1" type="textarea" min="2" max="20">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panel-browser m-1 border color-shadow-medium  ">
+      <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
+      </div>
+      <div class="container grid columns-1" style="--gap:0.5em; grid-template-rows: max-content max-content auto ;">
+        <form class="pb-6">
+          <div class="pb-6 form-group errored">
+            <div class="form-group-header">
+              <label for="username-input">Username</label>
+            </div>
+            <div class="form-group-body">
+              <input class="form-control" type="text" value="monalisa" id="username-input"
+                aria-describedby="username-input-validation" />
+            </div>
+            <p class="note error" id="username-input-validation">monalisa is not available. monalisa-beep,
+              monalisa-cyber, or monalisa87 are available.</p>
+          </div>
+          <div class="mt-8 form-group errored">
+            <div class="form-field">
+              <input class="form-control" type="email" id="username4" value="monalisa"
+                onkeyup="this.setAttribute('value', this.value);" aria-describedby="username-input-validation" />
+              <label for="username4">Username</label>
+            </div>
+
+            <p class="note error" id="username-input-validation">monalisa is not available. monalisa-beep,
+              monalisa-cyber, or monalisa87 are available.</p>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+
+  </div>
+</template>
+
+<script>
+
+</script>

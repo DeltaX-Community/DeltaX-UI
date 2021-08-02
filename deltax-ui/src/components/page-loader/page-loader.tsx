@@ -1,5 +1,5 @@
-import { Component, Prop, Listen, Element, h } from '@stencil/core';
-import { GetHeader } from "../../api/request"
+import { Component, Prop, Listen, Watch, Element, h } from '@stencil/core';
+import api from "../../api/request"
 
 @Component({
   tag: 'dx-page-loader',
@@ -10,7 +10,7 @@ export class PageLoader {
 
   @Element() element: HTMLElement;
 
-  @Prop() templateUrl = "";
+  @Prop({ reflect: true }) templateUrl = "";
   @Prop() useHash = false;
   @Prop() defaultTemplateUrl = 'home.html';
 
@@ -48,7 +48,18 @@ export class PageLoader {
     this.loadTemplate()
   }
 
+  unload() {
+    console.log("Unload")
+    if (this.scriptEl) {
+      this.scriptEl.remove()
+    }
+  }
+
+  @Watch("templateUrl")
   async loadTemplate() {
+
+    this.unload()
+
     let url = this.getUrlPath();
     if (!url) {
       this.wrapperEl.innerHTML = `<p>Page URL not provided...</p>`
@@ -61,7 +72,7 @@ export class PageLoader {
 
     console.log('loadTemplate', url);
     try {
-      let res = await fetch(url, { headers: GetHeader() })
+      let res = await fetch(url, { headers: api.GetHeader() })
 
       if (res.ok) {
         let tmpl = await res.text()

@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+@import "./styles/deltax.css";
+@import "./styles/primer.css";
+@import "./styles/layout/tile.css";
+@import "./styles/layout/grid.css";
+@import "./styles/layout/panel.css";
+@import "./styles/layout/table.css";
 
 // @import "../../node_modules/spectre.css/src/spectre.scss";
 
@@ -15,8 +21,7 @@
 // @import "styles/deltax.css";
 
 // @import "styles-bkp/bkp/mini.css";
-// @import "../../node_modules/spectre.css/dist/spectre.css";
-@import "../../node_modules/@primer/css/index.scss";
+// @import "../../node_modules/spectre.css/dist/spectre.css"; 
 
 
 // @import "../../node_modules/minstyle.io/css/minstyle.io.css";

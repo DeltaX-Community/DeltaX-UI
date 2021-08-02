@@ -5,10 +5,11 @@
   right: 0px;
   bottom: 0px;
   left: 0px;
+  display: grid;
   /* overflow: hidden; */
   position: absolute;
   z-index: 1;
-  background-color: rgb(199, 199, 199);
+  background-color: rgba(209, 213, 218, 0.2);
 }
 
 .plot-plot {
@@ -22,5 +23,5 @@
 }
 
 .dark .plot-wrapper {
-  background-color: rgb(32, 32, 32);
+  background-color: rgba(32, 32, 32, 20%);
 }

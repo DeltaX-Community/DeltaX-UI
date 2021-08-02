@@ -1,6 +1,5 @@
 import { Component, Prop, State, h, Listen } from '@stencil/core';
-import RtTimer from '../../services/RtTimer';
-import { Get } from "../../api/request"
+import api from "../../api/request"
 
 
 export interface IItem {
@@ -34,29 +33,19 @@ var defaultMenu: IHeaderMenu = {
   shadow: false,
 })
 export class HeaderBar {
-  private timeout: number = 1000;
 
   @Prop() menuUrl: string = 'menu.json';
-  @State() date: Date;
   @State() menu: IHeaderMenu = defaultMenu;
   @State() currentTab: IItem;
 
   componentWillLoad() {
-    this.loadTimer();
     this.getMenu();
   }
 
-  loadTimer() {
-    let timer = RtTimer.get(this.timeout);
-    timer.subscribe((d) => {
-      this.date = d
-    })
-    this.date = timer.state.date
-  }
-
   getMenu() {
-    Get<IHeaderMenu>(this.menuUrl).then(json => {
+    api.Get<IHeaderMenu>(this.menuUrl).then(json => {
       this.menu = Object.assign({}, defaultMenu, json);
+      console.log("The menu:", this.menu)
       this.updateCurrentTab();
     });
   }
@@ -81,22 +70,34 @@ export class HeaderBar {
   }
 
   renderBreadcrumb(items: IItem[]) {
-    return items.map(item => {
-      return (
-        <li class="breadcrumb-item" style={
-          { "--color": item.color, "--last-child-color": item.color }}>
-          <a href={item.url} >{item.title}</a>
-        </li>
-      )
+    const len = items.length;
+    return items.map((item, idx) => {
+      if (len > idx + 1) {
+        return (
+          <li class="breadcrumb-item pr-1" style={
+            { "--color-text-link": item.color || "var(--color-header-text)" }}>
+            <a href={item.url} >{item.title}</a>
+          </li>
+        )
+      }
+      else {
+        return (
+          <li class="breadcrumb-item" style={{ "color": item.color || "var(--color-header-logo)" }} aria-current="page">
+            {item.title}
+          </li>
+        )
+      }
     })
   }
 
   render() {
     return (
       <div class="dx-header-bar header">
-        <div class="logo"></div>
-        <div class="items flex">
-          <div class="grow-4 flex flex-md gap-3 items-center ">
+        <div class="logo">
+          <img alt="Antares Technologies" src="/assets/img/logo-antares.png" />
+        </div>
+        <div class="items">
+          <div >
             {/* <div>{this.menu.title}</div> */}
             <div class="breadcrumb">
               {this.renderBreadcrumb(this.menu.items)}
@@ -110,7 +111,7 @@ export class HeaderBar {
           </div>
         </div>
         <div class="controls">
-          <span><b> {this.date.toLocaleTimeString()}</b></span>
+          <dx-header-bar-control></dx-header-bar-control>
         </div>
       </div>
     );

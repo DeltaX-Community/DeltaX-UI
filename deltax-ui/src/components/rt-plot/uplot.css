@@ -1,0 +1,205 @@
+.uplot,
+.uplot *,
+.uplot *::before,
+.uplot *::after {
+  box-sizing: border-box;
+}
+
+.uplot {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.5;
+  width: min-content;
+  position: relative;
+}
+
+.u-title {
+  text-align: left;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(75, 75, 75);
+}
+
+
+.dark .u-title {
+  color: rgb(207, 207, 207);
+}
+
+.u-wrap {
+  position: relative;
+  user-select: none;
+}
+
+.u-over,
+.u-under {
+  position: absolute;
+}
+
+.u-under {
+  overflow: hidden;
+}
+
+.uplot canvas {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.u-legend {
+  font-size: 14px;
+  margin: auto;
+  text-align: center;
+  /*Agregado*/
+
+  /* 
+    position: absolute;
+    border-radius: 4px;
+    width: 100%;
+    top: -16px;
+    left: 2px;
+    background: rgba(255, 249, 245, 0.76);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4); 
+    */
+}
+
+.float-legend {
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  border-radius: 4px;
+  background: rgba(255, 249, 245, 0.76);
+  /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4); */
+}
+
+
+
+.dark .float-legend {
+  background: rgba(57, 56, 61, 0.76);
+  /* box-shadow: 0px 0px 4px rgba(163, 163, 163, 0.4); */
+  /* color: rgb(207, 207, 207); */
+}
+
+.u-inline {
+  display: block;
+}
+
+.u-inline * {
+  display: inline-block;
+}
+
+.u-inline tr {
+  margin-right: 16px;
+}
+
+.u-legend th {
+  font-weight: 600;
+}
+
+.u-legend th>* {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.u-legend .u-marker {
+  width: 1em;
+  height: 1em;
+  margin-right: 4px;
+  background-clip: content-box !important;
+}
+
+.u-inline.u-live th::after {
+  content: ":";
+  vertical-align: middle;
+}
+
+.u-inline:not(.u-live) .u-value {
+  display: none;
+}
+
+.u-series>* {
+  padding: 4px;
+}
+
+.u-series th {
+  cursor: pointer;
+}
+
+.u-legend .u-off>* {
+  opacity: 0.3;
+}
+
+.u-select {
+  background: rgba(0, 0, 0, 0.07);
+  position: absolute;
+  pointer-events: none;
+}
+
+.u-cursor-x,
+.u-cursor-y {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 1;
+}
+
+.u-hz .u-cursor-x,
+.u-vt .u-cursor-y {
+  height: 100%;
+  border-right: 1px dashed #607D8B;
+}
+
+.u-hz .u-cursor-y,
+.u-vt .u-cursor-x {
+  width: 100%;
+  border-bottom: 1px dashed #607D8B;
+}
+
+.u-cursor-pt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  z-index: 1;
+  /*this has to be !important since we set inline "background" shorthand */
+  background-clip: content-box !important;
+}
+
+.u-select.u-off,
+.u-cursor-x.u-off,
+.u-cursor-y.u-off,
+.u-cursor-pt.u-off {
+  display: none;
+}
+
+.u-legend {
+  font-size: 12px;
+  padding: 2px 2px 4px 2px;
+  display: block;
+}
+
+.u-legend .u-series th {
+  text-align: left;
+}
+
+.u-series>* {
+  padding: 0 4px;
+}
+
+tr.u-series {
+  margin: 0;
+  padding: 0;
+}
+
+td.u-value {
+  font-weight: 700;
+}
+
+.u-hz .u-cursor-x {
+  border-right: 1px dashed rgb(207, 57, 57);
+}

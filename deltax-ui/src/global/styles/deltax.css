@@ -4,6 +4,58 @@
   z-index: 1000;
 }
 
+:root {
+  --rt-meter-color: var(--color-bg-canvas-inverse);
+  --rt-meter-bg-color: var(--color-counter-bg);
+}
+
+[data-color-mode="dark"] {
+  --rt-meter-bg-color: var(--color-bg-secondary);
+}
+
+.dx-label.red,
+dx-rt-label .label.red {
+  --bg-color: red;
+}
+
+.dx-label.green,
+dx-rt-label .label.green {
+  --bg-color: green;
+}
+
+
+.dx-label.grey,
+dx-rt-label .label.grey {
+  --bg-color: rgba(95, 95, 95, 0.712);
+  --color: rgba(209, 209, 209, 0.651);
+}
+
+.dx-label,
+dx-rt-label .label {
+  --color: white;
+  --bg-color: green;
+  box-sizing: border-box;
+  border: 0.1em solid var(--color);
+  background-color: var(--bg-color);
+  color: var(--color);
+  font-size: 0.9em;
+  line-height: 1.3em;
+  padding: 0.1em 0.5em;
+  font-weight: bold;
+  border-radius: 0.1em;
+  text-transform: uppercase;
+  cursor: default;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dx-label.small,
+dx-rt-label .label.small {
+  font-size: 10px;
+}
+
 /*  
 .toolbar>.header {
   --font-size: 1rem;

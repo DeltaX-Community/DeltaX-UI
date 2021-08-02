@@ -49,6 +49,7 @@ const colorPalette = [
 
 
 // converts the legend into a simple tooltip
+
 function moveLegendAsTooltipPlugin(className: string = "") {
     let legendEl;
     let overEl;
@@ -114,7 +115,7 @@ export class Plot {
         syncCursor: boolean = false) {
 
         this.defaultAxes = {
-            stroke: dark ? "#c7d0d9" : "#3c3245",
+            stroke: dark ? "#d7e0e9" : "#1c121F",
             grid: {
                 stroke: "#5c526550",
                 width: 1
@@ -190,7 +191,7 @@ export class Plot {
             this.options.cursor.show = false
         }
         else {
-            this.options.plugins.push(moveLegendAsTooltipPlugin())
+            // this.options.plugins.push(moveLegendAsTooltipPlugin())
         }
 
         if (syncCursor) {
@@ -207,6 +208,10 @@ export class Plot {
         this.seriesDataString = {}
         this.xValues = [];
         this.seriesData = [this.xValues]
+    }
+
+    public setFloatTooltip() {
+        this.options.plugins.push(moveLegendAsTooltipPlugin())
     }
 
     public init(el: HTMLElement) {

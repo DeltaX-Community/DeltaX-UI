@@ -1,46 +1,69 @@
 
 import { createStore } from "@stencil/store";
 
+export type ThemesType = "light" | "dark" | "dark_dimmed"
 
 class CommonClass {
     private store = createStore({
-        IsDarkMode: false
+        "data-theme": "light" as ThemesType
     });
 
-    constructor(darkMode = false) {
+
+    constructor() {
+        let theme: ThemesType = "dark";
         // detect default mode from media device
         if (window.matchMedia) {
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                darkMode = true
+                theme = "dark"
             }
             else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                darkMode = false
+                theme = "light";
             }
         }
 
         // read config from local storage
-        var lsDark = localStorage.getItem('IsDarkMode')
-        if (lsDark) {
-            darkMode = JSON.parse(lsDark) == true
+        const dataTheme = localStorage.getItem('data-theme');
+        if (dataTheme) {
+            theme = dataTheme as ThemesType
         }
 
-        let htmlEl = document.getElementsByTagName('html')[0];
-        htmlEl.classList.toggle("dark", darkMode)
-        htmlEl.setAttribute("data-theme", darkMode ? "dark" : "light");
-        this.store.set("IsDarkMode", darkMode)
+        this.setTheme(theme, false);
     }
 
     public get state() {
         return this.store.state;
     }
 
-    public setDarkMode(darkMode = true) {
-        let htmlEl = document.getElementsByTagName('html')[0];
-        htmlEl.classList.toggle("dark", darkMode)
-        htmlEl.setAttribute("data-theme", darkMode ? "dark" : "light");
+    public get IsDarkMode() {
+        return this.store.state["data-theme"] !== "light";
+    }
 
-        localStorage.setItem('IsDarkMode', JSON.stringify(darkMode))
-        this.store.set("IsDarkMode", darkMode)
+    public setTheme(theme: ThemesType, reload = true) {
+        let htmlEl = document.getElementsByTagName('html')[0];
+
+        if (theme == "light") {
+            htmlEl.setAttribute("data-color-mode", "light");
+            htmlEl.setAttribute("data-light-theme", "light");
+            htmlEl.removeAttribute("data-dark-theme")
+        }
+        else if (theme == "dark") {
+            htmlEl.setAttribute("data-color-mode", "dark");
+            htmlEl.setAttribute("data-dark-theme", "dark");
+            htmlEl.removeAttribute("data-light-theme")
+        }
+        else if (theme == "dark_dimmed") {
+            htmlEl.setAttribute("data-color-mode", "dark");
+            htmlEl.setAttribute("data-dark-theme", "dark_dimmed");
+            htmlEl.removeAttribute("data-light-theme")
+        }
+
+        htmlEl.classList.toggle("dark", theme !== "light");
+        localStorage.setItem('data-theme', theme);
+        this.store.set("data-theme", theme);
+
+        if (reload) {
+            window.location.reload();
+        }
     }
 }
 

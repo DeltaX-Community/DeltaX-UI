@@ -5,6 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Column, Row } from "./components/data-table/data-table";
+import { TType } from "./components/input-field/input-field";
 export namespace Components {
     interface ColorPicker {
         "defaultValue": string;
@@ -17,8 +19,32 @@ export namespace Components {
         "name": string;
         "timeout": number;
     }
+    interface DxDataTable {
+        "columns": Column[] | string;
+        "name": string;
+        "rows": Row[] | string;
+    }
     interface DxHeaderBar {
         "menuUrl": string;
+    }
+    interface DxHeaderBarControl {
+    }
+    interface DxInputField {
+        "disabled": boolean;
+        "expected": string;
+        "expectedError": string;
+        "isAlphanumeric": boolean;
+        "isWord": boolean;
+        "label": string;
+        "max"?: number;
+        "min"?: number;
+        "placeholder": string;
+        "readonly": boolean;
+        "regex": string;
+        "required": boolean;
+        "trim": boolean;
+        "type": TType;
+        "value": string;
     }
     interface DxPageLoader {
         "defaultTemplateUrl": string;
@@ -26,6 +52,9 @@ export namespace Components {
         "useHash": boolean;
     }
     interface DxPlotRaw {
+    }
+    interface DxRtLabel {
+        "topicName": string;
     }
     interface DxRtMeter {
         "animateColor": string;
@@ -38,6 +67,18 @@ export namespace Components {
         "unit": string;
     }
     interface DxRtPlot {
+        "baseUrl": string;
+        "begin": string;
+        "end": string;
+        "interval": number;
+        "legendFloated": boolean;
+        "legendSize": number;
+        "name": string;
+        "period": number;
+        "realtime": boolean;
+        "slice": boolean;
+        "spark": boolean;
+        "tags": string;
     }
     interface DxRtValue {
         "animateColor": string;
@@ -66,11 +107,29 @@ declare global {
         prototype: HTMLDemoWcElement;
         new (): HTMLDemoWcElement;
     };
+    interface HTMLDxDataTableElement extends Components.DxDataTable, HTMLStencilElement {
+    }
+    var HTMLDxDataTableElement: {
+        prototype: HTMLDxDataTableElement;
+        new (): HTMLDxDataTableElement;
+    };
     interface HTMLDxHeaderBarElement extends Components.DxHeaderBar, HTMLStencilElement {
     }
     var HTMLDxHeaderBarElement: {
         prototype: HTMLDxHeaderBarElement;
         new (): HTMLDxHeaderBarElement;
+    };
+    interface HTMLDxHeaderBarControlElement extends Components.DxHeaderBarControl, HTMLStencilElement {
+    }
+    var HTMLDxHeaderBarControlElement: {
+        prototype: HTMLDxHeaderBarControlElement;
+        new (): HTMLDxHeaderBarControlElement;
+    };
+    interface HTMLDxInputFieldElement extends Components.DxInputField, HTMLStencilElement {
+    }
+    var HTMLDxInputFieldElement: {
+        prototype: HTMLDxInputFieldElement;
+        new (): HTMLDxInputFieldElement;
     };
     interface HTMLDxPageLoaderElement extends Components.DxPageLoader, HTMLStencilElement {
     }
@@ -83,6 +142,12 @@ declare global {
     var HTMLDxPlotRawElement: {
         prototype: HTMLDxPlotRawElement;
         new (): HTMLDxPlotRawElement;
+    };
+    interface HTMLDxRtLabelElement extends Components.DxRtLabel, HTMLStencilElement {
+    }
+    var HTMLDxRtLabelElement: {
+        prototype: HTMLDxRtLabelElement;
+        new (): HTMLDxRtLabelElement;
     };
     interface HTMLDxRtMeterElement extends Components.DxRtMeter, HTMLStencilElement {
     }
@@ -111,9 +176,13 @@ declare global {
     interface HTMLElementTagNameMap {
         "color-picker": HTMLColorPickerElement;
         "demo-wc": HTMLDemoWcElement;
+        "dx-data-table": HTMLDxDataTableElement;
         "dx-header-bar": HTMLDxHeaderBarElement;
+        "dx-header-bar-control": HTMLDxHeaderBarControlElement;
+        "dx-input-field": HTMLDxInputFieldElement;
         "dx-page-loader": HTMLDxPageLoaderElement;
         "dx-plot-raw": HTMLDxPlotRawElement;
+        "dx-rt-label": HTMLDxRtLabelElement;
         "dx-rt-meter": HTMLDxRtMeterElement;
         "dx-rt-plot": HTMLDxRtPlotElement;
         "dx-rt-value": HTMLDxRtValueElement;
@@ -134,8 +203,33 @@ declare namespace LocalJSX {
         "onInput-change"?: (event: CustomEvent<any>) => void;
         "timeout"?: number;
     }
+    interface DxDataTable {
+        "columns"?: Column[] | string;
+        "name"?: string;
+        "rows"?: Row[] | string;
+    }
     interface DxHeaderBar {
         "menuUrl"?: string;
+    }
+    interface DxHeaderBarControl {
+    }
+    interface DxInputField {
+        "disabled"?: boolean;
+        "expected"?: string;
+        "expectedError"?: string;
+        "isAlphanumeric"?: boolean;
+        "isWord"?: boolean;
+        "label"?: string;
+        "max"?: number;
+        "min"?: number;
+        "onColor-changed"?: (event: CustomEvent<any>) => void;
+        "placeholder"?: string;
+        "readonly"?: boolean;
+        "regex"?: string;
+        "required"?: boolean;
+        "trim"?: boolean;
+        "type"?: TType;
+        "value"?: string;
     }
     interface DxPageLoader {
         "defaultTemplateUrl"?: string;
@@ -143,6 +237,9 @@ declare namespace LocalJSX {
         "useHash"?: boolean;
     }
     interface DxPlotRaw {
+    }
+    interface DxRtLabel {
+        "topicName"?: string;
     }
     interface DxRtMeter {
         "animateColor"?: string;
@@ -155,6 +252,18 @@ declare namespace LocalJSX {
         "unit"?: string;
     }
     interface DxRtPlot {
+        "baseUrl"?: string;
+        "begin"?: string;
+        "end"?: string;
+        "interval"?: number;
+        "legendFloated"?: boolean;
+        "legendSize"?: number;
+        "name"?: string;
+        "period"?: number;
+        "realtime"?: boolean;
+        "slice"?: boolean;
+        "spark"?: boolean;
+        "tags"?: string;
     }
     interface DxRtValue {
         "animateColor"?: string;
@@ -173,9 +282,13 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "color-picker": ColorPicker;
         "demo-wc": DemoWc;
+        "dx-data-table": DxDataTable;
         "dx-header-bar": DxHeaderBar;
+        "dx-header-bar-control": DxHeaderBarControl;
+        "dx-input-field": DxInputField;
         "dx-page-loader": DxPageLoader;
         "dx-plot-raw": DxPlotRaw;
+        "dx-rt-label": DxRtLabel;
         "dx-rt-meter": DxRtMeter;
         "dx-rt-plot": DxRtPlot;
         "dx-rt-value": DxRtValue;
@@ -188,9 +301,13 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "color-picker": LocalJSX.ColorPicker & JSXBase.HTMLAttributes<HTMLColorPickerElement>;
             "demo-wc": LocalJSX.DemoWc & JSXBase.HTMLAttributes<HTMLDemoWcElement>;
+            "dx-data-table": LocalJSX.DxDataTable & JSXBase.HTMLAttributes<HTMLDxDataTableElement>;
             "dx-header-bar": LocalJSX.DxHeaderBar & JSXBase.HTMLAttributes<HTMLDxHeaderBarElement>;
+            "dx-header-bar-control": LocalJSX.DxHeaderBarControl & JSXBase.HTMLAttributes<HTMLDxHeaderBarControlElement>;
+            "dx-input-field": LocalJSX.DxInputField & JSXBase.HTMLAttributes<HTMLDxInputFieldElement>;
             "dx-page-loader": LocalJSX.DxPageLoader & JSXBase.HTMLAttributes<HTMLDxPageLoaderElement>;
             "dx-plot-raw": LocalJSX.DxPlotRaw & JSXBase.HTMLAttributes<HTMLDxPlotRawElement>;
+            "dx-rt-label": LocalJSX.DxRtLabel & JSXBase.HTMLAttributes<HTMLDxRtLabelElement>;
             "dx-rt-meter": LocalJSX.DxRtMeter & JSXBase.HTMLAttributes<HTMLDxRtMeterElement>;
             "dx-rt-plot": LocalJSX.DxRtPlot & JSXBase.HTMLAttributes<HTMLDxRtPlotElement>;
             "dx-rt-value": LocalJSX.DxRtValue & JSXBase.HTMLAttributes<HTMLDxRtValueElement>;

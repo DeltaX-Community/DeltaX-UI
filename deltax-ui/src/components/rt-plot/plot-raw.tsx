@@ -3,12 +3,12 @@ import { Plot } from './Plot';
 import Common from '../../services/Common';
 
 @Component({
-  tag: 'dx-rt-plot',
+  tag: 'dx-plot-raw',
   styleUrl: 'rt-plot.css',
   shadow: true,
 })
 
-export class DxRtPlot {
+export class DxPlotRaw {
   @Element() element: HTMLElement;
 
   private plotHeight = 200;
@@ -40,7 +40,7 @@ export class DxRtPlot {
   }
 
   loadPlot(el: HTMLElement) {
-    this.plot = new Plot(this.plotWidth, this.plotHeight, null, Common.state.IsDarkMode, false, false);
+    this.plot = new Plot(this.plotWidth, this.plotHeight, null, Common.IsDarkMode, false, false);
 
     this.plot.addSerie("Serie 1", "y");
     this.plot.addSerie("Serie 2", "y3", { color: "#FFA000" });
@@ -78,7 +78,7 @@ export class DxRtPlot {
   render() {
     return (
       <Host>
-        <div class={Common.state.IsDarkMode ? 'dark' : ''} >
+        <div class={Common.IsDarkMode ? 'dark' : ''} >
           <div class="plot-wrapper" />
           <div class="plot-plot" />
         </div>

@@ -1,0 +1,371 @@
+<template>
+  <style>
+    .panels {
+      grid-template-rows: min-content auto;
+    }
+
+
+    @media (min-height: 800px) {
+      .panels {
+        grid-template-rows: 1fr 1.5fr;
+      }
+    }
+
+    .dx-label.alert {
+      --bg-color: red;
+    }
+
+    .dx-label.notification {
+      --bg-color: rgb(8, 90, 90);
+    }
+
+    .dx-label.event {
+      --bg-color: rgba(216, 233, 142, 0.664);
+      --color: rgb(0, 0, 0);
+    }
+
+    .dx-label.action {
+      --bg-color: rgb(20, 201, 192);
+    }
+
+  </style>
+  <div class="panels grid grid-lg columns-2" style="--gap:0.2rem; min-height: calc(100vh - 105px); ">
+
+
+    <div class="m-1 panel-browser border color-shadow-medium">
+      <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
+        <div>
+          Estado Marcha Parada
+        </div>
+        <dx-rt-label topic-name="={simulation/prueba}==1">
+          <div slot="0" class="dx-label red">Parada</div>
+          <div slot="1" class="dx-label grey">Parada</div>
+        </dx-rt-label>
+        <dx-rt-label topic-name="={simulation/prueba}==1">
+          <span slot="0" class="dx-label grey">Marcha</span>
+          <span slot="1" class="dx-label green">Marcha</span>
+        </dx-rt-label>
+      </div>
+      <div class="container grid columns-1" style="--gap:0.5em; grid-template-rows: auto auto;">
+        <div class="grid " style="--gap:0.5em; ">
+          <dx-rt-meter name="Totales" animate-color="#FFFFFF11" topic-name="simulation/countTotal"></dx-rt-meter>
+          <dx-rt-meter name="Buenas" color="var(--color-auto-green-7)" animate-color="#0601"
+            topic-name="simulation/countGood">
+          </dx-rt-meter>
+          <dx-rt-meter name="Malas" color="var(--color-auto-red-6)" animate-color="#A211"
+            topic-name="simulation/countBad">
+          </dx-rt-meter>
+        </div>
+        <div class="grid center "
+          style="--gap:0.5rem; grid-template-columns: max-content auto 50px max-content; font-size: large; font-weight: 600;">
+
+          <div>En Marcha</div>
+          <div style="height: 30px; width: 100%; position: relative;">
+            <dx-rt-plot realtime="1" interval="2000" spark="true"
+              tags='[{"tagName": "simulation/running", "color": "#22FF44", "fill": "#22FF4444", "scaleOption": {"range": [-0.02, 1.02]} }]'>
+            </dx-rt-plot>
+          </div>
+          <dx-rt-value class="size" topic-name="=round({process_info/UI.Server/AliveMs}/123.456, 0)">
+          </dx-rt-value>
+          <span>Min</span>
+
+          <div>Tiempo desde Ultima Parada</div>
+          <div style="height: 30px; width: 100%; position: relative;">
+            <dx-rt-plot realtime="1" interval="2000" tags='[{"tagName": "process_info/RealTimeHistoricDB/AliveMs"}]'
+              spark="true">
+            </dx-rt-plot>
+          </div>
+          <dx-rt-value class="text-base text-black dark:text-gray-200"
+            topic-name="=round({process_info/RealTimeHistoricDB/AliveMs} / 100, 0)"></dx-rt-value>
+          <span>Min</span>
+
+          <div>Velocidad de linea</div>
+          <div style="height: 30px; width: 100%; position: relative;">
+            <dx-rt-plot realtime="1" interval="2000" tags='[{"tagName": "simulation/lineSpeed"}]' spark="true">
+            </dx-rt-plot>
+          </div>
+          <dx-rt-value class="text-base text-black dark:text-gray-200" animate-color="transparent"
+            topic-name="=round({simulation/lineSpeed}, 1)"></dx-rt-value>
+          <span>Min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-1 panel-browser border color-shadow-medium row-span-2">
+      <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
+        <div>
+          Estado Marcha Parada
+        </div>
+        <dx-rt-label topic-name="={simulation/prueba}==1">
+          <div slot="0" class="dx-label red">Parada</div>
+          <div slot="1" class="dx-label grey">Parada</div>
+        </dx-rt-label>
+        <dx-rt-label topic-name="={simulation/prueba}==1">
+          <span slot="0" class="dx-label grey">Marcha</span>
+          <span slot="1" class="dx-label green">Marcha</span>
+        </dx-rt-label>
+      </div>
+      <div class="container p-0">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th style="min-width: 200px;">Superpower</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Luther</td>
+                <td>Super-strength</td>
+                <td>luther@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Diego</td>
+                <td>Telekinesis</td>
+                <td>diego@umbrella.eduasfdiego@umbrella.edudiego@umbrella.edudiego@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Allison</td>
+                <td>Rumor</td>
+                <td>allison@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Klaus</td>
+                <td>Seance</td>
+                <td>klaus@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Five</td>
+                <td>Time-travel</td>
+                <td>five@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Ben</td>
+                <td>Inter-dimensional monster</td>
+                <td>ben@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Vanya</td>
+                <td>Apocalyptic destruction</td>
+                <td>vanya@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Reginald</td>
+                <td>[Spoiler] powers</td>
+                <td>reginald@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Pogo</td>
+                <td>Human communication</td>
+                <td>pogo@umbrella.edu</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Cha-Cha</td>
+                <td>Ruthlessness</td>
+                <td>chacha@temps.comm</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Hazel</td>
+                <td>Compassion</td>
+                <td>hazel@temps.comm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-browser m-1 border color-shadow-medium">
+      <div class="header">
+        <div>
+          Tabla de prueba
+        </div>
+      </div>
+      <div class="container p-0">
+        <div class="table-responsive">
+          <dx-data-table id="table-demo-1" columns='[{"field":"pepe"}]'>
+
+          </dx-data-table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+  var tableEl = document.getElementById("table-demo-1")
+  tableEl.columns = JSON.stringify([{
+      "field": "type",
+      "label": "Tipo",
+      "width": "60px"
+    },
+    {
+      "field": "time",
+      "label": "Hora"
+    },
+    {
+      "field": "description",
+      "label": "Descripcion"
+    }
+  ])
+
+  var rows = [{
+      "time": "2021-03-24T13:11:50.126Z",
+      "type": "alert",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+      "time": "2021-03-24T13:11:51.126Z",
+      "type": "notification",
+      "description": "Sint aut beatae vitae veritatis maxime cum, saepe nobis nesciunt iste dolorem! Sint aut beatae vitae veritatis maxime cum, saepe nobis nesciunt iste dolorem! Sint aut beatae vitae veritatis maxime cum, saepe nobis nesciunt iste dolorem!"
+    },
+    {
+      "time": "2021-03-24T14:11:05.126Z",
+      "type": "event",
+      "description": "Quo animi commodi aperiam amet, veritatis perferendis libero eius corrupti."
+    },
+    {
+      "time": "2021-03-24T14:11:06.126Z",
+      "type": "event",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    }
+  ]
+
+  function formatTime(v) {
+    return `${new Date(v.time).toLocaleTimeString()}`
+  }
+
+  function formatType(v) {
+    if (v.type == "alert")
+      return `<span class="dx-label small alert">Alerta</span>`
+    if (v.type == "notification")
+      return `<span class="dx-label small notification">Notificación</span>`
+    if (v.type == "event")
+      return `<span class="dx-label small event">Evento</span>`
+    if (v.type == "action")
+      return `<span class="dx-label small action">Acción</span>`
+    return v.type
+  }
+
+  function mappFields() {
+    result = rows.map(r => {
+      return {
+        ...r,
+        time: formatTime(r),
+        type: formatType(r)
+      }
+    })
+    return result
+  }
+
+  var interval = setInterval(() => {
+    if (!document.getElementById("table-demo-1") && interval) {
+      console.log("clearInterval", tableEl)
+      clearInterval(interval)
+    }
+
+    rows.push({
+      time: new Date(),
+      type: "event",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.  "
+    })
+    rows = rows.slice(-20)
+    tableEl.rows = JSON.stringify(mappFields())
+  }, 1000);
+
+
+  // document.addEventListener("DOMNodeRemoved", () => {
+  //   console.log("DOMNodeRemoved")
+  //   if (interval) {
+  //     clearInterval(interval)
+  //   }
+  // })
+
+</script>
