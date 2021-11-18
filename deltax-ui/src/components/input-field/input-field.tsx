@@ -1,6 +1,14 @@
-import { Component, Prop, State, Watch, h, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, State, Watch, h, Event, EventEmitter, Element } from '@stencil/core';
+import FormValidator from '../../services/FormValidator';
 
 export type TType = "number" | "text" | "password" | "email" | "date" | "time" | "tel"
+
+let autoFormGenId = 1;
+
+function generateFormId(type = "input") {
+    autoFormGenId += 1;
+    return `auto-${type}-${autoFormGenId}`
+}
 
 const wordsRegex = /^\w[\w\s,.]*[\w.]$/;
 const alphanumericRegex = /^[a-zA-Z0-9]+$/;
@@ -12,7 +20,15 @@ const trimRegex = /^[^ ]([\w\W ]*[^ ])?$/;
     styleUrl: 'input-field.css',
     shadow: false
 })
+
+
+
 export class InputField {
+    formRef: string;
+    inputRef: string = generateFormId();
+    inputEl: HTMLInputElement;
+    formEl: HTMLFormElement;
+    @Element() element: HTMLElement;
 
     @Prop() type: TType = "text";
     @Prop() label: string;
@@ -35,10 +51,27 @@ export class InputField {
 
     @Event({ eventName: 'color-changed' }) valueChange: EventEmitter;
 
-    @Watch("value")
     componentWillLoad() {
+        setTimeout(() => {
+            this.getFormRef()
+            this.update()
+        }, 200);
+    }
+
+    @Watch("value")
+    update() {
         this.currentValue = this.value;
         this.validate()
+    }
+
+    getFormRef() {
+        this.formEl = this.inputEl.form;
+        this.formRef = this.formEl.getAttribute("ref");
+        if (!this.formRef) {
+            this.formRef = generateFormId("form");
+            this.formEl.setAttribute("ref", this.formRef)
+        }
+        return this.formRef
     }
 
     validateNumber(): string {
@@ -89,6 +122,8 @@ export class InputField {
             this.error = this.validateText()
         }
 
+        FormValidator.setForm(this.formRef, this.inputRef, this.error)
+
         return !this.error;
     }
 
@@ -120,14 +155,16 @@ export class InputField {
             <div class="dx-input-field">
                 <div class={{ "form-group": true, "errored": this.hasError }} >
                     <input
+                        itemRef={this.inputRef}
+                        ref={(r) => { this.inputEl = r; }}
                         class="form-control"
                         type={this.inputType}
                         id={`field-${this.label}`}
                         onInput={(e) => this.inputChanged(e)}
-                        value={this.currentValue}
                         placeholder={this.placeholder}
                         min={this.min}
                         max={this.max}
+                        value={this.currentValue}
                         disabled={this.disabled}
                         readonly={this.readonly}
                     />

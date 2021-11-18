@@ -32,7 +32,7 @@
   <div class="panels grid grid-lg columns-2" style="--gap:0.2rem; min-height: calc(100vh - 105px); ">
 
 
-    <div class="m-1 panel-browser border color-shadow-medium">
+    <div class="m-1 panel-browser color-shadow-medium">
       <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
         <div>
           Estado Marcha Parada
@@ -91,20 +91,26 @@
       </div>
     </div>
 
-    <div class="m-1 panel-browser border color-shadow-medium row-span-2">
+    <div class="m-1 panel-browser color-shadow-medium">
       <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
         <div>
           Estado Marcha Parada
         </div>
+        
+        
         <dx-rt-label topic-name="={simulation/prueba}==1">
           <div slot="0" class="dx-label red">Parada</div>
           <div slot="1" class="dx-label grey">Parada</div>
         </dx-rt-label>
+
+
         <dx-rt-label topic-name="={simulation/prueba}==1">
           <span slot="0" class="dx-label grey">Marcha</span>
           <span slot="1" class="dx-label green">Marcha</span>
-        </dx-rt-label>
+          <span slot="***" class="dx-label red">Desconectado</span>
+        </dx-rt-label> 
       </div>
+
       <div class="container p-0">
         <div class="table-responsive">
           <table>
@@ -112,7 +118,7 @@
               <tr>
                 <th>Number</th>
                 <th>Name</th>
-                <th style="min-width: 200px;">Superpower</th>
+                <th style="min-width: 400px;">Superpower</th>
                 <th>Email</th>
               </tr>
             </thead>
@@ -261,7 +267,7 @@
       </div>
     </div>
 
-    <div class="panel-browser m-1 border color-shadow-medium">
+    <div class="panel-browser m-1 color-shadow-medium col-span-2">
       <div class="header">
         <div>
           Tabla de prueba

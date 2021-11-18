@@ -85,13 +85,11 @@
   </style>
   <div class="panels grid grid-lg columns-2">
 
-    <div class="panel-browser m-1 border color-shadow-medium  ">
+    <div class="panel-browser m-1 border color-shadow-medium  row-span-2 ">
       <div class="header grid" style="--gap:0.5em; grid-template-columns: 2fr 1fr 1fr;">
 
       </div>
-      <div class="container grid columns-1" style="--gap:0.5em; grid-template-rows: max-content max-content auto ;">
-
-
+      <div class="container grid columns-1 " style="--gap:0.5em; grid-template-rows: max-content max-content auto ;">
 
         <form>
           <div class="form-field">
@@ -114,9 +112,10 @@
           <button class="btn" type="submit">Submit</button>
         </form>
 
-        <form>
+        <form ref="Pepe">
           <div class="grid mt-4 columns-1" style="--gap: 0.1em;">
-            <dx-input-field label="Contraseña" type="password" min="4" max="20" placeholder="Escriba la contraseña"></dx-input-field>
+            <dx-input-field label="Contraseña" type="password" min="4" max="20" placeholder="Escriba la contraseña">
+            </dx-input-field>
             <dx-input-field label="Confirmación de contraseña" expected="asdf" required
               expected-error="las contraseñas no coinciden" type="password"
               placeholder="Vuelva a escribir la contraseña"></dx-input-field>
@@ -125,9 +124,8 @@
             <dx-input-field label="El Label Numerico 55" value="55" type="number" min="2" max="20" required>
             </dx-input-field>
             <dx-input-field label="El  expected" type="number" expected="6" expected-error2="que cargaste" min="2"
-            placeholder="Ingrese un numero"
-              max="20" required> </dx-input-field>
-            <dx-input-field label="El Label Numerico" type="number" value="56" readonly min="2" max="20" required >
+              placeholder="Ingrese un numero" max="20" required> </dx-input-field>
+            <dx-input-field label="El Label Numerico" type="number" value="56" readonly min="2" max="20" required>
             </dx-input-field>
             <input value="1" type="date" min="2" max="20">
             <input value="1" type="datetime" min="2" max="20">
@@ -179,6 +177,5 @@
   </div>
 </template>
 
-<script>
-
+<script> 
 </script>

@@ -9,7 +9,7 @@
   /* overflow: hidden; */
   position: absolute;
   z-index: 1;
-  background-color: rgba(209, 213, 218, 0.2);
+  /* background-color: rgba(209, 213, 218, 0.082); */
 }
 
 .plot-plot {
@@ -23,5 +23,5 @@
 }
 
 .dark .plot-wrapper {
-  background-color: rgba(32, 32, 32, 20%);
+  /* background-color: rgba(32, 32, 32, 0.096); */
 }

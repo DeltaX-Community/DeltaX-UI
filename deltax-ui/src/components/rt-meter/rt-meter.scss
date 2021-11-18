@@ -1,5 +1,6 @@
 .meter-main {
   --animation-opacity: 56;
+  --box-shadow-meter: inset 0px -0.2em 1.5em red;
 
   display: flex;
   flex-direction: column;
@@ -7,9 +8,15 @@
   gap: .2em;
   color: var(--rt-meter-color);
   background-color: var(--rt-meter-bg-color);
-  box-shadow: var(--box-shadow-meter);
+  // box-shadow: var(--box-shadow-meter);
   cursor: default;
 }
+
+.meter-main {
+  // background-color: rgba(0, 0, 255, 0.329);
+  // box-shadow: inset 0px -0.2em 1.5em 1em var(--rt-meter-bg-color);
+}
+
 
 .meter-main:hover,
 .meter-main:focus {
